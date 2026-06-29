@@ -1,0 +1,218 @@
+{
+  "_comment": "专业目录数据（主要本科专业），来源教育部本科专业目录，选科要求根据教育部3+1+2模式指引",
+  "_source": "教育部普通高等学校本科专业目录 + 选考科目要求指引(3+1+2)",
+  "_updateDate": "2026-06-11",
+  "_totalCount": 30,
+  "majors": [
+    {
+      "id": "cs",
+      "name": "计算机科学与技术",
+      "category": "工学",
+      "requireSubjects": ["物理", "化学"],
+      "directions": ["软件开发", "人工智能", "数据科学", "网络安全"]
+    },
+    {
+      "id": "se",
+      "name": "软件工程",
+      "category": "工学",
+      "requireSubjects": ["物理", "化学"],
+      "directions": ["软件开发", "系统架构", "项目管理"]
+    },
+    {
+      "id": "ai",
+      "name": "人工智能",
+      "category": "工学",
+      "requireSubjects": ["物理", "化学"],
+      "directions": ["机器学习", "计算机视觉", "自然语言处理"]
+    },
+    {
+      "id": "ee",
+      "name": "电子信息工程",
+      "category": "工学",
+      "requireSubjects": ["物理", "化学"],
+      "directions": ["通信", "芯片设计", "信号处理"]
+    },
+    {
+      "id": "me",
+      "name": "机械工程",
+      "category": "工学",
+      "requireSubjects": ["物理", "化学"],
+      "directions": ["机械设计", "智能制造", "机器人"]
+    },
+    {
+      "id": "ce",
+      "name": "土木工程",
+      "category": "工学",
+      "requireSubjects": ["物理", "化学"],
+      "directions": ["结构设计", "施工管理", "城市规划"]
+    },
+    {
+      "id": "arch",
+      "name": "建筑学",
+      "category": "工学",
+      "requireSubjects": ["物理", "历史"],
+      "directions": ["建筑设计", "城市规划", "景观设计"]
+    },
+    {
+      "id": "bio",
+      "name": "生物科学",
+      "category": "理学",
+      "requireSubjects": ["物理", "化学", "生物"],
+      "directions": ["生物技术", "医药研发", "农业生物"]
+    },
+    {
+      "id": "math",
+      "name": "数学与应用数学",
+      "category": "理学",
+      "requireSubjects": ["物理", "化学"],
+      "directions": ["金融数学", "数据科学", "科研教学"]
+    },
+    {
+      "id": "phy",
+      "name": "物理学",
+      "category": "理学",
+      "requireSubjects": ["物理", "化学"],
+      "directions": ["科研教学", "光电技术", "材料科学"]
+    },
+    {
+      "id": "chem",
+      "name": "化学",
+      "category": "理学",
+      "requireSubjects": ["化学"],
+      "directions": ["化工", "材料", "医药研发"]
+    },
+    {
+      "id": "econ",
+      "name": "经济学",
+      "category": "经济学",
+      "requireSubjects": [],
+      "directions": ["金融", "投资", "经济研究"]
+    },
+    {
+      "id": "fin",
+      "name": "金融学",
+      "category": "经济学",
+      "requireSubjects": ["物理"],
+      "directions": ["银行", "证券", "保险", "基金"]
+    },
+    {
+      "id": "acct",
+      "name": "会计学",
+      "category": "管理学",
+      "requireSubjects": [],
+      "directions": ["审计", "财务管理", "税务"]
+    },
+    {
+      "id": "ba",
+      "name": "工商管理",
+      "category": "管理学",
+      "requireSubjects": [],
+      "directions": ["企业管理", "市场营销", "人力资源"]
+    },
+    {
+      "id": "law",
+      "name": "法学",
+      "category": "法学",
+      "requireSubjects": [],
+      "directions": ["律师", "公务员", "法务", "司法"]
+    },
+    {
+      "id": "cnl",
+      "name": "中国语言文学",
+      "category": "文学",
+      "requireSubjects": ["历史"],
+      "directions": ["教师", "编辑", "文案", "公务员"]
+    },
+    {
+      "id": "fl",
+      "name": "外国语言文学",
+      "category": "文学",
+      "requireSubjects": ["历史"],
+      "directions": ["翻译", "外贸", "教育", "外交"]
+    },
+    {
+      "id": "jour",
+      "name": "新闻学",
+      "category": "文学",
+      "requireSubjects": ["历史"],
+      "directions": ["记者", "编辑", "新媒体", "公关"]
+    },
+    {
+      "id": "med",
+      "name": "临床医学",
+      "category": "医学",
+      "requireSubjects": ["物理", "化学", "生物"],
+      "directions": ["临床医生", "医学研究", "公共卫生"]
+    },
+    {
+      "id": "tcm",
+      "name": "中医学",
+      "category": "医学",
+      "requireSubjects": ["物理", "化学", "生物"],
+      "directions": ["中医临床", "中药研发", "养生保健"]
+    },
+    {
+      "id": "pharm",
+      "name": "药学",
+      "category": "医学",
+      "requireSubjects": ["物理", "化学", "生物"],
+      "directions": ["药物研发", "药品监管", "临床药学"]
+    },
+    {
+      "id": "edu",
+      "name": "教育学",
+      "category": "教育学",
+      "requireSubjects": [],
+      "directions": ["教师", "教育管理", "教育研究"]
+    },
+    {
+      "id": "psy",
+      "name": "心理学",
+      "category": "理学",
+      "requireSubjects": ["物理", "化学"],
+      "directions": ["心理咨询", "人力资源", "用户体验"]
+    },
+    {
+      "id": "agri",
+      "name": "农学",
+      "category": "农学",
+      "requireSubjects": ["物理", "化学", "生物"],
+      "directions": ["农业技术", "食品安全", "园艺"]
+    },
+    {
+      "id": "env",
+      "name": "环境科学与工程",
+      "category": "工学",
+      "requireSubjects": ["物理", "化学", "生物"],
+      "directions": ["环保", "环境监测", "新能源"]
+    },
+    {
+      "id": "mat",
+      "name": "材料科学与工程",
+      "category": "工学",
+      "requireSubjects": ["物理", "化学"],
+      "directions": ["新材料", "纳米技术", "金属加工"]
+    },
+    {
+      "id": "auto",
+      "name": "自动化",
+      "category": "工学",
+      "requireSubjects": ["物理", "化学"],
+      "directions": ["工业控制", "机器人", "智能系统"]
+    },
+    {
+      "id": "comm",
+      "name": "通信工程",
+      "category": "工学",
+      "requireSubjects": ["物理", "化学"],
+      "directions": ["5G通信", "网络工程", "卫星通信"]
+    },
+    {
+      "id": "ds",
+      "name": "数据科学与大数据技术",
+      "category": "工学",
+      "requireSubjects": ["物理", "化学"],
+      "directions": ["数据分析", "大数据开发", "商业智能"]
+    }
+  ]
+}

@@ -1,0 +1,191 @@
+{
+  "verifiedAt": "2026-06-11 13:48:38",
+  "results": [
+    {
+      "province": "北京",
+      "url": "https://www.bjeea.cn/",
+      "status": "OK",
+      "code": 200
+    },
+    {
+      "province": "天津",
+      "url": "http://www.zhaokao.net/",
+      "status": "BLOCKED",
+      "code": 403
+    },
+    {
+      "province": "河北",
+      "url": "http://www.hebeea.edu.cn/",
+      "status": "OK",
+      "code": 200
+    },
+    {
+      "province": "山西",
+      "url": "http://www.sxkszx.cn/",
+      "status": "OK",
+      "code": 200
+    },
+    {
+      "province": "内蒙古",
+      "url": "https://www.nm.zsks.cn/",
+      "status": "CONN_ERR",
+      "code": 0
+    },
+    {
+      "province": "辽宁",
+      "url": "https://www.lnzsks.com",
+      "status": "OK",
+      "code": 200
+    },
+    {
+      "province": "吉林",
+      "url": "http://www.jleea.edu.cn/",
+      "status": "NOT_FOUND",
+      "code": 404
+    },
+    {
+      "province": "黑龙江",
+      "url": "https://www.lzk.hl.cn",
+      "status": "OK",
+      "code": 200
+    },
+    {
+      "province": "上海",
+      "url": "https://www.shmeea.edu.cn/page/24300/index.html",
+      "status": "OK",
+      "code": 200
+    },
+    {
+      "province": "江苏",
+      "url": "https://www.jseea.cn",
+      "status": "OK",
+      "code": 200
+    },
+    {
+      "province": "浙江",
+      "url": "https://www.zjzs.net",
+      "status": "OK",
+      "code": 200
+    },
+    {
+      "province": "安徽",
+      "url": "https://www.ahzsks.cn",
+      "status": "OK",
+      "code": 200
+    },
+    {
+      "province": "福建",
+      "url": "https://www.eeafj.cn/",
+      "status": "CONN_ERR",
+      "code": 0
+    },
+    {
+      "province": "江西",
+      "url": "http://www.jxeea.cn",
+      "status": "OK",
+      "code": 200
+    },
+    {
+      "province": "山东",
+      "url": "https://www.sdzk.cn",
+      "status": "OK",
+      "code": 200
+    },
+    {
+      "province": "河南",
+      "url": "http://www.haeea.cn/",
+      "status": "WARN(412)",
+      "code": 412
+    },
+    {
+      "province": "湖北",
+      "url": "http://www.hbea.edu.cn",
+      "status": "OK",
+      "code": 200
+    },
+    {
+      "province": "湖南",
+      "url": "http://www.hneeb.cn/",
+      "status": "CONN_ERR",
+      "code": 0
+    },
+    {
+      "province": "广东",
+      "url": "https://eea.gd.gov.cn",
+      "status": "OK",
+      "code": 200
+    },
+    {
+      "province": "广西",
+      "url": "https://www.gxeea.cn",
+      "status": "OK",
+      "code": 200
+    },
+    {
+      "province": "海南",
+      "url": "https://ea.hainan.gov.cn",
+      "status": "OK",
+      "code": 200
+    },
+    {
+      "province": "重庆",
+      "url": "http://www.cqksy.cn/",
+      "status": "WARN(405)",
+      "code": 405
+    },
+    {
+      "province": "四川",
+      "url": "https://cx.sceea.cn/",
+      "status": "OK",
+      "code": 200
+    },
+    {
+      "province": "贵州",
+      "url": "http://gkzy.gzszk.com/",
+      "status": "TIMEOUT",
+      "code": 0
+    },
+    {
+      "province": "云南",
+      "url": "https://www.ynzs.cn",
+      "status": "OK",
+      "code": 200
+    },
+    {
+      "province": "西藏",
+      "url": "http://www.xzzsks.com.cn/",
+      "status": "CONN_ERR",
+      "code": 0
+    },
+    {
+      "province": "陕西",
+      "url": "https://www.sneea.cn",
+      "status": "OK",
+      "code": 200
+    },
+    {
+      "province": "甘肃",
+      "url": "http://www.ganseea.cn/",
+      "status": "OK",
+      "code": 200
+    },
+    {
+      "province": "青海",
+      "url": "http://www.qhjyks.com/",
+      "status": "CONN_ERR",
+      "code": 0
+    },
+    {
+      "province": "宁夏",
+      "url": "https://www.nxjyks.cn",
+      "status": "OK",
+      "code": 200
+    },
+    {
+      "province": "新疆",
+      "url": "https://www.xjzk.gov.cn",
+      "status": "OK",
+      "code": 200
+    }
+  ]
+}

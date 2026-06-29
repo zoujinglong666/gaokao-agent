@@ -1,0 +1,591 @@
+{
+  "_comment": "院校专业组数据库（新高考投档基本单位）",
+  "_source": "基于教育部2024-2025年各高校招生章程整理",
+  "_updateDate": "2026-06-11",
+  "_note": "专业组 = 同一院校内选科要求相同的若干专业打包成一个投档单位。每个组共享一个投档线，组内专业分数有差异。",
+  "majorGroups": [
+    {
+      "groupId": "thu-01",
+      "universityId": "tsinghua",
+      "groupCode": "001",
+      "groupName": "物理+化学组",
+      "requireSubjects": ["物理", "化学"],
+      "majors": [
+        { "majorId": "cs", "majorName": "计算机科学与技术", "minScoreInGroup": 700, "tuition": 5000 },
+        { "majorId": "se", "majorName": "软件工程", "minScoreInGroup": 698, "tuition": 5000 },
+        { "majorId": "ai", "majorName": "人工智能", "minScoreInGroup": 702, "tuition": 5000 },
+        { "majorId": "ee", "majorName": "电子信息工程", "minScoreInGroup": 695, "tuition": 5000 },
+        { "majorId": "me", "majorName": "机械工程", "minScoreInGroup": 685, "tuition": 5000 },
+        { "majorId": "auto", "majorName": "自动化", "minScoreInGroup": 688, "tuition": 5000 },
+        { "majorId": "mat", "majorName": "材料科学与工程", "minScoreInGroup": 680, "tuition": 5000 }
+      ],
+      "groupMinScore": 680,
+      "groupAvgScore": 695,
+      "popularMajors": ["cs", "ai", "se"],
+      "admissionData": [
+        { "year": 2024, "province": "北京", "minScore": 685, "rank": 100 },
+        { "year": 2024, "province": "上海", "minScore": 615, "rank": 80 },
+        { "year": 2024, "province": "江苏", "minScore": 685, "rank": 200 },
+        { "year": 2024, "province": "浙江", "minScore": 705, "rank": 200 }
+      ],
+      "adjustmentRisk": {
+        "level": "high",
+        "description": "组内热门专业（计算机、AI）通常比投档线高 15-25 分，低分专业调剂可能性大。强烈建议勾选服从调剂，否则有退档风险。",
+        "scoreGap": 22
+      }
+    },
+    {
+      "groupId": "thu-02",
+      "universityId": "tsinghua",
+      "groupCode": "002",
+      "groupName": "历史组",
+      "requireSubjects": ["历史"],
+      "majors": [
+        { "majorId": "econ", "majorName": "经济学", "minScoreInGroup": 685, "tuition": 5000 },
+        { "majorId": "law", "majorName": "法学", "minScoreInGroup": 680, "tuition": 5000 },
+        { "majorId": "cnl", "majorName": "中国语言文学", "minScoreInGroup": 670, "tuition": 5000 }
+      ],
+      "groupMinScore": 670,
+      "groupAvgScore": 678,
+      "popularMajors": ["econ"],
+      "admissionData": [
+        { "year": 2024, "province": "北京", "minScore": 670, "rank": 150 },
+        { "year": 2024, "province": "上海", "minScore": 605, "rank": 100 }
+      ],
+      "adjustmentRisk": {
+        "level": "medium",
+        "description": "组内专业分数差较小，调剂风险中等。",
+        "scoreGap": 15
+      }
+    },
+    {
+      "groupId": "pku-01",
+      "universityId": "pku",
+      "groupCode": "001",
+      "groupName": "物理+化学组",
+      "requireSubjects": ["物理", "化学"],
+      "majors": [
+        { "majorId": "cs", "majorName": "计算机科学与技术", "minScoreInGroup": 698, "tuition": 5000 },
+        { "majorId": "math", "majorName": "数学与应用数学", "minScoreInGroup": 690, "tuition": 5000 },
+        { "majorId": "phy", "majorName": "物理学", "minScoreInGroup": 685, "tuition": 5000 },
+        { "majorId": "chem", "majorName": "化学", "minScoreInGroup": 680, "tuition": 5000 }
+      ],
+      "groupMinScore": 680,
+      "groupAvgScore": 692,
+      "popularMajors": ["cs", "math"],
+      "admissionData": [
+        { "year": 2024, "province": "北京", "minScore": 680, "rank": 200 }
+      ],
+      "adjustmentRisk": {
+        "level": "high",
+        "description": "热门专业比投档线高 18-25 分，勾选服从调剂是必须的。",
+        "scoreGap": 25
+      }
+    },
+    {
+      "groupId": "pku-02",
+      "universityId": "pku",
+      "groupCode": "002",
+      "groupName": "历史组",
+      "requireSubjects": ["历史"],
+      "majors": [
+        { "majorId": "law", "majorName": "法学", "minScoreInGroup": 685, "tuition": 5000 },
+        { "majorId": "cnl", "majorName": "中国语言文学", "minScoreInGroup": 678, "tuition": 5000 },
+        { "majorId": "econ", "majorName": "经济学", "minScoreInGroup": 682, "tuition": 5000 }
+      ],
+      "groupMinScore": 675,
+      "groupAvgScore": 680,
+      "popularMajors": ["law", "econ"],
+      "admissionData": [
+        { "year": 2024, "province": "北京", "minScore": 675, "rank": 180 }
+      ],
+      "adjustmentRisk": {
+        "level": "medium",
+        "description": "法学/经济学较热门，调剂到中文/冷门专业风险存在。",
+        "scoreGap": 12
+      }
+    },
+    {
+      "groupId": "fdu-01",
+      "universityId": "fudan",
+      "groupCode": "001",
+      "groupName": "物理+化学组",
+      "requireSubjects": ["物理", "化学"],
+      "majors": [
+        { "majorId": "cs", "majorName": "计算机科学与技术", "minScoreInGroup": 680, "tuition": 6500 },
+        { "majorId": "ee", "majorName": "电子信息工程", "minScoreInGroup": 670, "tuition": 6500 },
+        { "majorId": "math", "majorName": "数学与应用数学", "minScoreInGroup": 665, "tuition": 6500 },
+        { "majorId": "med", "majorName": "临床医学(8年制)", "minScoreInGroup": 685, "tuition": 6500 },
+        { "majorId": "comm", "majorName": "通信工程", "minScoreInGroup": 668, "tuition": 6500 }
+      ],
+      "groupMinScore": 660,
+      "groupAvgScore": 675,
+      "popularMajors": ["cs", "med"],
+      "admissionData": [
+        { "year": 2024, "province": "上海", "minScore": 580, "rank": 1500 },
+        { "year": 2024, "province": "浙江", "minScore": 685, "rank": 800 }
+      ],
+      "adjustmentRisk": {
+        "level": "high",
+        "description": "临床医学8年制是组内最高分专业，比投档线高25分+。若被调剂到材料/化学等专业可能性高。",
+        "scoreGap": 25
+      }
+    },
+    {
+      "groupId": "fdu-02",
+      "universityId": "fudan",
+      "groupCode": "002",
+      "groupName": "历史组",
+      "requireSubjects": ["历史"],
+      "majors": [
+        { "majorId": "econ", "majorName": "经济学", "minScoreInGroup": 665, "tuition": 6500 },
+        { "majorId": "law", "majorName": "法学", "minScoreInGroup": 660, "tuition": 6500 },
+        { "majorId": "cnl", "majorName": "中国语言文学", "minScoreInGroup": 650, "tuition": 6500 },
+        { "majorId": "jour", "majorName": "新闻学", "minScoreInGroup": 655, "tuition": 6500 }
+      ],
+      "groupMinScore": 645,
+      "groupAvgScore": 658,
+      "popularMajors": ["econ", "law"],
+      "admissionData": [
+        { "year": 2024, "province": "上海", "minScore": 565, "rank": 2000 }
+      ],
+      "adjustmentRisk": {
+        "level": "medium",
+        "description": "组内专业分差不大，调剂风险中等。",
+        "scoreGap": 20
+      }
+    },
+    {
+      "groupId": "sjtu-01",
+      "universityId": "sjtu",
+      "groupCode": "001",
+      "groupName": "物理+化学组",
+      "requireSubjects": ["物理", "化学"],
+      "majors": [
+        { "majorId": "cs", "majorName": "计算机科学与技术", "minScoreInGroup": 678, "tuition": 5000 },
+        { "majorId": "ee", "majorName": "电子信息工程", "minScoreInGroup": 670, "tuition": 5000 },
+        { "majorId": "me", "majorName": "机械工程", "minScoreInGroup": 660, "tuition": 5000 },
+        { "majorId": "auto", "majorName": "自动化", "minScoreInGroup": 665, "tuition": 5000 },
+        { "majorId": "ds", "majorName": "数据科学与大数据技术", "minScoreInGroup": 675, "tuition": 5000 }
+      ],
+      "groupMinScore": 655,
+      "groupAvgScore": 670,
+      "popularMajors": ["cs", "ds", "ee"],
+      "admissionData": [
+        { "year": 2024, "province": "上海", "minScore": 575, "rank": 2000 },
+        { "year": 2024, "province": "浙江", "minScore": 680, "rank": 1200 }
+      ],
+      "adjustmentRisk": {
+        "level": "high",
+        "description": "上交大工科专业组竞争激烈，分数差 20+，调剂风险高。",
+        "scoreGap": 23
+      }
+    },
+    {
+      "groupId": "sjtu-02",
+      "universityId": "sjtu",
+      "groupCode": "002",
+      "groupName": "物理组(不限化学)",
+      "requireSubjects": ["物理"],
+      "majors": [
+        { "majorId": "arch", "majorName": "建筑学", "minScoreInGroup": 660, "tuition": 5000 },
+        { "majorId": "psy", "majorName": "心理学", "minScoreInGroup": 650, "tuition": 5000 }
+      ],
+      "groupMinScore": 645,
+      "groupAvgScore": 655,
+      "popularMajors": ["arch"],
+      "admissionData": [
+        { "year": 2024, "province": "上海", "minScore": 565, "rank": 2500 }
+      ],
+      "adjustmentRisk": {
+        "level": "medium",
+        "description": "组内专业少但分数有差，5年制建筑学分高。",
+        "scoreGap": 15
+      }
+    },
+    {
+      "groupId": "nju-01",
+      "universityId": "nju",
+      "groupCode": "001",
+      "groupName": "物理+化学组",
+      "requireSubjects": ["物理", "化学"],
+      "majors": [
+        { "majorId": "cs", "majorName": "计算机科学与技术", "minScoreInGroup": 660, "tuition": 5800 },
+        { "majorId": "se", "majorName": "软件工程", "minScoreInGroup": 655, "tuition": 5800 },
+        { "majorId": "ee", "majorName": "电子信息工程", "minScoreInGroup": 650, "tuition": 5800 },
+        { "majorId": "math", "majorName": "数学与应用数学", "minScoreInGroup": 645, "tuition": 5800 }
+      ],
+      "groupMinScore": 640,
+      "groupAvgScore": 655,
+      "popularMajors": ["cs", "se"],
+      "admissionData": [
+        { "year": 2024, "province": "江苏", "minScore": 640, "rank": 5000 },
+        { "year": 2024, "province": "浙江", "minScore": 670, "rank": 2500 }
+      ],
+      "adjustmentRisk": {
+        "level": "high",
+        "description": "南大计算机/软工竞争激烈，组内分差 20+。",
+        "scoreGap": 20
+      }
+    },
+    {
+      "groupId": "nju-02",
+      "universityId": "nju",
+      "groupCode": "002",
+      "groupName": "历史组",
+      "requireSubjects": ["历史"],
+      "majors": [
+        { "majorId": "econ", "majorName": "经济学", "minScoreInGroup": 645, "tuition": 5800 },
+        { "majorId": "law", "majorName": "法学", "minScoreInGroup": 640, "tuition": 5800 },
+        { "majorId": "cnl", "majorName": "中国语言文学", "minScoreInGroup": 630, "tuition": 5800 }
+      ],
+      "groupMinScore": 625,
+      "groupAvgScore": 638,
+      "popularMajors": ["econ", "law"],
+      "admissionData": [
+        { "year": 2024, "province": "江苏", "minScore": 625, "rank": 2500 }
+      ],
+      "adjustmentRisk": {
+        "level": "medium",
+        "description": "经济/法学分数较高，调剂到中文/哲学风险存在。",
+        "scoreGap": 18
+      }
+    },
+    {
+      "groupId": "zju-01",
+      "universityId": "zju",
+      "groupCode": "001",
+      "groupName": "物理+化学组",
+      "requireSubjects": ["物理", "化学"],
+      "majors": [
+        { "majorId": "cs", "majorName": "计算机科学与技术", "minScoreInGroup": 668, "tuition": 6000 },
+        { "majorId": "se", "majorName": "软件工程", "minScoreInGroup": 663, "tuition": 6000 },
+        { "majorId": "ai", "majorName": "人工智能", "minScoreInGroup": 670, "tuition": 6000 },
+        { "majorId": "ee", "majorName": "电子信息工程", "minScoreInGroup": 658, "tuition": 6000 },
+        { "majorId": "me", "majorName": "机械工程", "minScoreInGroup": 650, "tuition": 6000 },
+        { "majorId": "mat", "majorName": "材料科学与工程", "minScoreInGroup": 645, "tuition": 6000 }
+      ],
+      "groupMinScore": 640,
+      "groupAvgScore": 660,
+      "popularMajors": ["cs", "ai"],
+      "admissionData": [
+        { "year": 2024, "province": "浙江", "minScore": 670, "rank": 3000 },
+        { "year": 2024, "province": "江苏", "minScore": 645, "rank": 4000 }
+      ],
+      "adjustmentRisk": {
+        "level": "high",
+        "description": "浙大CS/AI/软工是顶流，组内分差近 25 分，调剂风险高。",
+        "scoreGap": 25
+      }
+    },
+    {
+      "groupId": "zju-02",
+      "universityId": "zju",
+      "groupCode": "002",
+      "groupName": "物理组(医学方向)",
+      "requireSubjects": ["物理", "化学", "生物"],
+      "majors": [
+        { "majorId": "med", "majorName": "临床医学(5+3一体化)", "minScoreInGroup": 660, "tuition": 6000 },
+        { "majorId": "pharm", "majorName": "药学", "minScoreInGroup": 640, "tuition": 6000 }
+      ],
+      "groupMinScore": 635,
+      "groupAvgScore": 650,
+      "popularMajors": ["med"],
+      "admissionData": [
+        { "year": 2024, "province": "浙江", "minScore": 660, "rank": 3500 }
+      ],
+      "adjustmentRisk": {
+        "level": "medium",
+        "description": "临床医学是组内最高分专业，比投档线高 20+ 分。",
+        "scoreGap": 20
+      }
+    },
+    {
+      "groupId": "whu-01",
+      "universityId": "whu",
+      "groupCode": "001",
+      "groupName": "物理+化学组",
+      "requireSubjects": ["物理", "化学"],
+      "majors": [
+        { "majorId": "cs", "majorName": "计算机科学与技术", "minScoreInGroup": 645, "tuition": 5850 },
+        { "majorId": "se", "majorName": "软件工程", "minScoreInGroup": 640, "tuition": 5850 },
+        { "majorId": "ee", "majorName": "电子信息工程", "minScoreInGroup": 635, "tuition": 5850 },
+        { "majorId": "math", "majorName": "数学与应用数学", "minScoreInGroup": 630, "tuition": 5850 },
+        { "majorId": "phy", "majorName": "物理学", "minScoreInGroup": 625, "tuition": 5850 }
+      ],
+      "groupMinScore": 620,
+      "groupAvgScore": 635,
+      "popularMajors": ["cs", "se"],
+      "admissionData": [
+        { "year": 2024, "province": "湖北", "minScore": 625, "rank": 5000 },
+        { "year": 2024, "province": "湖南", "minScore": 615, "rank": 8000 }
+      ],
+      "adjustmentRisk": {
+        "level": "high",
+        "description": "武大CS/SE 竞争激烈，组内分差近 20 分。",
+        "scoreGap": 20
+      }
+    },
+    {
+      "groupId": "hust-01",
+      "universityId": "hust",
+      "groupCode": "001",
+      "groupName": "物理+化学组",
+      "requireSubjects": ["物理", "化学"],
+      "majors": [
+        { "majorId": "cs", "majorName": "计算机科学与技术", "minScoreInGroup": 640, "tuition": 5850 },
+        { "majorId": "me", "majorName": "机械工程", "minScoreInGroup": 615, "tuition": 5850 },
+        { "majorId": "ee", "majorName": "电子信息工程", "minScoreInGroup": 630, "tuition": 5850 },
+        { "majorId": "auto", "majorName": "自动化", "minScoreInGroup": 620, "tuition": 5850 },
+        { "majorId": "ce", "majorName": "土木工程", "minScoreInGroup": 600, "tuition": 5850 }
+      ],
+      "groupMinScore": 595,
+      "groupAvgScore": 620,
+      "popularMajors": ["cs", "me"],
+      "admissionData": [
+        { "year": 2024, "province": "湖北", "minScore": 620, "rank": 6000 }
+      ],
+      "adjustmentRisk": {
+        "level": "high",
+        "description": "华科机械/电气是王牌，CS 竞争激烈。土木近年分数走低，组内分差可达 40+。",
+        "scoreGap": 35
+      }
+    },
+    {
+      "groupId": "sysu-01",
+      "universityId": "sysu",
+      "groupCode": "001",
+      "groupName": "物理+化学组",
+      "requireSubjects": ["物理", "化学"],
+      "majors": [
+        { "majorId": "cs", "majorName": "计算机科学与技术", "minScoreInGroup": 635, "tuition": 6000 },
+        { "majorId": "ee", "majorName": "电子信息工程", "minScoreInGroup": 625, "tuition": 6000 },
+        { "majorId": "med", "majorName": "临床医学", "minScoreInGroup": 640, "tuition": 6000 },
+        { "majorId": "phy", "majorName": "物理学", "minScoreInGroup": 610, "tuition": 6000 }
+      ],
+      "groupMinScore": 605,
+      "groupAvgScore": 625,
+      "popularMajors": ["med", "cs"],
+      "admissionData": [
+        { "year": 2024, "province": "广东", "minScore": 625, "rank": 8000 }
+      ],
+      "adjustmentRisk": {
+        "level": "high",
+        "description": "中山医临床8年制是组内最高分，比投档线高 30+。",
+        "scoreGap": 30
+      }
+    },
+    {
+      "groupId": "xjtu-01",
+      "universityId": "xjtu",
+      "groupCode": "001",
+      "groupName": "物理+化学组",
+      "requireSubjects": ["物理", "化学"],
+      "majors": [
+        { "majorId": "me", "majorName": "机械工程", "minScoreInGroup": 625, "tuition": 5200 },
+        { "majorId": "ee", "majorName": "电气工程及其自动化", "minScoreInGroup": 630, "tuition": 5200 },
+        { "majorId": "cs", "majorName": "计算机科学与技术", "minScoreInGroup": 640, "tuition": 5200 },
+        { "majorId": "mat", "majorName": "材料科学与工程", "minScoreInGroup": 610, "tuition": 5200 }
+      ],
+      "groupMinScore": 605,
+      "groupAvgScore": 625,
+      "popularMajors": ["ee", "cs"],
+      "admissionData": [
+        { "year": 2024, "province": "陕西", "minScore": 615, "rank": 6000 }
+      ],
+      "adjustmentRisk": {
+        "level": "high",
+        "description": "交大能动/电气是王牌，材料分数低，组内分差 30+。",
+        "scoreGap": 30
+      }
+    },
+    {
+      "groupId": "hit-01",
+      "universityId": "hit",
+      "groupCode": "001",
+      "groupName": "物理+化学组",
+      "requireSubjects": ["物理", "化学"],
+      "majors": [
+        { "majorId": "cs", "majorName": "计算机科学与技术", "minScoreInGroup": 635, "tuition": 5500 },
+        { "majorId": "me", "majorName": "机械工程", "minScoreInGroup": 620, "tuition": 5500 },
+        { "majorId": "auto", "majorName": "自动化", "minScoreInGroup": 625, "tuition": 5500 },
+        { "majorId": "mat", "majorName": "材料科学与工程", "minScoreInGroup": 600, "tuition": 5500 }
+      ],
+      "groupMinScore": 595,
+      "groupAvgScore": 618,
+      "popularMajors": ["cs", "me"],
+      "admissionData": [
+        { "year": 2024, "province": "黑龙江", "minScore": 605, "rank": 6000 }
+      ],
+      "adjustmentRisk": {
+        "level": "high",
+        "description": "哈工大本部 CS 竞争激烈，组内分差 35+。威海/深圳校区分数较低。",
+        "scoreGap": 35
+      }
+    },
+    {
+      "groupId": "nankai-01",
+      "universityId": "nankai",
+      "groupCode": "001",
+      "groupName": "物理+化学组",
+      "requireSubjects": ["物理", "化学"],
+      "majors": [
+        { "majorId": "cs", "majorName": "计算机科学与技术", "minScoreInGroup": 640, "tuition": 5800 },
+        { "majorId": "math", "majorName": "数学与应用数学", "minScoreInGroup": 630, "tuition": 5800 },
+        { "majorId": "chem", "majorName": "化学", "minScoreInGroup": 625, "tuition": 5800 }
+      ],
+      "groupMinScore": 620,
+      "groupAvgScore": 632,
+      "popularMajors": ["cs", "math"],
+      "admissionData": [
+        { "year": 2024, "province": "天津", "minScore": 645, "rank": 5000 }
+      ],
+      "adjustmentRisk": {
+        "level": "medium",
+        "description": "南开数学/化学是王牌，组内分差 20+。",
+        "scoreGap": 20
+      }
+    },
+    {
+      "groupId": "tju-01",
+      "universityId": "tju",
+      "groupCode": "001",
+      "groupName": "物理+化学组",
+      "requireSubjects": ["物理", "化学"],
+      "majors": [
+        { "majorId": "ce", "majorName": "土木工程", "minScoreInGroup": 605, "tuition": 5800 },
+        { "majorId": "me", "majorName": "机械工程", "minScoreInGroup": 615, "tuition": 5800 },
+        { "majorId": "ee", "majorName": "电子信息工程", "minScoreInGroup": 625, "tuition": 5800 },
+        { "majorId": "mat", "majorName": "材料科学与工程", "minScoreInGroup": 600, "tuition": 5800 }
+      ],
+      "groupMinScore": 595,
+      "groupAvgScore": 615,
+      "popularMajors": ["ce", "me"],
+      "admissionData": [
+        { "year": 2024, "province": "天津", "minScore": 620, "rank": 8000 }
+      ],
+      "adjustmentRisk": {
+        "level": "high",
+        "description": "天大建筑/化工是王牌，组内分差 25+。",
+        "scoreGap": 25
+      }
+    },
+    {
+      "groupId": "seu-01",
+      "universityId": "seu",
+      "groupCode": "001",
+      "groupName": "物理+化学组",
+      "requireSubjects": ["物理", "化学"],
+      "majors": [
+        { "majorId": "ee", "majorName": "电子信息工程", "minScoreInGroup": 625, "tuition": 5800 },
+        { "majorId": "cs", "majorName": "计算机科学与技术", "minScoreInGroup": 630, "tuition": 5800 },
+        { "majorId": "arch", "majorName": "建筑学", "minScoreInGroup": 615, "tuition": 5800 }
+      ],
+      "groupMinScore": 605,
+      "groupAvgScore": 620,
+      "popularMajors": ["ee", "cs"],
+      "admissionData": [
+        { "year": 2024, "province": "江苏", "minScore": 615, "rank": 8000 }
+      ],
+      "adjustmentRisk": {
+        "level": "medium",
+        "description": "东南建筑老牌，电子信息有竞争力，组内分差 20+。",
+        "scoreGap": 20
+      }
+    },
+    {
+      "groupId": "csu-01",
+      "universityId": "csu",
+      "groupCode": "001",
+      "groupName": "物理+化学组",
+      "requireSubjects": ["物理", "化学"],
+      "majors": [
+        { "majorId": "mat", "majorName": "材料科学与工程", "minScoreInGroup": 605, "tuition": 5500 },
+        { "majorId": "me", "majorName": "机械工程", "minScoreInGroup": 595, "tuition": 5500 },
+        { "majorId": "ee", "majorName": "电子信息工程", "minScoreInGroup": 610, "tuition": 5500 },
+        { "majorId": "med", "majorName": "临床医学", "minScoreInGroup": 615, "tuition": 5500 }
+      ],
+      "groupMinScore": 585,
+      "groupAvgScore": 605,
+      "popularMajors": ["med", "mat"],
+      "admissionData": [
+        { "year": 2024, "province": "湖南", "minScore": 605, "rank": 15000 }
+      ],
+      "adjustmentRisk": {
+        "level": "high",
+        "description": "中南材料/医学是王牌，组内分差 30+。",
+        "scoreGap": 30
+      }
+    },
+    {
+      "groupId": "uestc-01",
+      "universityId": "uestc",
+      "groupCode": "001",
+      "groupName": "物理+化学组",
+      "requireSubjects": ["物理", "化学"],
+      "majors": [
+        { "majorId": "ee", "majorName": "电子信息工程", "minScoreInGroup": 625, "tuition": 6000 },
+        { "majorId": "cs", "majorName": "计算机科学与技术", "minScoreInGroup": 630, "tuition": 6000 },
+        { "majorId": "comm", "majorName": "通信工程", "minScoreInGroup": 620, "tuition": 6000 }
+      ],
+      "groupMinScore": 605,
+      "groupAvgScore": 622,
+      "popularMajors": ["ee", "cs"],
+      "admissionData": [
+        { "year": 2024, "province": "四川", "minScore": 620, "rank": 12000 }
+      ],
+      "adjustmentRisk": {
+        "level": "medium",
+        "description": "成电电子信息是王牌，组内分差 20+。",
+        "scoreGap": 20
+      }
+    },
+    {
+      "groupId": "cqu-01",
+      "universityId": "cqu",
+      "groupCode": "001",
+      "groupName": "物理+化学组",
+      "requireSubjects": ["物理", "化学"],
+      "majors": [
+        { "majorId": "me", "majorName": "机械工程", "minScoreInGroup": 600, "tuition": 5625 },
+        { "majorId": "ee", "majorName": "电子信息工程", "minScoreInGroup": 615, "tuition": 5625 },
+        { "majorId": "ce", "majorName": "土木工程", "minScoreInGroup": 590, "tuition": 5625 },
+        { "majorId": "mat", "majorName": "材料科学与工程", "minScoreInGroup": 585, "tuition": 5625 }
+      ],
+      "groupMinScore": 580,
+      "groupAvgScore": 600,
+      "popularMajors": ["me", "ee"],
+      "admissionData": [
+        { "year": 2024, "province": "重庆", "minScore": 605, "rank": 10000 }
+      ],
+      "adjustmentRisk": {
+        "level": "high",
+        "description": "重大机械/建筑是王牌，组内分差 30+。",
+        "scoreGap": 30
+      }
+    },
+    {
+      "groupId": "hnu-01",
+      "universityId": "hnu",
+      "groupCode": "001",
+      "groupName": "物理+化学组",
+      "requireSubjects": ["物理", "化学"],
+      "majors": [
+        { "majorId": "cs", "majorName": "计算机科学与技术", "minScoreInGroup": 615, "tuition": 5500 },
+        { "majorId": "ee", "majorName": "电子信息工程", "minScoreInGroup": 605, "tuition": 5500 },
+        { "majorId": "ce", "majorName": "土木工程", "minScoreInGroup": 590, "tuition": 5500 }
+      ],
+      "groupMinScore": 580,
+      "groupAvgScore": 600,
+      "popularMajors": ["cs"],
+      "admissionData": [
+        { "year": 2024, "province": "湖南", "minScore": 605, "rank": 12000 }
+      ],
+      "adjustmentRisk": {
+        "level": "medium",
+        "description": "湖大CS/电气是热门，组内分差 25+。",
+        "scoreGap": 25
+      }
+    }
+  ]
+}

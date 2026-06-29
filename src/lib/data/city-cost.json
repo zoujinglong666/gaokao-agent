@@ -1,0 +1,287 @@
+{
+  "_comment": "城市生活成本参考数据（月均），仅供参考",
+  "_source": "综合公开统计数据估算",
+  "_updateDate": "2026-06-11",
+  "cities": [
+    {
+      "city": "北京",
+      "rentAvg": 3500,
+      "mealDaily": 50,
+      "transportMonthly": 200,
+      "level": "一线"
+    },
+    {
+      "city": "上海",
+      "rentAvg": 3200,
+      "mealDaily": 48,
+      "transportMonthly": 200,
+      "level": "一线"
+    },
+    {
+      "city": "广州",
+      "rentAvg": 2200,
+      "mealDaily": 40,
+      "transportMonthly": 150,
+      "level": "一线"
+    },
+    {
+      "city": "深圳",
+      "rentAvg": 2800,
+      "mealDaily": 45,
+      "transportMonthly": 180,
+      "level": "一线"
+    },
+    {
+      "city": "南京",
+      "rentAvg": 1800,
+      "mealDaily": 35,
+      "transportMonthly": 130,
+      "level": "新一线"
+    },
+    {
+      "city": "杭州",
+      "rentAvg": 2200,
+      "mealDaily": 38,
+      "transportMonthly": 150,
+      "level": "新一线"
+    },
+    {
+      "city": "武汉",
+      "rentAvg": 1500,
+      "mealDaily": 30,
+      "transportMonthly": 120,
+      "level": "新一线"
+    },
+    {
+      "city": "成都",
+      "rentAvg": 1600,
+      "mealDaily": 28,
+      "transportMonthly": 120,
+      "level": "新一线"
+    },
+    {
+      "city": "西安",
+      "rentAvg": 1400,
+      "mealDaily": 28,
+      "transportMonthly": 100,
+      "level": "新一线"
+    },
+    {
+      "city": "长沙",
+      "rentAvg": 1400,
+      "mealDaily": 28,
+      "transportMonthly": 100,
+      "level": "新一线"
+    },
+    {
+      "city": "天津",
+      "rentAvg": 1600,
+      "mealDaily": 32,
+      "transportMonthly": 120,
+      "level": "新一线"
+    },
+    {
+      "city": "重庆",
+      "rentAvg": 1300,
+      "mealDaily": 25,
+      "transportMonthly": 100,
+      "level": "新一线"
+    },
+    {
+      "city": "苏州",
+      "rentAvg": 1800,
+      "mealDaily": 35,
+      "transportMonthly": 130,
+      "level": "新一线"
+    },
+    {
+      "city": "合肥",
+      "rentAvg": 1300,
+      "mealDaily": 28,
+      "transportMonthly": 100,
+      "level": "新一线"
+    },
+    {
+      "city": "青岛",
+      "rentAvg": 1500,
+      "mealDaily": 32,
+      "transportMonthly": 110,
+      "level": "二线"
+    },
+    {
+      "city": "厦门",
+      "rentAvg": 1800,
+      "mealDaily": 35,
+      "transportMonthly": 120,
+      "level": "二线"
+    },
+    {
+      "city": "大连",
+      "rentAvg": 1400,
+      "mealDaily": 30,
+      "transportMonthly": 100,
+      "level": "二线"
+    },
+    {
+      "city": "沈阳",
+      "rentAvg": 1100,
+      "mealDaily": 25,
+      "transportMonthly": 90,
+      "level": "二线"
+    },
+    {
+      "city": "哈尔滨",
+      "rentAvg": 1000,
+      "mealDaily": 22,
+      "transportMonthly": 80,
+      "level": "二线"
+    },
+    {
+      "city": "长春",
+      "rentAvg": 1000,
+      "mealDaily": 22,
+      "transportMonthly": 80,
+      "level": "二线"
+    },
+    {
+      "city": "济南",
+      "rentAvg": 1300,
+      "mealDaily": 28,
+      "transportMonthly": 100,
+      "level": "二线"
+    },
+    {
+      "city": "郑州",
+      "rentAvg": 1200,
+      "mealDaily": 25,
+      "transportMonthly": 90,
+      "level": "二线"
+    },
+    {
+      "city": "福州",
+      "rentAvg": 1500,
+      "mealDaily": 30,
+      "transportMonthly": 100,
+      "level": "二线"
+    },
+    {
+      "city": "昆明",
+      "rentAvg": 1200,
+      "mealDaily": 25,
+      "transportMonthly": 90,
+      "level": "二线"
+    },
+    {
+      "city": "南昌",
+      "rentAvg": 1100,
+      "mealDaily": 22,
+      "transportMonthly": 80,
+      "level": "二线"
+    },
+    {
+      "city": "贵阳",
+      "rentAvg": 1100,
+      "mealDaily": 22,
+      "transportMonthly": 80,
+      "level": "二线"
+    },
+    {
+      "city": "太原",
+      "rentAvg": 1100,
+      "mealDaily": 22,
+      "transportMonthly": 80,
+      "level": "二线"
+    },
+    {
+      "city": "南宁",
+      "rentAvg": 1000,
+      "mealDaily": 22,
+      "transportMonthly": 80,
+      "level": "二线"
+    },
+    {
+      "city": "兰州",
+      "rentAvg": 1000,
+      "mealDaily": 22,
+      "transportMonthly": 70,
+      "level": "三线"
+    },
+    {
+      "city": "海口",
+      "rentAvg": 1300,
+      "mealDaily": 28,
+      "transportMonthly": 90,
+      "level": "二线"
+    },
+    {
+      "city": "呼和浩特",
+      "rentAvg": 1000,
+      "mealDaily": 22,
+      "transportMonthly": 70,
+      "level": "三线"
+    },
+    {
+      "city": "乌鲁木齐",
+      "rentAvg": 1000,
+      "mealDaily": 22,
+      "transportMonthly": 70,
+      "level": "三线"
+    },
+    {
+      "city": "拉萨",
+      "rentAvg": 1200,
+      "mealDaily": 30,
+      "transportMonthly": 80,
+      "level": "三线"
+    },
+    {
+      "city": "银川",
+      "rentAvg": 900,
+      "mealDaily": 20,
+      "transportMonthly": 70,
+      "level": "三线"
+    },
+    {
+      "city": "西宁",
+      "rentAvg": 900,
+      "mealDaily": 20,
+      "transportMonthly": 70,
+      "level": "三线"
+    },
+    {
+      "city": "无锡",
+      "rentAvg": 1500,
+      "mealDaily": 32,
+      "transportMonthly": 110,
+      "level": "二线"
+    },
+    {
+      "city": "徐州",
+      "rentAvg": 1000,
+      "mealDaily": 22,
+      "transportMonthly": 80,
+      "level": "三线"
+    },
+    {
+      "city": "咸阳",
+      "rentAvg": 900,
+      "mealDaily": 20,
+      "transportMonthly": 70,
+      "level": "三线"
+    },
+    {
+      "city": "延吉",
+      "rentAvg": 800,
+      "mealDaily": 20,
+      "transportMonthly": 60,
+      "level": "三线"
+    },
+    {
+      "city": "石河子",
+      "rentAvg": 700,
+      "mealDaily": 18,
+      "transportMonthly": 50,
+      "level": "三线"
+    }
+  ]
+}

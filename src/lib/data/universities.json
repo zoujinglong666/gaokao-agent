@@ -1,0 +1,1727 @@
+{
+  "_comment": "院校基础数据 - 全部来自公开信息，请人工审核确认",
+  "_source": "教育部全国高等学校名单 + 各校官网公开信息",
+  "_crawlDate": "2026-06-11",
+  "_totalCount": 105,
+  "universities": [
+    {
+      "id": "tsinghua",
+      "name": "清华大学",
+      "province": "北京",
+      "city": "北京",
+      "address": "北京市海淀区双清路30号",
+      "lat": 39.9994,
+      "lng": 116.3267,
+      "website": "https://www.tsinghua.edu.cn",
+      "admissionOfficePhone": "010-62770334",
+      "type": "综合",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "pku",
+      "name": "北京大学",
+      "province": "北京",
+      "city": "北京",
+      "address": "北京市海淀区颐和园路5号",
+      "lat": 39.987,
+      "lng": 116.3052,
+      "website": "https://www.pku.edu.cn",
+      "admissionOfficePhone": "010-62751407",
+      "type": "综合",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "ruc",
+      "name": "中国人民大学",
+      "province": "北京",
+      "city": "北京",
+      "address": "北京市海淀区中关村大街59号",
+      "lat": 39.9703,
+      "lng": 116.3166,
+      "website": "https://www.ruc.edu.cn",
+      "admissionOfficePhone": "010-62511340",
+      "type": "综合",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "buaa",
+      "name": "北京航空航天大学",
+      "province": "北京",
+      "city": "北京",
+      "address": "北京市海淀区学院路37号",
+      "lat": 39.9837,
+      "lng": 116.3494,
+      "website": "https://www.buaa.edu.cn",
+      "admissionOfficePhone": "010-82317699",
+      "type": "理工",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "bit",
+      "name": "北京理工大学",
+      "province": "北京",
+      "city": "北京",
+      "address": "北京市海淀区中关村南大街5号",
+      "lat": 39.9609,
+      "lng": 116.3166,
+      "website": "https://www.bit.edu.cn",
+      "admissionOfficePhone": "010-68913345",
+      "type": "理工",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "bnu",
+      "name": "北京师范大学",
+      "province": "北京",
+      "city": "北京",
+      "address": "北京市西城区新街口外大街19号",
+      "lat": 39.9585,
+      "lng": 116.3606,
+      "website": "https://www.bnu.edu.cn",
+      "admissionOfficePhone": "010-58807962",
+      "type": "师范",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "cau",
+      "name": "中国农业大学",
+      "province": "北京",
+      "city": "北京",
+      "address": "北京市海淀区清华东路17号",
+      "lat": 40.0026,
+      "lng": 116.3578,
+      "website": "https://www.cau.edu.cn",
+      "admissionOfficePhone": "010-62737086",
+      "type": "农林",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "muc",
+      "name": "中央民族大学",
+      "province": "北京",
+      "city": "北京",
+      "address": "北京市海淀区中关村南大街27号",
+      "lat": 39.9511,
+      "lng": 116.3219,
+      "website": "https://www.muc.edu.cn",
+      "admissionOfficePhone": "010-68939886",
+      "type": "民族",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "bjtu",
+      "name": "北京交通大学",
+      "province": "北京",
+      "city": "北京",
+      "address": "北京市海淀区上园村3号",
+      "lat": 39.9524,
+      "lng": 116.3414,
+      "website": "https://www.bjtu.edu.cn",
+      "admissionOfficePhone": "010-51688441",
+      "type": "理工",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "bjut",
+      "name": "北京工业大学",
+      "province": "北京",
+      "city": "北京",
+      "address": "北京市朝阳区平乐园100号",
+      "lat": 39.8745,
+      "lng": 116.4796,
+      "website": "https://www.bjut.edu.cn",
+      "admissionOfficePhone": "010-67391609",
+      "type": "理工",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "ustb",
+      "name": "北京科技大学",
+      "province": "北京",
+      "city": "北京",
+      "address": "北京市海淀区学院路30号",
+      "lat": 39.9891,
+      "lng": 116.3577,
+      "website": "https://www.ustb.edu.cn",
+      "admissionOfficePhone": "010-62325294",
+      "type": "理工",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "buct",
+      "name": "北京化工大学",
+      "province": "北京",
+      "city": "北京",
+      "address": "北京市朝阳区北三环东路15号",
+      "lat": 39.9707,
+      "lng": 116.4208,
+      "website": "https://www.buct.edu.cn",
+      "admissionOfficePhone": "010-64435706",
+      "type": "理工",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "bupt",
+      "name": "北京邮电大学",
+      "province": "北京",
+      "city": "北京",
+      "address": "北京市海淀区西土城路10号",
+      "lat": 39.9618,
+      "lng": 116.3579,
+      "website": "https://www.bupt.edu.cn",
+      "admissionOfficePhone": "010-62282045",
+      "type": "理工",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "bjfu",
+      "name": "北京林业大学",
+      "province": "北京",
+      "city": "北京",
+      "address": "北京市海淀区清华东路35号",
+      "lat": 40.0025,
+      "lng": 116.3526,
+      "website": "https://www.bjfu.edu.cn",
+      "admissionOfficePhone": "010-62338216",
+      "type": "农林",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "bucm",
+      "name": "北京中医药大学",
+      "province": "北京",
+      "city": "北京",
+      "address": "北京市朝阳区北三环东路11号",
+      "lat": 39.9713,
+      "lng": 116.4274,
+      "website": "https://www.bucm.edu.cn",
+      "admissionOfficePhone": "010-64286231",
+      "type": "医药",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "bfsu",
+      "name": "北京外国语大学",
+      "province": "北京",
+      "city": "北京",
+      "address": "北京市海淀区西三环北路2号",
+      "lat": 39.9547,
+      "lng": 116.3116,
+      "website": "https://www.bfsu.edu.cn",
+      "admissionOfficePhone": "010-88816481",
+      "type": "语言",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "cuc",
+      "name": "中国传媒大学",
+      "province": "北京",
+      "city": "北京",
+      "address": "北京市朝阳区定福庄东街1号",
+      "lat": 39.912,
+      "lng": 116.5582,
+      "website": "https://www.cuc.edu.cn",
+      "admissionOfficePhone": "010-65779370",
+      "type": "语言",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "cufe",
+      "name": "中央财经大学",
+      "province": "北京",
+      "city": "北京",
+      "address": "北京市海淀区学院南路39号",
+      "lat": 39.9573,
+      "lng": 116.3453,
+      "website": "https://www.cufe.edu.cn",
+      "admissionOfficePhone": "010-62288090",
+      "type": "财经",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "uibe",
+      "name": "对外经济贸易大学",
+      "province": "北京",
+      "city": "北京",
+      "address": "北京市朝阳区惠新东街10号",
+      "lat": 39.9812,
+      "lng": 116.4314,
+      "website": "https://www.uibe.edu.cn",
+      "admissionOfficePhone": "010-64492178",
+      "type": "财经",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "cupl",
+      "name": "中国政法大学",
+      "province": "北京",
+      "city": "北京",
+      "address": "北京市昌平区府学路27号",
+      "lat": 40.2207,
+      "lng": 116.2653,
+      "website": "https://www.cupl.edu.cn",
+      "admissionOfficePhone": "010-58909122",
+      "type": "政法",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "ncepu",
+      "name": "华北电力大学",
+      "province": "北京",
+      "city": "北京",
+      "address": "北京市昌平区北农路2号",
+      "lat": 40.0852,
+      "lng": 116.3093,
+      "website": "https://www.ncepu.edu.cn",
+      "admissionOfficePhone": "010-61773009",
+      "type": "理工",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "fudan",
+      "name": "复旦大学",
+      "province": "上海",
+      "city": "上海",
+      "address": "上海市杨浦区邯郸路220号",
+      "lat": 31.2986,
+      "lng": 121.5034,
+      "website": "https://www.fudan.edu.cn",
+      "admissionOfficePhone": "021-65646666",
+      "type": "综合",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "sjtu",
+      "name": "上海交通大学",
+      "province": "上海",
+      "city": "上海",
+      "address": "上海市闵行区东川路800号",
+      "lat": 31.0282,
+      "lng": 121.4436,
+      "website": "https://www.sjtu.edu.cn",
+      "admissionOfficePhone": "021-34200000",
+      "type": "综合",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "tongji",
+      "name": "同济大学",
+      "province": "上海",
+      "city": "上海",
+      "address": "上海市杨浦区四平路1239号",
+      "lat": 31.2847,
+      "lng": 121.5042,
+      "website": "https://www.tongji.edu.cn",
+      "admissionOfficePhone": "021-65982869",
+      "type": "理工",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "ecnu",
+      "name": "华东师范大学",
+      "province": "上海",
+      "city": "上海",
+      "address": "上海市闵行区东川路500号",
+      "lat": 31.0248,
+      "lng": 121.4346,
+      "website": "https://www.ecnu.edu.cn",
+      "admissionOfficePhone": "021-62232218",
+      "type": "师范",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "ecust",
+      "name": "华东理工大学",
+      "province": "上海",
+      "city": "上海",
+      "address": "上海市徐汇区梅陇路130号",
+      "lat": 31.1457,
+      "lng": 121.4242,
+      "website": "https://www.ecust.edu.cn",
+      "admissionOfficePhone": "021-64252763",
+      "type": "理工",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "shisu",
+      "name": "上海外国语大学",
+      "province": "上海",
+      "city": "上海",
+      "address": "上海市松江区文翔路1550号",
+      "lat": 31.0383,
+      "lng": 121.2082,
+      "website": "https://www.shisu.edu.cn",
+      "admissionOfficePhone": "021-55386383",
+      "type": "语言",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "sufe",
+      "name": "上海财经大学",
+      "province": "上海",
+      "city": "上海",
+      "address": "上海市杨浦区国定路777号",
+      "lat": 31.3006,
+      "lng": 121.4944,
+      "website": "https://www.sufe.edu.cn",
+      "admissionOfficePhone": "021-65904372",
+      "type": "财经",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "dhu",
+      "name": "东华大学",
+      "province": "上海",
+      "city": "上海",
+      "address": "上海市松江区人民北路2999号",
+      "lat": 31.0322,
+      "lng": 121.2068,
+      "website": "https://www.dhu.edu.cn",
+      "admissionOfficePhone": "021-67791993",
+      "type": "理工",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "shu",
+      "name": "上海大学",
+      "province": "上海",
+      "city": "上海",
+      "address": "上海市宝山区上大路99号",
+      "lat": 31.3163,
+      "lng": 121.3919,
+      "website": "https://www.shu.edu.cn",
+      "admissionOfficePhone": "021-66134148",
+      "type": "综合",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "nankai",
+      "name": "南开大学",
+      "province": "天津",
+      "city": "天津",
+      "address": "天津市南开区卫津路94号",
+      "lat": 39.1017,
+      "lng": 117.1644,
+      "website": "https://www.nankai.edu.cn",
+      "admissionOfficePhone": "022-23504845",
+      "type": "综合",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "tju",
+      "name": "天津大学",
+      "province": "天津",
+      "city": "天津",
+      "address": "天津市南开区卫津路92号",
+      "lat": 39.1093,
+      "lng": 117.1678,
+      "website": "https://www.tju.edu.cn",
+      "admissionOfficePhone": "022-27405486",
+      "type": "理工",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "hebut",
+      "name": "河北工业大学",
+      "province": "天津",
+      "city": "天津",
+      "address": "天津市北辰区西平道5340号",
+      "lat": 39.2569,
+      "lng": 117.1325,
+      "website": "https://www.hebut.edu.cn",
+      "admissionOfficePhone": "022-60436811",
+      "type": "理工",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "nju",
+      "name": "南京大学",
+      "province": "江苏",
+      "city": "南京",
+      "address": "南京市鼓楼区汉口路22号",
+      "lat": 32.0579,
+      "lng": 118.7781,
+      "website": "https://www.nju.edu.cn",
+      "admissionOfficePhone": "025-89686606",
+      "type": "综合",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "seu",
+      "name": "东南大学",
+      "province": "江苏",
+      "city": "南京",
+      "address": "南京市江宁区东南大学路2号",
+      "lat": 31.8836,
+      "lng": 118.8146,
+      "website": "https://www.seu.edu.cn",
+      "admissionOfficePhone": "025-52090271",
+      "type": "综合",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "nuaa",
+      "name": "南京航空航天大学",
+      "province": "江苏",
+      "city": "南京",
+      "address": "南京市江宁区将军大道29号",
+      "lat": 31.9368,
+      "lng": 118.7946,
+      "website": "https://www.nuaa.edu.cn",
+      "admissionOfficePhone": "025-52115850",
+      "type": "理工",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "njust",
+      "name": "南京理工大学",
+      "province": "江苏",
+      "city": "南京",
+      "address": "南京市玄武区孝陵卫200号",
+      "lat": 32.0337,
+      "lng": 118.8558,
+      "website": "https://www.njust.edu.cn",
+      "admissionOfficePhone": "025-84315821",
+      "type": "理工",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "hhu",
+      "name": "河海大学",
+      "province": "江苏",
+      "city": "南京",
+      "address": "南京市江宁区佛城西路8号",
+      "lat": 31.9434,
+      "lng": 118.7897,
+      "website": "https://www.hhu.edu.cn",
+      "admissionOfficePhone": "025-58099483",
+      "type": "理工",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "cumt",
+      "name": "中国矿业大学",
+      "province": "江苏",
+      "city": "徐州",
+      "address": "徐州市铜山区大学路1号",
+      "lat": 34.2138,
+      "lng": 117.1435,
+      "website": "https://www.cumt.edu.cn",
+      "admissionOfficePhone": "0516-83591666",
+      "type": "理工",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "jiangnan",
+      "name": "江南大学",
+      "province": "江苏",
+      "city": "无锡",
+      "address": "无锡市滨湖区蠡湖大道1800号",
+      "lat": 31.4889,
+      "lng": 120.2924,
+      "website": "https://www.jiangnan.edu.cn",
+      "admissionOfficePhone": "0510-85915605",
+      "type": "理工",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "njau",
+      "name": "南京农业大学",
+      "province": "江苏",
+      "city": "南京",
+      "address": "南京市玄武区卫岗1号",
+      "lat": 32.0374,
+      "lng": 118.8402,
+      "website": "https://www.njau.edu.cn",
+      "admissionOfficePhone": "025-84399789",
+      "type": "农林",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "cpu",
+      "name": "中国药科大学",
+      "province": "江苏",
+      "city": "南京",
+      "address": "南京市江宁区龙眠大道639号",
+      "lat": 31.9051,
+      "lng": 118.8278,
+      "website": "https://www.cpu.edu.cn",
+      "admissionOfficePhone": "025-86185203",
+      "type": "医药",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "njnu",
+      "name": "南京师范大学",
+      "province": "江苏",
+      "city": "南京",
+      "address": "南京市栖霞区文苑路1号",
+      "lat": 32.1134,
+      "lng": 118.913,
+      "website": "https://www.njnu.edu.cn",
+      "admissionOfficePhone": "025-83720705",
+      "type": "师范",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "suda",
+      "name": "苏州大学",
+      "province": "江苏",
+      "city": "苏州",
+      "address": "苏州市姑苏区十梓街1号",
+      "lat": 31.3035,
+      "lng": 120.6371,
+      "website": "https://www.suda.edu.cn",
+      "admissionOfficePhone": "0512-67507943",
+      "type": "综合",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "zju",
+      "name": "浙江大学",
+      "province": "浙江",
+      "city": "杭州",
+      "address": "杭州市西湖区余杭塘路866号",
+      "lat": 30.3085,
+      "lng": 120.0864,
+      "website": "https://www.zju.edu.cn",
+      "admissionOfficePhone": "0571-87951001",
+      "type": "综合",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "ustc",
+      "name": "中国科学技术大学",
+      "province": "安徽",
+      "city": "合肥",
+      "address": "合肥市蜀山区金寨路96号",
+      "lat": 31.8427,
+      "lng": 117.2702,
+      "website": "https://www.ustc.edu.cn",
+      "admissionOfficePhone": "0551-63602553",
+      "type": "理工",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "ahu",
+      "name": "安徽大学",
+      "province": "安徽",
+      "city": "合肥",
+      "address": "合肥市经济技术开发区九龙路111号",
+      "lat": 31.7727,
+      "lng": 117.1851,
+      "website": "https://www.ahu.edu.cn",
+      "admissionOfficePhone": "0551-63861666",
+      "type": "综合",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "hfut",
+      "name": "合肥工业大学",
+      "province": "安徽",
+      "city": "合肥",
+      "address": "合肥市包河区屯溪路193号",
+      "lat": 31.8428,
+      "lng": 117.2948,
+      "website": "https://www.hfut.edu.cn",
+      "admissionOfficePhone": "0551-62902880",
+      "type": "理工",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "whu",
+      "name": "武汉大学",
+      "province": "湖北",
+      "city": "武汉",
+      "address": "武汉市武昌区八一路299号",
+      "lat": 30.5378,
+      "lng": 114.3627,
+      "website": "https://www.whu.edu.cn",
+      "admissionOfficePhone": "027-68754231",
+      "type": "综合",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "hust",
+      "name": "华中科技大学",
+      "province": "湖北",
+      "city": "武汉",
+      "address": "武汉市洪山区珞喻路1037号",
+      "lat": 30.5133,
+      "lng": 114.4144,
+      "website": "https://www.hust.edu.cn",
+      "admissionOfficePhone": "027-87542228",
+      "type": "理工",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "whut",
+      "name": "武汉理工大学",
+      "province": "湖北",
+      "city": "武汉",
+      "address": "武汉市洪山区珞狮路122号",
+      "lat": 30.5245,
+      "lng": 114.3416,
+      "website": "https://www.whut.edu.cn",
+      "admissionOfficePhone": "027-87859056",
+      "type": "理工",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "cug",
+      "name": "中国地质大学",
+      "province": "湖北",
+      "city": "武汉",
+      "address": "武汉市洪山区鲁磨路388号",
+      "lat": 30.5215,
+      "lng": 114.3991,
+      "website": "https://www.cug.edu.cn",
+      "admissionOfficePhone": "027-67883232",
+      "type": "理工",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "hzau",
+      "name": "华中农业大学",
+      "province": "湖北",
+      "city": "武汉",
+      "address": "武汉市洪山区狮子山街1号",
+      "lat": 30.4834,
+      "lng": 114.3574,
+      "website": "https://www.hzau.edu.cn",
+      "admissionOfficePhone": "027-87280707",
+      "type": "农林",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "ccnu",
+      "name": "华中师范大学",
+      "province": "湖北",
+      "city": "武汉",
+      "address": "武汉市洪山区珞喻路152号",
+      "lat": 30.5174,
+      "lng": 114.3599,
+      "website": "https://www.ccnu.edu.cn",
+      "admissionOfficePhone": "027-67863334",
+      "type": "师范",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "zuel",
+      "name": "中南财经政法大学",
+      "province": "湖北",
+      "city": "武汉",
+      "address": "武汉市东湖新技术开发区南湖大道182号",
+      "lat": 30.4768,
+      "lng": 114.3886,
+      "website": "https://www.zuel.edu.cn",
+      "admissionOfficePhone": "027-88386186",
+      "type": "财经",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "csu",
+      "name": "中南大学",
+      "province": "湖南",
+      "city": "长沙",
+      "address": "长沙市岳麓区麓山南路932号",
+      "lat": 28.1821,
+      "lng": 112.935,
+      "website": "https://www.csu.edu.cn",
+      "admissionOfficePhone": "0731-88830995",
+      "type": "综合",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "hnu",
+      "name": "湖南大学",
+      "province": "湖南",
+      "city": "长沙",
+      "address": "长沙市岳麓区麓山路273号",
+      "lat": 28.1791,
+      "lng": 112.9439,
+      "website": "https://www.hnu.edu.cn",
+      "admissionOfficePhone": "0731-88821996",
+      "type": "综合",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "nudt",
+      "name": "国防科技大学",
+      "province": "湖南",
+      "city": "长沙",
+      "address": "长沙市开福区德雅路109号",
+      "lat": 28.2361,
+      "lng": 112.9794,
+      "website": "https://www.nudt.edu.cn",
+      "admissionOfficePhone": "0731-84572095",
+      "type": "军事",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "hunnu",
+      "name": "湖南师范大学",
+      "province": "湖南",
+      "city": "长沙",
+      "address": "长沙市岳麓区麓山路36号",
+      "lat": 28.191,
+      "lng": 112.9518,
+      "website": "https://www.hunnu.edu.cn",
+      "admissionOfficePhone": "0731-88872222",
+      "type": "师范",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "sysu",
+      "name": "中山大学",
+      "province": "广东",
+      "city": "广州",
+      "address": "广州市海珠区新港西路135号",
+      "lat": 23.0946,
+      "lng": 113.2972,
+      "website": "https://www.sysu.edu.cn",
+      "admissionOfficePhone": "020-84111598",
+      "type": "综合",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "scut",
+      "name": "华南理工大学",
+      "province": "广东",
+      "city": "广州",
+      "address": "广州市天河区五山路381号",
+      "lat": 23.154,
+      "lng": 113.3431,
+      "website": "https://www.scut.edu.cn",
+      "admissionOfficePhone": "020-87110737",
+      "type": "理工",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "jnu",
+      "name": "暨南大学",
+      "province": "广东",
+      "city": "广州",
+      "address": "广州市天河区黄埔大道西601号",
+      "lat": 23.1361,
+      "lng": 113.3433,
+      "website": "https://www.jnu.edu.cn",
+      "admissionOfficePhone": "020-85220130",
+      "type": "综合",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "scnu",
+      "name": "华南师范大学",
+      "province": "广东",
+      "city": "广州",
+      "address": "广州市天河区中山大道西55号",
+      "lat": 23.1409,
+      "lng": 113.3533,
+      "website": "https://www.scnu.edu.cn",
+      "admissionOfficePhone": "020-85211098",
+      "type": "师范",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "scu",
+      "name": "四川大学",
+      "province": "四川",
+      "city": "成都",
+      "address": "成都市武侯区一环路南一段24号",
+      "lat": 30.6309,
+      "lng": 104.0841,
+      "website": "https://www.scu.edu.cn",
+      "admissionOfficePhone": "028-86080605",
+      "type": "综合",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "uestc",
+      "name": "电子科技大学",
+      "province": "四川",
+      "city": "成都",
+      "address": "成都市高新区西源大道2006号",
+      "lat": 30.7534,
+      "lng": 103.9377,
+      "website": "https://www.uestc.edu.cn",
+      "admissionOfficePhone": "028-61831137",
+      "type": "理工",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "swjtu",
+      "name": "西南交通大学",
+      "province": "四川",
+      "city": "成都",
+      "address": "成都市郫都区犀安路999号",
+      "lat": 30.7496,
+      "lng": 103.9936,
+      "website": "https://www.swjtu.edu.cn",
+      "admissionOfficePhone": "028-66366373",
+      "type": "理工",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "swufe",
+      "name": "西南财经大学",
+      "province": "四川",
+      "city": "成都",
+      "address": "成都市温江区柳台大道555号",
+      "lat": 30.6872,
+      "lng": 103.8162,
+      "website": "https://www.swufe.edu.cn",
+      "admissionOfficePhone": "028-87092355",
+      "type": "财经",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "swu",
+      "name": "西南大学",
+      "province": "重庆",
+      "city": "重庆",
+      "address": "重庆市北碚区天生路2号",
+      "lat": 29.8247,
+      "lng": 106.4273,
+      "website": "https://www.swu.edu.cn",
+      "admissionOfficePhone": "023-68252513",
+      "type": "综合",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "cqu",
+      "name": "重庆大学",
+      "province": "重庆",
+      "city": "重庆",
+      "address": "重庆市沙坪坝区沙正街174号",
+      "lat": 29.5684,
+      "lng": 106.4678,
+      "website": "https://www.cqu.edu.cn",
+      "admissionOfficePhone": "023-65102371",
+      "type": "综合",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "xjtu",
+      "name": "西安交通大学",
+      "province": "陕西",
+      "city": "西安",
+      "address": "西安市碑林区咸宁西路28号",
+      "lat": 34.2347,
+      "lng": 108.9879,
+      "website": "https://www.xjtu.edu.cn",
+      "admissionOfficePhone": "029-82668320",
+      "type": "综合",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "nwpu",
+      "name": "西北工业大学",
+      "province": "陕西",
+      "city": "西安",
+      "address": "西安市长安区东祥路1号",
+      "lat": 34.1363,
+      "lng": 108.8979,
+      "website": "https://www.nwpu.edu.cn",
+      "admissionOfficePhone": "029-88460233",
+      "type": "理工",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "nwafu",
+      "name": "西北农林科技大学",
+      "province": "陕西",
+      "city": "咸阳",
+      "address": "咸阳市杨凌区西农路22号",
+      "lat": 34.2604,
+      "lng": 108.0842,
+      "website": "https://www.nwafu.edu.cn",
+      "admissionOfficePhone": "029-87083777",
+      "type": "农林",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "nwu",
+      "name": "西北大学",
+      "province": "陕西",
+      "city": "西安",
+      "address": "西安市长安区郭杜教育科技产业开发区学府大道1号",
+      "lat": 34.1593,
+      "lng": 108.8704,
+      "website": "https://www.nwu.edu.cn",
+      "admissionOfficePhone": "029-88302211",
+      "type": "综合",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "chd",
+      "name": "长安大学",
+      "province": "陕西",
+      "city": "西安",
+      "address": "西安市雁塔区南二环路中段",
+      "lat": 34.2312,
+      "lng": 108.9484,
+      "website": "https://www.chd.edu.cn",
+      "admissionOfficePhone": "029-82334104",
+      "type": "理工",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "snnu",
+      "name": "陕西师范大学",
+      "province": "陕西",
+      "city": "西安",
+      "address": "西安市长安区西长安街620号",
+      "lat": 34.1541,
+      "lng": 108.8392,
+      "website": "https://www.snnu.edu.cn",
+      "admissionOfficePhone": "029-85310330",
+      "type": "师范",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "hit",
+      "name": "哈尔滨工业大学",
+      "province": "黑龙江",
+      "city": "哈尔滨",
+      "address": "哈尔滨市南岗区西大直街92号",
+      "lat": 45.7281,
+      "lng": 126.6288,
+      "website": "https://www.hit.edu.cn",
+      "admissionOfficePhone": "0451-86414671",
+      "type": "理工",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "hrbeu",
+      "name": "哈尔滨工程大学",
+      "province": "黑龙江",
+      "city": "哈尔滨",
+      "address": "哈尔滨市南岗区南通大街145号",
+      "lat": 45.7747,
+      "lng": 126.6824,
+      "website": "https://www.hrbeu.edu.cn",
+      "admissionOfficePhone": "0451-82519740",
+      "type": "理工",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "neau",
+      "name": "东北农业大学",
+      "province": "黑龙江",
+      "city": "哈尔滨",
+      "address": "哈尔滨市香坊区长江路600号",
+      "lat": 45.7411,
+      "lng": 126.7289,
+      "website": "https://www.neau.edu.cn",
+      "admissionOfficePhone": "0451-55190159",
+      "type": "农林",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "nefu",
+      "name": "东北林业大学",
+      "province": "黑龙江",
+      "city": "哈尔滨",
+      "address": "哈尔滨市香坊区和兴路26号",
+      "lat": 45.7182,
+      "lng": 126.6348,
+      "website": "https://www.nefu.edu.cn",
+      "admissionOfficePhone": "0451-82190346",
+      "type": "农林",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "jlu",
+      "name": "吉林大学",
+      "province": "吉林",
+      "city": "长春",
+      "address": "长春市朝阳区前进大街2699号",
+      "lat": 43.8414,
+      "lng": 125.2832,
+      "website": "https://www.jlu.edu.cn",
+      "admissionOfficePhone": "0431-85168282",
+      "type": "综合",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "nenu",
+      "name": "东北师范大学",
+      "province": "吉林",
+      "city": "长春",
+      "address": "长春市南关区人民大街5268号",
+      "lat": 43.8515,
+      "lng": 125.3278,
+      "website": "https://www.nenu.edu.cn",
+      "admissionOfficePhone": "0431-85098500",
+      "type": "师范",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "ybu",
+      "name": "延边大学",
+      "province": "吉林",
+      "city": "延吉",
+      "address": "延吉市公园路977号",
+      "lat": 42.9068,
+      "lng": 129.4923,
+      "website": "https://www.ybu.edu.cn",
+      "admissionOfficePhone": "0433-2733095",
+      "type": "综合",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "dlut",
+      "name": "大连理工大学",
+      "province": "辽宁",
+      "city": "大连",
+      "address": "大连市甘井子区凌工路2号",
+      "lat": 38.8792,
+      "lng": 121.5267,
+      "website": "https://www.dlut.edu.cn",
+      "admissionOfficePhone": "0411-84708375",
+      "type": "理工",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "neu",
+      "name": "东北大学",
+      "province": "辽宁",
+      "city": "沈阳",
+      "address": "沈阳市和平区文化路三巷11号",
+      "lat": 41.7702,
+      "lng": 123.423,
+      "website": "https://www.neu.edu.cn",
+      "admissionOfficePhone": "024-83687392",
+      "type": "理工",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "dlmu",
+      "name": "大连海事大学",
+      "province": "辽宁",
+      "city": "大连",
+      "address": "大连市甘井子区凌海路1号",
+      "lat": 38.8694,
+      "lng": 121.5272,
+      "website": "https://www.dlmu.edu.cn",
+      "admissionOfficePhone": "0411-84726518",
+      "type": "理工",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "lnu",
+      "name": "辽宁大学",
+      "province": "辽宁",
+      "city": "沈阳",
+      "address": "沈阳市沈北新区道义南大街58号",
+      "lat": 41.9051,
+      "lng": 123.3922,
+      "website": "https://www.lnu.edu.cn",
+      "admissionOfficePhone": "024-62202299",
+      "type": "综合",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "sdu",
+      "name": "山东大学",
+      "province": "山东",
+      "city": "济南",
+      "address": "济南市历城区山大南路27号",
+      "lat": 36.6745,
+      "lng": 117.0607,
+      "website": "https://www.sdu.edu.cn",
+      "admissionOfficePhone": "0531-88364707",
+      "type": "综合",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "ouc",
+      "name": "中国海洋大学",
+      "province": "山东",
+      "city": "青岛",
+      "address": "青岛市崂山区松岭路238号",
+      "lat": 36.0581,
+      "lng": 120.5062,
+      "website": "https://www.ouc.edu.cn",
+      "admissionOfficePhone": "0532-66782722",
+      "type": "综合",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "upc",
+      "name": "中国石油大学(华东)",
+      "province": "山东",
+      "city": "青岛",
+      "address": "青岛市黄岛区长江西路66号",
+      "lat": 35.9523,
+      "lng": 120.1679,
+      "website": "https://www.upc.edu.cn",
+      "admissionOfficePhone": "0532-86981301",
+      "type": "理工",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "xmu",
+      "name": "厦门大学",
+      "province": "福建",
+      "city": "厦门",
+      "address": "厦门市思明区思明南路422号",
+      "lat": 24.4378,
+      "lng": 118.0894,
+      "website": "https://www.xmu.edu.cn",
+      "admissionOfficePhone": "0592-2188888",
+      "type": "综合",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "fzu",
+      "name": "福州大学",
+      "province": "福建",
+      "city": "福州",
+      "address": "福州市闽侯县乌龙江北大道2号",
+      "lat": 26.0598,
+      "lng": 119.1954,
+      "website": "https://www.fzu.edu.cn",
+      "admissionOfficePhone": "0591-22866857",
+      "type": "理工",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "zzu",
+      "name": "郑州大学",
+      "province": "河南",
+      "city": "郑州",
+      "address": "郑州市高新技术产业开发区科学大道100号",
+      "lat": 34.8171,
+      "lng": 113.5375,
+      "website": "https://www.zzu.edu.cn",
+      "admissionOfficePhone": "0371-67781182",
+      "type": "综合",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "tyut",
+      "name": "太原理工大学",
+      "province": "山西",
+      "city": "太原",
+      "address": "太原市迎泽西大街79号",
+      "lat": 37.8606,
+      "lng": 112.5192,
+      "website": "https://www.tyut.edu.cn",
+      "admissionOfficePhone": "0351-6010300",
+      "type": "理工",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "imu",
+      "name": "内蒙古大学",
+      "province": "内蒙古",
+      "city": "呼和浩特",
+      "address": "呼和浩特市赛罕区大学西街235号",
+      "lat": 40.815,
+      "lng": 111.691,
+      "website": "https://www.imu.edu.cn",
+      "admissionOfficePhone": "0471-4992114",
+      "type": "综合",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "lzu",
+      "name": "兰州大学",
+      "province": "甘肃",
+      "city": "兰州",
+      "address": "兰州市城关区天水南路222号",
+      "lat": 36.046,
+      "lng": 103.8582,
+      "website": "https://www.lzu.edu.cn",
+      "admissionOfficePhone": "0931-8914223",
+      "type": "综合",
+      "tags": [
+        "985",
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "ncu",
+      "name": "南昌大学",
+      "province": "江西",
+      "city": "南昌",
+      "address": "南昌市红谷滩区学府大道999号",
+      "lat": 28.6488,
+      "lng": 115.8037,
+      "website": "https://www.ncu.edu.cn",
+      "admissionOfficePhone": "0791-88305092",
+      "type": "综合",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "gxu",
+      "name": "广西大学",
+      "province": "广西",
+      "city": "南宁",
+      "address": "南宁市西乡塘区大学东路100号",
+      "lat": 22.833,
+      "lng": 108.2887,
+      "website": "https://www.gxu.edu.cn",
+      "admissionOfficePhone": "0771-3232999",
+      "type": "综合",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "hainu",
+      "name": "海南大学",
+      "province": "海南",
+      "city": "海口",
+      "address": "海口市美兰区人民大道58号",
+      "lat": 20.0565,
+      "lng": 110.3432,
+      "website": "https://www.hainu.edu.cn",
+      "admissionOfficePhone": "0898-66266469",
+      "type": "综合",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "gzu",
+      "name": "贵州大学",
+      "province": "贵州",
+      "city": "贵阳",
+      "address": "贵阳市花溪区甲秀南路",
+      "lat": 26.4458,
+      "lng": 106.6745,
+      "website": "https://www.gzu.edu.cn",
+      "admissionOfficePhone": "0851-88292089",
+      "type": "综合",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "ynu",
+      "name": "云南大学",
+      "province": "云南",
+      "city": "昆明",
+      "address": "昆明市呈贡区大学城东外环南路",
+      "lat": 24.8288,
+      "lng": 102.8604,
+      "website": "https://www.ynu.edu.cn",
+      "admissionOfficePhone": "0871-65033255",
+      "type": "综合",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "utibet",
+      "name": "西藏大学",
+      "province": "西藏",
+      "city": "拉萨",
+      "address": "拉萨市城关区藏大东路10号",
+      "lat": 29.6659,
+      "lng": 91.1688,
+      "website": "https://www.utibet.edu.cn",
+      "admissionOfficePhone": "0891-6405163",
+      "type": "综合",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "qhu",
+      "name": "青海大学",
+      "province": "青海",
+      "city": "西宁",
+      "address": "西宁市城北区宁大路251号",
+      "lat": 36.7075,
+      "lng": 101.7576,
+      "website": "https://www.qhu.edu.cn",
+      "admissionOfficePhone": "0971-5310695",
+      "type": "综合",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "nxu",
+      "name": "宁夏大学",
+      "province": "宁夏",
+      "city": "银川",
+      "address": "银川市西夏区贺兰山西路489号",
+      "lat": 38.4951,
+      "lng": 106.1279,
+      "website": "https://www.nxu.edu.cn",
+      "admissionOfficePhone": "0951-2061897",
+      "type": "综合",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "xju",
+      "name": "新疆大学",
+      "province": "新疆",
+      "city": "乌鲁木齐",
+      "address": "乌鲁木齐市天山区胜利路666号",
+      "lat": 43.7675,
+      "lng": 87.6046,
+      "website": "https://www.xju.edu.cn",
+      "admissionOfficePhone": "0991-8582534",
+      "type": "综合",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    },
+    {
+      "id": "shzu",
+      "name": "石河子大学",
+      "province": "新疆",
+      "city": "石河子",
+      "address": "石河子市北四路",
+      "lat": 44.3056,
+      "lng": 86.065,
+      "website": "https://www.shzu.edu.cn",
+      "admissionOfficePhone": "0993-2059011",
+      "type": "综合",
+      "tags": [
+        "211",
+        "双一流"
+      ]
+    }
+  ]
+}

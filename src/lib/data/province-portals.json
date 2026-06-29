@@ -1,0 +1,287 @@
+{
+  "source": "各省教育考试院官网（用户手动验证）",
+  "verifiedAt": "2026-06-11",
+  "note": "查分入口仅在成绩公布期间开放，非公布期间可能无法直接访问具体查分页面。建议引导用户前往考试院官网首页查找入口。",
+  "portals": [
+    {
+      "province": "北京",
+      "scoreCheckDate": "6月25日",
+      "scoreCheckUrl": "https://www.bjeea.cn/",
+      "examInstituteUrl": "https://www.bjeea.cn/",
+      "volunteerFillDate": "本科首次6月27日—7月1日；专科7月24日—25日",
+      "volunteerSystemUrl": "https://www.bjeea.cn/",
+      "scoreTableUrl": "https://www.bjeea.cn/"
+    },
+    {
+      "province": "上海",
+      "scoreCheckDate": "6月23日",
+      "scoreCheckUrl": "https://www.shmeea.edu.cn/",
+      "examInstituteUrl": "https://www.shmeea.edu.cn/",
+      "volunteerFillDate": "已公布",
+      "volunteerSystemUrl": "https://www.shmeea.edu.cn/",
+      "scoreTableUrl": "https://www.shmeea.edu.cn/"
+    },
+    {
+      "province": "天津",
+      "scoreCheckDate": "6月23日17时起",
+      "scoreCheckUrl": "http://www.zhaokao.net/",
+      "examInstituteUrl": "http://www.zhaokao.net/",
+      "volunteerFillDate": "已公布",
+      "volunteerSystemUrl": "http://www.zhaokao.net/",
+      "scoreTableUrl": "http://www.zhaokao.net/"
+    },
+    {
+      "province": "重庆",
+      "scoreCheckDate": "6月24日13:00",
+      "scoreCheckUrl": "https://www.cqksy.cn/",
+      "examInstituteUrl": "https://www.cqksy.cn/",
+      "scoreCheckUrlAlt": "http://www.cqzk.com.cn/",
+      "volunteerFillDate": "6月27日9:00—6月30日18:00",
+      "volunteerSystemUrl": "https://www.cqksy.cn/",
+      "scoreTableUrl": "https://www.cqksy.cn/"
+    },
+    {
+      "province": "河北",
+      "scoreCheckDate": "6月25日左右",
+      "scoreCheckUrl": "http://www.hebeea.edu.cn/",
+      "examInstituteUrl": "http://www.hebeea.edu.cn/",
+      "volunteerFillDate": "分四段：6月27日—28日、7月2日—7日、7月25日—26日、8月10日—13日",
+      "volunteerSystemUrl": "http://www.hebeea.edu.cn/",
+      "scoreTableUrl": "http://www.hebeea.edu.cn/"
+    },
+    {
+      "province": "山西",
+      "scoreCheckDate": "6月25日",
+      "scoreCheckUrl": "http://www.sxkszx.cn/",
+      "examInstituteUrl": "http://www.sxkszx.cn/",
+      "volunteerFillDate": "6月27日—28日、7月2日—7日、7月25日—26日、8月10日—13日",
+      "volunteerSystemUrl": "http://www.sxkszx.cn/",
+      "scoreTableUrl": "http://www.sxkszx.cn/"
+    },
+    {
+      "province": "内蒙古",
+      "scoreCheckDate": "6月24日",
+      "scoreCheckUrl": "https://www.nm.zsks.cn/",
+      "examInstituteUrl": "https://www.nm.zsks.cn/",
+      "volunteerFillDate": "6月30日9:00—7月4日17:00；7月31日9:00—8月3日17:00",
+      "volunteerSystemUrl": "https://www.nm.zsks.cn/",
+      "scoreTableUrl": "https://www.nm.zsks.cn/"
+    },
+    {
+      "province": "山东",
+      "scoreCheckDate": "6月25日下午",
+      "scoreCheckUrl": "https://cx.sdzk.cn/",
+      "examInstituteUrl": "https://www.sdzk.cn/",
+      "volunteerFillDate": "已公布",
+      "volunteerSystemUrl": "https://www.sdzk.cn/",
+      "scoreTableUrl": "https://www.sdzk.cn/"
+    },
+    {
+      "province": "江苏",
+      "scoreCheckDate": "6月24日20:00后",
+      "scoreCheckUrl": "https://www.jseea.cn/",
+      "examInstituteUrl": "https://www.jseea.cn/",
+      "volunteerFillDate": "本科6月28日—7月2日；专科7月27日—28日",
+      "volunteerSystemUrl": "https://www.jseea.cn/",
+      "scoreTableUrl": "https://www.jseea.cn/"
+    },
+    {
+      "province": "浙江",
+      "scoreCheckDate": "6月26日左右",
+      "scoreCheckUrl": "https://www.zjzs.net/",
+      "examInstituteUrl": "https://www.zjzs.net/",
+      "volunteerFillDate": "已公布",
+      "volunteerSystemUrl": "https://www.zjzs.net/",
+      "scoreTableUrl": "https://www.zjzs.net/"
+    },
+    {
+      "province": "江西",
+      "scoreCheckDate": "预计6月25日",
+      "scoreCheckUrl": "http://www.jxeea.cn/",
+      "examInstituteUrl": "http://www.jxeea.cn/",
+      "volunteerFillDate": "第一次6月26日9:00—27日17:00；第二次6月30日9:00—7月4日17:00",
+      "volunteerSystemUrl": "http://www.jxeea.cn/",
+      "scoreTableUrl": "http://www.jxeea.cn/"
+    },
+    {
+      "province": "福建",
+      "scoreCheckDate": "预计6月24日",
+      "scoreCheckUrl": "https://www.eeafj.cn/",
+      "examInstituteUrl": "https://www.eeafj.cn/",
+      "volunteerFillDate": "已公布",
+      "volunteerSystemUrl": "https://www.eeafj.cn/",
+      "scoreTableUrl": "https://www.eeafj.cn/"
+    },
+    {
+      "province": "安徽",
+      "scoreCheckDate": "预计6月25日",
+      "scoreCheckUrl": "https://cx.ahzsks.cn/",
+      "examInstituteUrl": "https://www.ahzsks.cn/",
+      "volunteerFillDate": "",
+      "volunteerSystemUrl": "https://www.ahzsks.cn/",
+      "scoreTableUrl": "https://www.ahzsks.cn/"
+    },
+    {
+      "province": "河南",
+      "scoreCheckDate": "6月25日0点",
+      "scoreCheckUrl": "http://www.haeea.cn/",
+      "examInstituteUrl": "http://www.haeea.cn/",
+      "volunteerFillDate": "本科提前6月26日—28日；本科批6月30日—7月3日；专科7月5日—7日",
+      "volunteerSystemUrl": "http://www.haeea.cn/",
+      "scoreTableUrl": "http://www.haeea.cn/"
+    },
+    {
+      "province": "湖南",
+      "scoreCheckDate": "6月25日左右",
+      "scoreCheckUrl": "http://www.hneeb.cn/",
+      "examInstituteUrl": "http://www.hneeb.cn/",
+      "volunteerFillDate": "",
+      "volunteerSystemUrl": "https://ks.hneao.cn/",
+      "scoreTableUrl": "http://www.hneeb.cn/"
+    },
+    {
+      "province": "湖北",
+      "scoreCheckDate": "6月25日8:00",
+      "scoreCheckUrl": "http://www.hbea.edu.cn/",
+      "examInstituteUrl": "http://www.hbea.edu.cn/",
+      "volunteerFillDate": "第1次6月29日8:00—7月2日17:00；第2次8月6日—8月9日",
+      "volunteerSystemUrl": "http://www.hbea.edu.cn/",
+      "scoreTableUrl": "http://www.hbea.edu.cn/"
+    },
+    {
+      "province": "四川",
+      "scoreCheckDate": "预计6月25日晚",
+      "scoreCheckUrl": "https://www.sceea.cn/",
+      "examInstituteUrl": "https://www.sceea.cn/",
+      "volunteerFillDate": "本科提前批6月28日17:00前；本科批7月1日17:00前；专科7月5日17:00前",
+      "volunteerSystemUrl": "https://www.sceea.cn/",
+      "scoreTableUrl": "https://www.sceea.cn/"
+    },
+    {
+      "province": "云南",
+      "scoreCheckDate": "预计6月25日左右",
+      "scoreCheckUrl": "https://www.ynzs.cn/",
+      "examInstituteUrl": "https://www.ynzs.cn/",
+      "volunteerFillDate": "",
+      "volunteerSystemUrl": "https://www.ynzs.cn/",
+      "scoreTableUrl": "https://www.ynzs.cn/"
+    },
+    {
+      "province": "贵州",
+      "scoreCheckDate": "预计6月25日",
+      "scoreCheckUrl": "https://zsksy.guizhou.gov.cn/",
+      "examInstituteUrl": "https://zsksy.guizhou.gov.cn/",
+      "volunteerFillDate": "",
+      "volunteerSystemUrl": "https://zsksy.guizhou.gov.cn/",
+      "scoreTableUrl": "https://zsksy.guizhou.gov.cn/"
+    },
+    {
+      "province": "西藏",
+      "scoreCheckDate": "6月25日",
+      "scoreCheckUrl": "http://www.xzzsks.com.cn/",
+      "examInstituteUrl": "http://www.xzzsks.com.cn/",
+      "volunteerFillDate": "",
+      "volunteerSystemUrl": "http://www.xzzsks.com.cn/",
+      "scoreTableUrl": "http://www.xzzsks.com.cn/"
+    },
+    {
+      "province": "吉林",
+      "scoreCheckDate": "预计6月25日",
+      "scoreCheckUrl": "https://www.jleea.edu.cn/",
+      "examInstituteUrl": "https://www.jleea.edu.cn/",
+      "volunteerFillDate": "提前批6月26日—27日；本科批6月28日—7月2日",
+      "volunteerSystemUrl": "https://www.jleea.edu.cn/",
+      "scoreTableUrl": "https://www.jleea.edu.cn/"
+    },
+    {
+      "province": "辽宁",
+      "scoreCheckDate": "6月24日16:00",
+      "scoreCheckUrl": "https://www.lnzsks.com/",
+      "examInstituteUrl": "https://www.lnzsks.com/",
+      "volunteerFillDate": "正式志愿截止6月30日16:00",
+      "volunteerSystemUrl": "https://www.lnzsks.com/",
+      "scoreTableUrl": "https://www.lnzsks.com/"
+    },
+    {
+      "province": "黑龙江",
+      "scoreCheckDate": "6月24日11:00左右",
+      "scoreCheckUrl": "https://www.hljea.org.cn/",
+      "examInstituteUrl": "https://www.hljea.org.cn/",
+      "volunteerFillDate": "6月27日—29日",
+      "volunteerSystemUrl": "https://www.lzk.hl.cn/",
+      "scoreTableUrl": "https://www.lzk.hl.cn/"
+    },
+    {
+      "province": "陕西",
+      "scoreCheckDate": "预计6月25日",
+      "scoreCheckUrl": "https://www.sneea.cn/",
+      "examInstituteUrl": "https://www.sneea.cn/",
+      "volunteerFillDate": "",
+      "volunteerSystemUrl": "https://www.sneea.cn/",
+      "scoreTableUrl": "https://www.sneea.cn/"
+    },
+    {
+      "province": "甘肃",
+      "scoreCheckDate": "6月25日12时左右",
+      "scoreCheckUrl": "https://www.ganseea.cn/",
+      "examInstituteUrl": "https://www.ganseea.cn/",
+      "volunteerFillDate": "",
+      "volunteerSystemUrl": "https://www.ganseea.cn/",
+      "scoreTableUrl": "https://www.ganseea.cn/"
+    },
+    {
+      "province": "广东",
+      "scoreCheckDate": "6月25日前后",
+      "scoreCheckUrl": "https://eea.gd.gov.cn/",
+      "examInstituteUrl": "https://eea.gd.gov.cn/",
+      "volunteerFillDate": "",
+      "volunteerSystemUrl": "https://eea.gd.gov.cn/",
+      "scoreTableUrl": "https://eea.gd.gov.cn/"
+    },
+    {
+      "province": "海南",
+      "scoreCheckDate": "预计6月25日",
+      "scoreCheckUrl": "https://ea.hainan.gov.cn/",
+      "examInstituteUrl": "https://ea.hainan.gov.cn/",
+      "volunteerFillDate": "",
+      "volunteerSystemUrl": "https://ea.hainan.gov.cn/",
+      "scoreTableUrl": "https://ea.hainan.gov.cn/"
+    },
+    {
+      "province": "广西",
+      "scoreCheckDate": "6月25日",
+      "scoreCheckUrl": "https://www.gxeea.cn/",
+      "examInstituteUrl": "https://www.gxeea.cn/",
+      "volunteerFillDate": "提前批6月25日15:00—29日10:00；其余批次6月29日15:00—7月3日10:00",
+      "volunteerSystemUrl": "https://www.gxeea.cn/",
+      "scoreTableUrl": "https://www.gxeea.cn/"
+    },
+    {
+      "province": "宁夏",
+      "scoreCheckDate": "6月25日",
+      "scoreCheckUrl": "https://www.nxjyks.cn/",
+      "examInstituteUrl": "https://www.nxjyks.cn/",
+      "volunteerFillDate": "",
+      "volunteerSystemUrl": "https://www.nxjyks.cn/",
+      "scoreTableUrl": "https://www.nxjyks.cn/"
+    },
+    {
+      "province": "青海",
+      "scoreCheckDate": "6月25日12时",
+      "scoreCheckUrl": "http://www.qhjyks.com/",
+      "examInstituteUrl": "http://www.qhjyks.com/",
+      "volunteerFillDate": "6月26日12:00—6月30日18:00",
+      "volunteerSystemUrl": "http://www.qhjyks.com/",
+      "scoreTableUrl": "http://www.qhjyks.com/"
+    },
+    {
+      "province": "新疆",
+      "scoreCheckDate": "6月25日",
+      "scoreCheckUrl": "https://www.xjzk.gov.cn/",
+      "examInstituteUrl": "https://www.xjzk.gov.cn/",
+      "volunteerFillDate": "",
+      "volunteerSystemUrl": "https://www.xjzk.gov.cn/",
+      "scoreTableUrl": "https://www.xjzk.gov.cn/"
+    }
+  ]
+}

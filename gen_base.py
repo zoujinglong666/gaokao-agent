@@ -1,4 +1,16 @@
-@import "tailwindcss";
+# -*- coding: utf-8 -*-
+"""Generate CSS + Layout for FuturePath"""
+import os
+BASE = r"d:\workCode\AiWorkCode\gaokao-agent\src"
+
+def w(path, content):
+    full = os.path.join(BASE, path)
+    os.makedirs(os.path.dirname(full), exist_ok=True)
+    with open(full, "w", encoding="utf-8") as f:
+        f.write(content)
+    print(f"  + {path}")
+
+w("app/globals.css", r"""@import "tailwindcss";
 
 @layer base {
   :root {
@@ -136,3 +148,32 @@
   @keyframes pulse-dot { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
   .animate-pulse-dot { animation: pulse-dot 1.5s ease-in-out infinite; }
 }
+""")
+
+w("app/layout.tsx", r"""import type { Metadata } from "next";
+import "./globals.css";
+
+export const metadata: Metadata = {
+  title: "FuturePath \u00b7 \u9ad8\u8003\u5fd7\u613f\u667a\u80fd\u89c4\u5212 Agent",
+  description: "FuturePath \u5e2e\u4f60\u8ba4\u8bc6\u81ea\u5df1\u3001\u7406\u89e3\u89c4\u5219\u3001\u5339\u914d\u9662\u6821\uff0c\u5728\u6b63\u786e\u7684\u65f6\u95f4\u505a\u51fa\u4e0d\u540e\u6094\u7684\u9009\u62e9\u3002",
+  keywords: "\u9ad8\u8003\u5fd7\u613f,\u5fd7\u613f\u586b\u62a5,AI\u89c4\u5212,\u4eba\u683c\u8bca\u65ad,\u9662\u6821\u63a8\u8350",
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="zh-CN">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="min-h-dvh antialiased">{children}</body>
+    </html>
+  );
+}
+""")
+
+print("CSS + Layout generated!")
