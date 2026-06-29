@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@amap/amap-jsapi-loader": "^1.0.1",
+    "@tanstack/react-virtual": "^3.14.4",
     "framer-motion": "^12.40.0",
     "html2canvas": "^1.4.1",
     "lucide-react": "^1.17.0",
