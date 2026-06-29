@@ -2,10 +2,12 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Navbar from "@/components/ui/Navbar";
 import { motion, AnimatePresence } from "framer-motion";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import MemoizedMarkdown from "@/components/chat/MemoizedMarkdown";
 import DataWatermark from "@/components/ui/DataWatermark";
 import ToolSkeleton from "@/components/ui/ToolSkeleton";
+import ThinkingCard from "@/components/chat/ThinkingCard";
+import ToolCallIndicator from "@/components/chat/ToolCallIndicator";
+import CopyButton from "@/components/chat/CopyButton";
 import { useAppStore, type ChatMessage as Msg, type ToolCall } from "@/lib/store";
 import { Search, Building2, TrendingUp, Calculator, Lightbulb, FileText, MapPin, Sparkles, Brain, CheckCircle2, Download } from "lucide-react";
 import ExportDialog from "@/components/ui/ExportDialog";
@@ -109,6 +111,7 @@ export default function ChatPage() {
   const [showQuickQuestions, setShowQuickQuestions] = useState(true);
   const [streamingId, setStreamingId] = useState<string | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const lastSendRef = useRef<number>(0);
   const [exportOpen, setExportOpen] = useState(false);
 
   useEffect(() => {
@@ -172,10 +175,10 @@ export default function ChatPage() {
   const send = async (text?: string) => {
     const userMsg = text || input.trim();
     if (!userMsg || loading) return;
-    // 简易防抖：500ms 内连续点击忽略
+    // 防抖：500ms 内连续点击忽略
     const now = Date.now();
-    if (now - (window as any).__lastSendAt < 500) return;
-    (window as any).__lastSendAt = now;
+    if (now - lastSendRef.current < 500) return;
+    lastSendRef.current = now;
 
     setInput("");
     setShowQuickQuestions(false);
@@ -258,94 +261,6 @@ export default function ChatPage() {
     return date.toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit" });
   };
 
-  const ThinkingCard = ({ msg }: { msg: Msg }) => {
-    const [step, setStep] = useState(0);
-    const steps = [
-      "正在理解你的问题…",
-      "正在检索相关数据…",
-      "正在分析并组织回答…",
-    ];
-    useEffect(() => {
-      const t = setInterval(() => setStep((s) => (s + 1) % steps.length), 2200);
-      return () => clearInterval(t);
-    }, []);
-    return (
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="flex justify-start"
-      >
-        <div className="max-w-[88%] sm:max-w-[85%]">
-          {/* 状态行 */}
-          <div className="flex items-center gap-2 mb-2 px-1">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-            >
-              <Sparkles size={14} style={{ color: "var(--blue)" }} />
-            </motion.div>
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={step}
-                initial={{ opacity: 0, y: 4 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -4 }}
-                transition={{ duration: 0.2 }}
-                className="text-xs"
-                style={{ color: "var(--blue)" }}
-              >
-                {steps[step]}
-              </motion.span>
-            </AnimatePresence>
-          </div>
-          {/* 骨架屏 — 在用户等待时填充视觉空白 */}
-          <div className="glass-card p-3.5">
-            <ToolSkeleton type="text" />
-            <div className="h-2" />
-            <ToolSkeleton type="card" />
-          </div>
-        </div>
-      </motion.div>
-    );
-  };
-
-  const ToolCallIndicator = ({ toolCalls }: { toolCalls?: ToolCall[] }) => {
-    if (!toolCalls || toolCalls.length === 0) return null;
-
-    return (
-      <div className="flex flex-wrap gap-1.5 mt-2">
-        {toolCalls.map((tc, i) => {
-          const Icon = toolIcons[tc.name] || Search;
-          return (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: i * 0.1 }}
-              className="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-xs"
-              style={{
-                background: tc.status === "done" ? "var(--blue-50)" : "rgba(74,111,165,0.1)",
-                color: "var(--blue)",
-              }}
-            >
-              {tc.status === "done" ? (
-                <CheckCircle2 size={12} />
-              ) : (
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                >
-                  <Icon size={12} />
-                </motion.div>
-              )}
-              <span>{toolNames[tc.name] || tc.name}</span>
-            </motion.div>
-          );
-        })}
-      </div>
-    );
-  };
-
   return (
     <div className="min-h-dvh flex flex-col" style={{ background: "var(--paper)" }}>
       <Navbar />
@@ -370,7 +285,7 @@ export default function ChatPage() {
         <div className="flex-1 overflow-y-auto space-y-3 sm:space-y-4 py-3 sm:py-4">
           {messages.map((msg, i) => {
             if (msg.role === "thinking") {
-              return <ThinkingCard key={msg.id} msg={msg} />;
+              return <ThinkingCard key={msg.id} />;
             }
 
             return (
@@ -400,65 +315,12 @@ export default function ChatPage() {
                       <span style={{ fontSize: "10px", color: "var(--ink-muted)", opacity: 0.6 }}>
                         · 请结合官方信息核实
                       </span>
+                      {/* 复制按钮 */}
+                      <CopyButton content={msg.content} />
                     </div>
                   )}
                   <div className="whitespace-pre-wrap mt-1">
-                    <ReactMarkdown
-                      remarkPlugins={[remarkGfm]}
-                      components={{
-                        p: ({ children }) => <p className="my-1.5">{children}</p>,
-                        ul: ({ children }) => (
-                          <ul className="list-disc list-inside my-1.5 space-y-1">{children}</ul>
-                        ),
-                        ol: ({ children }) => (
-                          <ol className="list-decimal list-inside my-1.5 space-y-1">{children}</ol>
-                        ),
-                        strong: ({ children }) => (
-                          <strong style={{ fontWeight: "600", color: "var(--blue)" }}>{children}</strong>
-                        ),
-                        em: ({ children }) => <em style={{ fontStyle: "italic" }}>{children}</em>,
-                        h1: ({ children }) => (
-                          <h1 className="text-lg font-bold my-2" style={{ color: "var(--ink)" }}>{children}</h1>
-                        ),
-                        h2: ({ children }) => (
-                          <h2 className="text-base font-semibold my-2" style={{ color: "var(--ink)" }}>{children}</h2>
-                        ),
-                        h3: ({ children }) => (
-                          <h3 className="text-sm font-semibold my-1.5" style={{ color: "var(--ink-light)" }}>{children}</h3>
-                        ),
-                        code: ({ children }) => (
-                          <code className="px-1.5 py-0.5 rounded text-xs font-mono" style={{ background: "var(--blue-50)", color: "var(--blue)" }}>
-                            {children}
-                          </code>
-                        ),
-                        blockquote: ({ children }) => (
-                          <blockquote className="border-l-2 pl-3 my-2 italic" style={{ borderColor: "var(--blue)", color: "var(--ink-muted)" }}>
-                            {children}
-                          </blockquote>
-                        ),
-                        table: ({ children }) => (
-                          <div className="overflow-x-auto my-2">
-                            <table className="w-full text-sm border-collapse">{children}</table>
-                          </div>
-                        ),
-                        thead: ({ children }) => (
-                          <thead style={{ background: "var(--blue-50)" }}>{children}</thead>
-                        ),
-                        th: ({ children }) => (
-                          <th className="px-3 py-2 text-left font-semibold text-xs border-b-2" style={{ borderColor: "var(--blue)", color: "var(--ink)" }}>
-                            {children}
-                          </th>
-                        ),
-                        td: ({ children }) => (
-                          <td className="px-3 py-2 text-xs border-b" style={{ borderColor: "rgba(19,35,58,0.08)", color: "var(--ink-light)" }}>
-                            {children}
-                          </td>
-                        ),
-                        tr: ({ children }) => <tr>{children}</tr>,
-                      }}
-                    >
-                      {msg.id === streamingId ? msg.content : msg.content}
-                    </ReactMarkdown>
+                    <MemoizedMarkdown content={msg.content} />
                     {msg.id === streamingId && (
                       <div className="mt-1">
                         <TypeWriter text={msg.content} speed={12} />
