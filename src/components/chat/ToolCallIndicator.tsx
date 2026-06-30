@@ -20,12 +20,11 @@ const toolIcons: Record<string, any> = {
   get_major_ranking: Award,
   get_same_score_destinations: Search,
   generate_volunteer_table: FileText,
-  get_major_groups: List,
+  search_major_groups: List,
   analyze_major_group: Brain,
-  get_score_lines_by_province: BarChart3,
+  get_province_score_lines: BarChart3,
   check_subject_compatibility: Settings,
   score_rank_convert: BarChart3,
-  get_admission_data: FileText,
 };
 
 const toolNames: Record<string, string> = {
@@ -45,12 +44,11 @@ const toolNames: Record<string, string> = {
   get_major_ranking: "专业排名",
   get_same_score_destinations: "同分去向",
   generate_volunteer_table: "生成志愿表",
-  get_major_groups: "查询专业组",
+  search_major_groups: "查询专业组",
   analyze_major_group: "分析专业组",
-  get_score_lines_by_province: "查询省份分数线",
+  get_province_score_lines: "查询省份分数线",
   check_subject_compatibility: "校验选科",
   score_rank_convert: "换算位次",
-  get_admission_data: "查询录取数据",
 };
 
 export default function ToolCallIndicator({ toolCalls }: { toolCalls?: ToolCall[] }) {
