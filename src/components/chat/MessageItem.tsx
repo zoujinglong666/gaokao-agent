@@ -9,12 +9,11 @@ import { ChatMessage } from "@/lib/store";
 
 interface MessageItemProps {
   msg: ChatMessage;
-  index: number;
   streamingId?: string | null;
   formatTime: (date: Date) => string;
 }
 
-export default memo(function MessageItem({ msg, index, streamingId, formatTime }: MessageItemProps) {
+export default memo(function MessageItem({ msg, streamingId, formatTime }: MessageItemProps) {
   if (msg.role === "thinking") {
     return <div data-region="thinking-card" key={msg.id} />;
   }
@@ -22,9 +21,9 @@ export default memo(function MessageItem({ msg, index, streamingId, formatTime }
   return (
     <motion.div
       key={msg.id}
-      initial={{ opacity: 0, y: 10, scale: 0.95 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.3, delay: index * 0.03 }}
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.2 }}
       className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
     >
       <div

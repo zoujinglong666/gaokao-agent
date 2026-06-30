@@ -91,6 +91,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden glass-card mx-4 mb-4 overflow-hidden"
+            style={{ position: "relative" }}
           >
             <div className="flex flex-col py-2">
               {links.map((link, i) => (

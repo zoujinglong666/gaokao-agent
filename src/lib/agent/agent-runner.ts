@@ -45,7 +45,7 @@ export interface AgentOptions {
 }
 
 const MAX_ITERATIONS = 10;
-const MAX_CONTEXT_MESSAGES = 20;
+const MAX_CONTEXT_MESSAGES = 16;
 
 function getCurrentDateStr() {
   const now = new Date();
@@ -58,21 +58,21 @@ function compressHistory(messages: ChatMessage[]): ChatMessage[] {
 
   const systemMsgs = messages.filter((m) => m.role === "system");
   const nonSystem = messages.filter((m) => m.role !== "system");
-  const keep = Math.min(12, nonSystem.length);
+  const keep = 8;
   const toCompress = nonSystem.slice(0, nonSystem.length - keep);
   const recent = nonSystem.slice(-keep);
 
   const summaryParts: string[] = [];
   for (const m of toCompress) {
     if (m.role === "user" && m.content) {
-      summaryParts.push(`用户问: ${m.content.slice(0, 100)}`);
+      summaryParts.push(`用户: ${m.content.slice(0, 50)}`);
     } else if (m.role === "assistant" && m.content) {
-      summaryParts.push(`助手答: ${m.content.slice(0, 100)}`);
+      summaryParts.push(`助手: ${m.content.slice(0, 50)}`);
     }
   }
 
   const summary = summaryParts.length > 0
-    ? `[历史对话摘要]\n${summaryParts.join("\n")}\n[摘要结束]`
+    ? `[历史摘要]\n${summaryParts.join("\n")}`
     : "";
 
   if (summary) {
@@ -219,19 +219,20 @@ export async function runAgent(
       const t0 = Date.now();
       console.log(`[Agent:${sessionId}] Calling: ${fnName}`, args);
 
-      // Error Recovery: 工具调用 try/catch + 重试
+      // Error Recovery: 工具调用 try/catch + 仅失败时重试
       let result: Record<string, unknown>;
       let success = true;
       let retried = false;
       try {
         result = await executeTool(fnName, args);
-        if (result?.error) {
-          retried = true;
-          result = await executeTool(fnName, args);
-        }
       } catch (err: any) {
         success = false;
-        result = { error: `工具执行失败: ${err.message || '未知错误'}`, fallback: true };
+        retried = true;
+        try {
+          result = await executeTool(fnName, args);
+        } catch (err2: any) {
+          result = { error: `工具执行失败: ${err.message || '未知错误'}`, fallback: true };
+        }
       }
 
       const duration = Date.now() - t0;
@@ -365,9 +366,6 @@ export async function runAgentStream(
       let result: Record<string, unknown>;
       try {
         result = await executeTool(fnName, args);
-        if (result?.error) {
-          result = await executeTool(fnName, args);
-        }
       } catch (err: any) {
         result = { error: `工具执行失败: ${err.message || '未知错误'}`, fallback: true };
       }

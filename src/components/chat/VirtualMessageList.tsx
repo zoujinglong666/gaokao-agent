@@ -84,7 +84,6 @@ export default function VirtualMessageList({ messages, streamingId, formatTime }
             >
               <MessageItem
                 msg={msg}
-                index={virtualItem.index}
                 streamingId={streamingId}
                 formatTime={formatTime}
               />

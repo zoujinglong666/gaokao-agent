@@ -189,7 +189,7 @@ export default function ChatPage() {
       )}
       <main className="flex-1 max-w-2xl mx-auto w-full px-3 sm:px-4 pb-4 flex flex-col">
         <div className="flex-1 overflow-y-auto space-y-3 sm:space-y-4 py-3 sm:py-4">
-          {messages.map((msg, i) => {
+          {messages.map((msg) => {
             if (msg.role === "thinking") {
               return <ThinkingCard key={msg.id} />;
             }
@@ -197,7 +197,6 @@ export default function ChatPage() {
               <MessageItem
                 key={msg.id}
                 msg={msg}
-                index={i}
                 streamingId={streamingId}
                 formatTime={formatTime}
               />
