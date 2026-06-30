@@ -6,7 +6,6 @@ import { useAppStore, type ChatMessage as Msg } from "@/lib/store";
 import { Download, ChevronDown } from "lucide-react";
 import ExportDialog from "@/components/ui/ExportDialog";
 import MessageItem from "@/components/chat/MessageItem";
-import ThinkingCard from "@/components/chat/ThinkingCard";
 import QuickQuestions from "@/components/chat/QuickQuestions";
 import ChatInput from "@/components/chat/ChatInput";
 
@@ -136,18 +135,6 @@ export default function ChatPage() {
 
     setLoading(true);
 
-    const thinkingId = (Date.now() + 1).toString();
-    setMessages((m) => [
-      ...m,
-      {
-        id: thinkingId,
-        role: "thinking",
-        content: "正在思考...",
-        timestamp: new Date(),
-        toolCalls: [],
-      },
-    ]);
-
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
@@ -160,8 +147,6 @@ export default function ChatPage() {
 
       if (!res.ok) throw new Error("API error");
       const data = await res.json();
-
-      setMessages((m) => m.filter((msg) => msg.id !== thinkingId));
 
       const assistantMessage: Msg = {
         id: (Date.now() + 2).toString(),
@@ -180,7 +165,6 @@ export default function ChatPage() {
       setStreamingId(assistantMessage.id);
       setTimeout(() => setStreamingId(null), (data.reply?.length || 0) * 15 + 500);
     } catch {
-      setMessages((m) => m.filter((msg) => msg.id !== thinkingId));
       const errorMessage: Msg = {
         id: (Date.now() + 2).toString(),
         role: "assistant",
@@ -218,19 +202,14 @@ export default function ChatPage() {
       )}
       <main className="flex-1 max-w-2xl mx-auto w-full px-3 sm:px-4 pb-4 flex flex-col relative">
         <div ref={scrollRef} className="flex-1 overflow-y-auto space-y-3 sm:space-y-4 py-3 sm:py-4">
-          {messages.map((msg) => {
-            if (msg.role === "thinking") {
-              return <ThinkingCard key={msg.id} />;
-            }
-            return (
-              <MessageItem
-                key={msg.id}
-                msg={msg}
-                streamingId={streamingId}
-                formatTime={formatTime}
-              />
-            );
-          })}
+          {messages.map((msg) => (
+            <MessageItem
+              key={msg.id}
+              msg={msg}
+              streamingId={streamingId}
+              formatTime={formatTime}
+            />
+          ))}
           <div ref={bottomRef} />
         </div>
 
