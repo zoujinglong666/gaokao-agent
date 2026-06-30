@@ -5,7 +5,8 @@ import { motion } from "framer-motion";
 import { useAppStore, type ChatMessage as Msg } from "@/lib/store";
 import { Download } from "lucide-react";
 import ExportDialog from "@/components/ui/ExportDialog";
-import VirtualMessageList from "@/components/chat/VirtualMessageList";
+import MessageItem from "@/components/chat/MessageItem";
+import ThinkingCard from "@/components/chat/ThinkingCard";
 import QuickQuestions from "@/components/chat/QuickQuestions";
 import ChatInput from "@/components/chat/ChatInput";
 
@@ -24,8 +25,13 @@ export default function ChatPage() {
   const [loading, setLoading] = useState(false);
   const [showQuickQuestions, setShowQuickQuestions] = useState(true);
   const [streamingId, setStreamingId] = useState<string | null>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
   const lastSendRef = useRef<number>(0);
   const [exportOpen, setExportOpen] = useState(false);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   const simulateToolCalls = (toolResults?: any[]): any[] => {
     if (!toolResults || toolResults.length === 0) return [];
@@ -182,11 +188,23 @@ export default function ChatPage() {
         </motion.button>
       )}
       <main className="flex-1 max-w-2xl mx-auto w-full px-3 sm:px-4 pb-4 flex flex-col">
-        <VirtualMessageList
-          messages={messages}
-          streamingId={streamingId}
-          formatTime={formatTime}
-        />
+        <div className="flex-1 overflow-y-auto space-y-3 sm:space-y-4 py-3 sm:py-4">
+          {messages.map((msg, i) => {
+            if (msg.role === "thinking") {
+              return <ThinkingCard key={msg.id} />;
+            }
+            return (
+              <MessageItem
+                key={msg.id}
+                msg={msg}
+                index={i}
+                streamingId={streamingId}
+                formatTime={formatTime}
+              />
+            );
+          })}
+          <div ref={bottomRef} />
+        </div>
 
         <QuickQuestions
           show={showQuickQuestions && messages.length === 1 && !loading}
