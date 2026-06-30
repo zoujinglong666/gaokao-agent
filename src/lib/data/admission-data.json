@@ -1,7 +1,7 @@
 {
-  "_comment": "各大学各专业近三年录取分数和位次数据",
+  "_comment": "各大学各专业2022-2026年录取分数和位次数据",
   "_source": "模拟数据，真实场景需接入各省考试院数据",
-  "_updateDate": "2026-06-11",
+  "_updateDate": "2026-06-30",
   "admissionData": [
     {
       "universityId": "tsinghua",
@@ -12,96 +12,44 @@
           "majorId": "cs",
           "majorName": "计算机科学与技术",
           "history": [
-            {
-              "year": 2024,
-              "score": 687,
-              "rank": 85,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 684,
-              "rank": 95,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 680,
-              "rank": 110,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 692, "rank": 78, "province": "北京" },
+            { "year": 2025, "score": 689, "rank": 82, "province": "北京" },
+            { "year": 2024, "score": 687, "rank": 85, "province": "北京" },
+            { "year": 2023, "score": 684, "rank": 95, "province": "北京" },
+            { "year": 2022, "score": 680, "rank": 110, "province": "北京" }
           ]
         },
         {
           "majorId": "ai",
           "majorName": "人工智能",
           "history": [
-            {
-              "year": 2024,
-              "score": 685,
-              "rank": 92,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 682,
-              "rank": 100,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 678,
-              "rank": 115,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 690, "rank": 85, "province": "北京" },
+            { "year": 2025, "score": 687, "rank": 88, "province": "北京" },
+            { "year": 2024, "score": 685, "rank": 92, "province": "北京" },
+            { "year": 2023, "score": 682, "rank": 100, "province": "北京" },
+            { "year": 2022, "score": 678, "rank": 115, "province": "北京" }
           ]
         },
         {
           "majorId": "ee",
           "majorName": "电子信息工程",
           "history": [
-            {
-              "year": 2024,
-              "score": 682,
-              "rank": 120,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 679,
-              "rank": 130,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 676,
-              "rank": 145,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 687, "rank": 110, "province": "北京" },
+            { "year": 2025, "score": 684, "rank": 115, "province": "北京" },
+            { "year": 2024, "score": 682, "rank": 120, "province": "北京" },
+            { "year": 2023, "score": 679, "rank": 130, "province": "北京" },
+            { "year": 2022, "score": 676, "rank": 145, "province": "北京" }
           ]
         },
         {
           "majorId": "math",
           "majorName": "数学与应用数学",
           "history": [
-            {
-              "year": 2024,
-              "score": 675,
-              "rank": 180,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 672,
-              "rank": 200,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 668,
-              "rank": 220,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 680, "rank": 165, "province": "北京" },
+            { "year": 2025, "score": 677, "rank": 175, "province": "北京" },
+            { "year": 2024, "score": 675, "rank": 180, "province": "北京" },
+            { "year": 2023, "score": 672, "rank": 200, "province": "北京" },
+            { "year": 2022, "score": 668, "rank": 220, "province": "北京" }
           ]
         }
       ]
@@ -115,96 +63,44 @@
           "majorId": "cs",
           "majorName": "计算机科学与技术",
           "history": [
-            {
-              "year": 2024,
-              "score": 686,
-              "rank": 90,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 683,
-              "rank": 98,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 679,
-              "rank": 112,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 691, "rank": 82, "province": "北京" },
+            { "year": 2025, "score": 688, "rank": 86, "province": "北京" },
+            { "year": 2024, "score": 686, "rank": 90, "province": "北京" },
+            { "year": 2023, "score": 683, "rank": 98, "province": "北京" },
+            { "year": 2022, "score": 679, "rank": 112, "province": "北京" }
           ]
         },
         {
           "majorId": "math",
           "majorName": "数学与应用数学",
           "history": [
-            {
-              "year": 2024,
-              "score": 680,
-              "rank": 140,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 677,
-              "rank": 160,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 674,
-              "rank": 180,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 685, "rank": 125, "province": "北京" },
+            { "year": 2025, "score": 682, "rank": 135, "province": "北京" },
+            { "year": 2024, "score": 680, "rank": 140, "province": "北京" },
+            { "year": 2023, "score": 677, "rank": 160, "province": "北京" },
+            { "year": 2022, "score": 674, "rank": 180, "province": "北京" }
           ]
         },
         {
           "majorId": "econ",
           "majorName": "经济学",
           "history": [
-            {
-              "year": 2024,
-              "score": 678,
-              "rank": 165,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 675,
-              "rank": 185,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 671,
-              "rank": 205,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 683, "rank": 150, "province": "北京" },
+            { "year": 2025, "score": 680, "rank": 160, "province": "北京" },
+            { "year": 2024, "score": 678, "rank": 165, "province": "北京" },
+            { "year": 2023, "score": 675, "rank": 185, "province": "北京" },
+            { "year": 2022, "score": 671, "rank": 205, "province": "北京" }
           ]
         },
         {
           "majorId": "law",
           "majorName": "法学",
           "history": [
-            {
-              "year": 2024,
-              "score": 675,
-              "rank": 195,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 672,
-              "rank": 215,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 669,
-              "rank": 235,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 680, "rank": 175, "province": "北京" },
+            { "year": 2025, "score": 677, "rank": 185, "province": "北京" },
+            { "year": 2024, "score": 675, "rank": 195, "province": "北京" },
+            { "year": 2023, "score": 672, "rank": 215, "province": "北京" },
+            { "year": 2022, "score": 669, "rank": 235, "province": "北京" }
           ]
         }
       ]
@@ -218,95 +114,44 @@
           "majorId": "econ",
           "majorName": "经济学",
           "history": [
-            {
-              "year": 2024,
-              "score": 672,
-              "rank": 235,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 669,
-              "rank": 255,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 666,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 677, "rank": 215, "province": "北京" },
+            { "year": 2025, "score": 674, "rank": 225, "province": "北京" },
+            { "year": 2024, "score": 672, "rank": 235, "province": "北京" },
+            { "year": 2023, "score": 669, "rank": 255, "province": "北京" },
+            { "year": 2022, "score": 666, "rank": 275, "province": "北京" }
           ]
         },
         {
           "majorId": "fin",
           "majorName": "金融学",
           "history": [
-            {
-              "year": 2024,
-              "score": 674,
-              "rank": 210,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 671,
-              "rank": 230,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 668,
-              "rank": 250,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 679, "rank": 195, "province": "北京" },
+            { "year": 2025, "score": 676, "rank": 205, "province": "北京" },
+            { "year": 2024, "score": 674, "rank": 210, "province": "北京" },
+            { "year": 2023, "score": 671, "rank": 230, "province": "北京" },
+            { "year": 2022, "score": 668, "rank": 250, "province": "北京" }
           ]
         },
         {
           "majorId": "law",
           "majorName": "法学",
           "history": [
-            {
-              "year": 2024,
-              "score": 670,
-              "rank": 250,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 667,
-              "rank": 270,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 664,
-              "rank": 290,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 675, "rank": 230, "province": "北京" },
+            { "year": 2025, "score": 672, "rank": 240, "province": "北京" },
+            { "year": 2024, "score": 670, "rank": 250, "province": "北京" },
+            { "year": 2023, "score": 667, "rank": 270, "province": "北京" },
+            { "year": 2022, "score": 664, "rank": 290, "province": "北京" }
           ]
         },
         {
           "majorId": "acct",
           "majorName": "会计学",
           "history": [
-            {
-              "year": 2024,
-              "score": 665,
-              "rank": 300,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 662,
-              "rank": 320,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 659,
-              "rank": 340,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 670, "rank": 280, "province": "北京" },
+            { "year": 2025, "score": 667, "rank": 290, "province": "北京" },
+            { "year": 2024, "score": 665, "rank": 300, "province": "北京" },
+            { "year": 2023, "score": 662, "rank": 320, "province": "北京" },
+            { "year": 2022, "score": 659, "rank": 340, "province": "北京" }
           ]
         }
       ]
@@ -320,72 +165,33 @@
           "majorId": "cs",
           "majorName": "计算机科学与技术",
           "history": [
-            {
-              "year": 2024,
-              "score": 668,
-              "rank": 280,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 665,
-              "rank": 300,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 662,
-              "rank": 320,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 673, "rank": 255, "province": "北京" },
+            { "year": 2025, "score": 670, "rank": 265, "province": "北京" },
+            { "year": 2024, "score": 668, "rank": 280, "province": "北京" },
+            { "year": 2023, "score": 665, "rank": 300, "province": "北京" },
+            { "year": 2022, "score": 662, "rank": 320, "province": "北京" }
           ]
         },
         {
           "majorId": "ee",
           "majorName": "电子信息工程",
           "history": [
-            {
-              "year": 2024,
-              "score": 665,
-              "rank": 310,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 662,
-              "rank": 330,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 659,
-              "rank": 350,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 670, "rank": 285, "province": "北京" },
+            { "year": 2025, "score": 667, "rank": 295, "province": "北京" },
+            { "year": 2024, "score": 665, "rank": 310, "province": "北京" },
+            { "year": 2023, "score": 662, "rank": 330, "province": "北京" },
+            { "year": 2022, "score": 659, "rank": 350, "province": "北京" }
           ]
         },
         {
           "majorId": "me",
           "majorName": "机械工程",
           "history": [
-            {
-              "year": 2024,
-              "score": 658,
-              "rank": 380,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 655,
-              "rank": 400,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 652,
-              "rank": 420,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 663, "rank": 350, "province": "北京" },
+            { "year": 2025, "score": 660, "rank": 365, "province": "北京" },
+            { "year": 2024, "score": 658, "rank": 380, "province": "北京" },
+            { "year": 2023, "score": 655, "rank": 400, "province": "北京" },
+            { "year": 2022, "score": 652, "rank": 420, "province": "北京" }
           ]
         }
       ]
@@ -399,72 +205,33 @@
           "majorId": "cs",
           "majorName": "计算机科学与技术",
           "history": [
-            {
-              "year": 2024,
-              "score": 674,
-              "rank": 220,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 671,
-              "rank": 240,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 668,
-              "rank": 260,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 679, "rank": 200, "province": "北京" },
+            { "year": 2025, "score": 676, "rank": 210, "province": "北京" },
+            { "year": 2024, "score": 674, "rank": 220, "province": "北京" },
+            { "year": 2023, "score": 671, "rank": 240, "province": "北京" },
+            { "year": 2022, "score": 668, "rank": 260, "province": "北京" }
           ]
         },
         {
           "majorId": "ai",
           "majorName": "人工智能",
           "history": [
-            {
-              "year": 2024,
-              "score": 672,
-              "rank": 240,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 669,
-              "rank": 260,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 666,
-              "rank": 280,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 677, "rank": 220, "province": "北京" },
+            { "year": 2025, "score": 674, "rank": 230, "province": "北京" },
+            { "year": 2024, "score": 672, "rank": 240, "province": "北京" },
+            { "year": 2023, "score": 669, "rank": 260, "province": "北京" },
+            { "year": 2022, "score": 666, "rank": 280, "province": "北京" }
           ]
         },
         {
           "majorId": "phy",
           "majorName": "物理学",
           "history": [
-            {
-              "year": 2024,
-              "score": 668,
-              "rank": 285,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 665,
-              "rank": 305,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 662,
-              "rank": 325,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 673, "rank": 260, "province": "北京" },
+            { "year": 2025, "score": 670, "rank": 275, "province": "北京" },
+            { "year": 2024, "score": 668, "rank": 285, "province": "北京" },
+            { "year": 2023, "score": 665, "rank": 305, "province": "北京" },
+            { "year": 2022, "score": 662, "rank": 325, "province": "北京" }
           ]
         }
       ]
@@ -478,72 +245,33 @@
           "majorId": "cs",
           "majorName": "计算机科学与技术",
           "history": [
-            {
-              "year": 2024,
-              "score": 673,
-              "rank": 230,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 670,
-              "rank": 250,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 667,
-              "rank": 270,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 678, "rank": 210, "province": "北京" },
+            { "year": 2025, "score": 675, "rank": 220, "province": "北京" },
+            { "year": 2024, "score": 673, "rank": 230, "province": "北京" },
+            { "year": 2023, "score": 670, "rank": 250, "province": "北京" },
+            { "year": 2022, "score": 667, "rank": 270, "province": "北京" }
           ]
         },
         {
           "majorId": "econ",
           "majorName": "经济学",
           "history": [
-            {
-              "year": 2024,
-              "score": 670,
-              "rank": 255,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 667,
-              "rank": 275,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 664,
-              "rank": 295,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 675, "rank": 235, "province": "北京" },
+            { "year": 2025, "score": 672, "rank": 245, "province": "北京" },
+            { "year": 2024, "score": 670, "rank": 255, "province": "北京" },
+            { "year": 2023, "score": 667, "rank": 275, "province": "北京" },
+            { "year": 2022, "score": 664, "rank": 295, "province": "北京" }
           ]
         },
         {
           "majorId": "cnl",
           "majorName": "中国语言文学",
           "history": [
-            {
-              "year": 2024,
-              "score": 665,
-              "rank": 315,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 662,
-              "rank": 335,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 659,
-              "rank": 355,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 670, "rank": 290, "province": "北京" },
+            { "year": 2025, "score": 667, "rank": 305, "province": "北京" },
+            { "year": 2024, "score": 665, "rank": 315, "province": "北京" },
+            { "year": 2023, "score": 662, "rank": 335, "province": "北京" },
+            { "year": 2022, "score": 659, "rank": 355, "province": "北京" }
           ]
         }
       ]
@@ -557,72 +285,33 @@
           "majorId": "cs",
           "majorName": "计算机科学与技术",
           "history": [
-            {
-              "year": 2024,
-              "score": 675,
-              "rank": 205,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 672,
-              "rank": 225,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 669,
-              "rank": 245,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 680, "rank": 185, "province": "北京" },
+            { "year": 2025, "score": 677, "rank": 195, "province": "北京" },
+            { "year": 2024, "score": 675, "rank": 205, "province": "北京" },
+            { "year": 2023, "score": 672, "rank": 225, "province": "北京" },
+            { "year": 2022, "score": 669, "rank": 245, "province": "北京" }
           ]
         },
         {
           "majorId": "ee",
           "majorName": "电子信息工程",
           "history": [
-            {
-              "year": 2024,
-              "score": 672,
-              "rank": 235,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 669,
-              "rank": 255,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 666,
-              "rank": 275,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 677, "rank": 215, "province": "北京" },
+            { "year": 2025, "score": 674, "rank": 225, "province": "北京" },
+            { "year": 2024, "score": 672, "rank": 235, "province": "北京" },
+            { "year": 2023, "score": 669, "rank": 255, "province": "北京" },
+            { "year": 2022, "score": 666, "rank": 275, "province": "北京" }
           ]
         },
         {
           "majorId": "med",
           "majorName": "临床医学",
           "history": [
-            {
-              "year": 2024,
-              "score": 678,
-              "rank": 170,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 675,
-              "rank": 190,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 672,
-              "rank": 210,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 683, "rank": 155, "province": "北京" },
+            { "year": 2025, "score": 680, "rank": 165, "province": "北京" },
+            { "year": 2024, "score": 678, "rank": 170, "province": "北京" },
+            { "year": 2023, "score": 675, "rank": 190, "province": "北京" },
+            { "year": 2022, "score": 672, "rank": 210, "province": "北京" }
           ]
         }
       ]
@@ -636,72 +325,33 @@
           "majorId": "cs",
           "majorName": "计算机科学与技术",
           "history": [
-            {
-              "year": 2024,
-              "score": 671,
-              "rank": 248,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 668,
-              "rank": 268,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 665,
-              "rank": 288,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 676, "rank": 225, "province": "北京" },
+            { "year": 2025, "score": 673, "rank": 238, "province": "北京" },
+            { "year": 2024, "score": 671, "rank": 248, "province": "北京" },
+            { "year": 2023, "score": 668, "rank": 268, "province": "北京" },
+            { "year": 2022, "score": 665, "rank": 288, "province": "北京" }
           ]
         },
         {
           "majorId": "ee",
           "majorName": "电子信息工程",
           "history": [
-            {
-              "year": 2024,
-              "score": 668,
-              "rank": 290,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 665,
-              "rank": 310,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 662,
-              "rank": 330,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 673, "rank": 265, "province": "北京" },
+            { "year": 2025, "score": 670, "rank": 280, "province": "北京" },
+            { "year": 2024, "score": 668, "rank": 290, "province": "北京" },
+            { "year": 2023, "score": 665, "rank": 310, "province": "北京" },
+            { "year": 2022, "score": 662, "rank": 330, "province": "北京" }
           ]
         },
         {
           "majorId": "ds",
           "majorName": "数据科学与大数据技术",
           "history": [
-            {
-              "year": 2024,
-              "score": 669,
-              "rank": 275,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 666,
-              "rank": 295,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 663,
-              "rank": 315,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 674, "rank": 250, "province": "北京" },
+            { "year": 2025, "score": 671, "rank": 265, "province": "北京" },
+            { "year": 2024, "score": 669, "rank": 275, "province": "北京" },
+            { "year": 2023, "score": 666, "rank": 295, "province": "北京" },
+            { "year": 2022, "score": 663, "rank": 315, "province": "北京" }
           ]
         }
       ]
@@ -715,72 +365,33 @@
           "majorId": "cs",
           "majorName": "计算机科学与技术",
           "history": [
-            {
-              "year": 2024,
-              "score": 635,
-              "rank": 580,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 632,
-              "rank": 600,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 629,
-              "rank": 620,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 640, "rank": 555, "province": "北京" },
+            { "year": 2025, "score": 637, "rank": 565, "province": "北京" },
+            { "year": 2024, "score": 635, "rank": 580, "province": "北京" },
+            { "year": 2023, "score": 632, "rank": 600, "province": "北京" },
+            { "year": 2022, "score": 629, "rank": 620, "province": "北京" }
           ]
         },
         {
           "majorId": "ee",
           "majorName": "电子信息工程",
           "history": [
-            {
-              "year": 2024,
-              "score": 632,
-              "rank": 610,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 629,
-              "rank": 630,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 626,
-              "rank": 650,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 637, "rank": 585, "province": "北京" },
+            { "year": 2025, "score": 634, "rank": 595, "province": "北京" },
+            { "year": 2024, "score": 632, "rank": 610, "province": "北京" },
+            { "year": 2023, "score": 629, "rank": 630, "province": "北京" },
+            { "year": 2022, "score": 626, "rank": 650, "province": "北京" }
           ]
         },
         {
           "majorId": "mat",
           "majorName": "材料科学与工程",
           "history": [
-            {
-              "year": 2024,
-              "score": 628,
-              "rank": 640,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 625,
-              "rank": 660,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 622,
-              "rank": 680,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 633, "rank": 615, "province": "北京" },
+            { "year": 2025, "score": 630, "rank": 625, "province": "北京" },
+            { "year": 2024, "score": 628, "rank": 640, "province": "北京" },
+            { "year": 2023, "score": 625, "rank": 660, "province": "北京" },
+            { "year": 2022, "score": 622, "rank": 680, "province": "北京" }
           ]
         }
       ]
@@ -794,72 +405,33 @@
           "majorId": "fin",
           "majorName": "金融学",
           "history": [
-            {
-              "year": 2024,
-              "score": 642,
-              "rank": 490,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 639,
-              "rank": 510,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 636,
-              "rank": 530,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 647, "rank": 465, "province": "北京" },
+            { "year": 2025, "score": 644, "rank": 475, "province": "北京" },
+            { "year": 2024, "score": 642, "rank": 490, "province": "北京" },
+            { "year": 2023, "score": 639, "rank": 510, "province": "北京" },
+            { "year": 2022, "score": 636, "rank": 530, "province": "北京" }
           ]
         },
         {
           "majorId": "acct",
           "majorName": "会计学",
           "history": [
-            {
-              "year": 2024,
-              "score": 638,
-              "rank": 540,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 635,
-              "rank": 560,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 632,
-              "rank": 580,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 643, "rank": 515, "province": "北京" },
+            { "year": 2025, "score": 640, "rank": 525, "province": "北京" },
+            { "year": 2024, "score": 638, "rank": 540, "province": "北京" },
+            { "year": 2023, "score": 635, "rank": 560, "province": "北京" },
+            { "year": 2022, "score": 632, "rank": 580, "province": "北京" }
           ]
         },
         {
           "majorId": "econ",
           "majorName": "经济学",
           "history": [
-            {
-              "year": 2024,
-              "score": 640,
-              "rank": 515,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 637,
-              "rank": 535,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 634,
-              "rank": 555,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 645, "rank": 490, "province": "北京" },
+            { "year": 2025, "score": 642, "rank": 500, "province": "北京" },
+            { "year": 2024, "score": 640, "rank": 515, "province": "北京" },
+            { "year": 2023, "score": 637, "rank": 535, "province": "北京" },
+            { "year": 2022, "score": 634, "rank": 555, "province": "北京" }
           ]
         }
       ]
@@ -873,72 +445,33 @@
           "majorId": "cs",
           "majorName": "计算机科学与技术",
           "history": [
-            {
-              "year": 2024,
-              "score": 658,
-              "rank": 375,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 655,
-              "rank": 395,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 652,
-              "rank": 415,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 663, "rank": 350, "province": "北京" },
+            { "year": 2025, "score": 660, "rank": 360, "province": "北京" },
+            { "year": 2024, "score": 658, "rank": 375, "province": "北京" },
+            { "year": 2023, "score": 655, "rank": 395, "province": "北京" },
+            { "year": 2022, "score": 652, "rank": 415, "province": "北京" }
           ]
         },
         {
           "majorId": "ee",
           "majorName": "电子信息工程",
           "history": [
-            {
-              "year": 2024,
-              "score": 655,
-              "rank": 405,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 652,
-              "rank": 425,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 649,
-              "rank": 445,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 660, "rank": 380, "province": "北京" },
+            { "year": 2025, "score": 657, "rank": 390, "province": "北京" },
+            { "year": 2024, "score": 655, "rank": 405, "province": "北京" },
+            { "year": 2023, "score": 652, "rank": 425, "province": "北京" },
+            { "year": 2022, "score": 649, "rank": 445, "province": "北京" }
           ]
         },
         {
           "majorId": "auto",
           "majorName": "自动化",
           "history": [
-            {
-              "year": 2024,
-              "score": 652,
-              "rank": 445,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 649,
-              "rank": 465,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 646,
-              "rank": 485,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 657, "rank": 420, "province": "北京" },
+            { "year": 2025, "score": 654, "rank": 430, "province": "北京" },
+            { "year": 2024, "score": 652, "rank": 445, "province": "北京" },
+            { "year": 2023, "score": 649, "rank": 465, "province": "北京" },
+            { "year": 2022, "score": 646, "rank": 485, "province": "北京" }
           ]
         }
       ]
@@ -952,72 +485,33 @@
           "majorId": "cs",
           "majorName": "计算机科学与技术",
           "history": [
-            {
-              "year": 2024,
-              "score": 625,
-              "rank": 650,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 622,
-              "rank": 670,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 619,
-              "rank": 690,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 630, "rank": 625, "province": "北京" },
+            { "year": 2025, "score": 627, "rank": 635, "province": "北京" },
+            { "year": 2024, "score": 625, "rank": 650, "province": "北京" },
+            { "year": 2023, "score": 622, "rank": 670, "province": "北京" },
+            { "year": 2022, "score": 619, "rank": 690, "province": "北京" }
           ]
         },
         {
           "majorId": "med",
           "majorName": "临床医学",
           "history": [
-            {
-              "year": 2024,
-              "score": 632,
-              "rank": 595,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 629,
-              "rank": 615,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 626,
-              "rank": 635,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 637, "rank": 570, "province": "北京" },
+            { "year": 2025, "score": 634, "rank": 580, "province": "北京" },
+            { "year": 2024, "score": 632, "rank": 595, "province": "北京" },
+            { "year": 2023, "score": 629, "rank": 615, "province": "北京" },
+            { "year": 2022, "score": 626, "rank": 635, "province": "北京" }
           ]
         },
         {
           "majorId": "cnl",
           "majorName": "中国语言文学",
           "history": [
-            {
-              "year": 2024,
-              "score": 615,
-              "rank": 730,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 612,
-              "rank": 750,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 609,
-              "rank": 770,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 620, "rank": 705, "province": "北京" },
+            { "year": 2025, "score": 617, "rank": 720, "province": "北京" },
+            { "year": 2024, "score": 615, "rank": 730, "province": "北京" },
+            { "year": 2023, "score": 612, "rank": 750, "province": "北京" },
+            { "year": 2022, "score": 609, "rank": 770, "province": "北京" }
           ]
         }
       ]
@@ -1031,72 +525,33 @@
           "majorId": "cs",
           "majorName": "计算机科学与技术",
           "history": [
-            {
-              "year": 2024,
-              "score": 638,
-              "rank": 540,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 635,
-              "rank": 560,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 632,
-              "rank": 580,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 643, "rank": 515, "province": "北京" },
+            { "year": 2025, "score": 640, "rank": 525, "province": "北京" },
+            { "year": 2024, "score": 638, "rank": 540, "province": "北京" },
+            { "year": 2023, "score": 635, "rank": 560, "province": "北京" },
+            { "year": 2022, "score": 632, "rank": 580, "province": "北京" }
           ]
         },
         {
           "majorId": "ee",
           "majorName": "电子信息工程",
           "history": [
-            {
-              "year": 2024,
-              "score": 635,
-              "rank": 570,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 632,
-              "rank": 590,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 629,
-              "rank": 610,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 640, "rank": 545, "province": "北京" },
+            { "year": 2025, "score": 637, "rank": 555, "province": "北京" },
+            { "year": 2024, "score": 635, "rank": 570, "province": "北京" },
+            { "year": 2023, "score": 632, "rank": 590, "province": "北京" },
+            { "year": 2022, "score": 629, "rank": 610, "province": "北京" }
           ]
         },
         {
           "majorId": "law",
           "majorName": "法学",
           "history": [
-            {
-              "year": 2024,
-              "score": 630,
-              "rank": 620,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 627,
-              "rank": 640,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 624,
-              "rank": 660,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 635, "rank": 595, "province": "北京" },
+            { "year": 2025, "score": 632, "rank": 605, "province": "北京" },
+            { "year": 2024, "score": 630, "rank": 620, "province": "北京" },
+            { "year": 2023, "score": 627, "rank": 640, "province": "北京" },
+            { "year": 2022, "score": 624, "rank": 660, "province": "北京" }
           ]
         }
       ]
@@ -1110,72 +565,33 @@
           "majorId": "edu",
           "majorName": "教育学",
           "history": [
-            {
-              "year": 2024,
-              "score": 635,
-              "rank": 570,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 632,
-              "rank": 590,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 629,
-              "rank": 610,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 640, "rank": 545, "province": "北京" },
+            { "year": 2025, "score": 637, "rank": 555, "province": "北京" },
+            { "year": 2024, "score": 635, "rank": 570, "province": "北京" },
+            { "year": 2023, "score": 632, "rank": 590, "province": "北京" },
+            { "year": 2022, "score": 629, "rank": 610, "province": "北京" }
           ]
         },
         {
           "majorId": "cnl",
           "majorName": "中国语言文学",
           "history": [
-            {
-              "year": 2024,
-              "score": 638,
-              "rank": 540,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 635,
-              "rank": 560,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 632,
-              "rank": 580,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 643, "rank": 515, "province": "北京" },
+            { "year": 2025, "score": 640, "rank": 525, "province": "北京" },
+            { "year": 2024, "score": 638, "rank": 540, "province": "北京" },
+            { "year": 2023, "score": 635, "rank": 560, "province": "北京" },
+            { "year": 2022, "score": 632, "rank": 580, "province": "北京" }
           ]
         },
         {
           "majorId": "psy",
           "majorName": "心理学",
           "history": [
-            {
-              "year": 2024,
-              "score": 642,
-              "rank": 495,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 639,
-              "rank": 515,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 636,
-              "rank": 535,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 647, "rank": 470, "province": "北京" },
+            { "year": 2025, "score": 644, "rank": 480, "province": "北京" },
+            { "year": 2024, "score": 642, "rank": 495, "province": "北京" },
+            { "year": 2023, "score": 639, "rank": 515, "province": "北京" },
+            { "year": 2022, "score": 636, "rank": 535, "province": "北京" }
           ]
         }
       ]
@@ -1189,72 +605,33 @@
           "majorId": "cs",
           "majorName": "计算机科学与技术",
           "history": [
-            {
-              "year": 2024,
-              "score": 628,
-              "rank": 640,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 625,
-              "rank": 660,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 622,
-              "rank": 680,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 633, "rank": 615, "province": "北京" },
+            { "year": 2025, "score": 630, "rank": 625, "province": "北京" },
+            { "year": 2024, "score": 628, "rank": 640, "province": "北京" },
+            { "year": 2023, "score": 625, "rank": 660, "province": "北京" },
+            { "year": 2022, "score": 622, "rank": 680, "province": "北京" }
           ]
         },
         {
           "majorId": "ce",
           "majorName": "土木工程",
           "history": [
-            {
-              "year": 2024,
-              "score": 622,
-              "rank": 680,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 619,
-              "rank": 700,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 616,
-              "rank": 720,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 627, "rank": 655, "province": "北京" },
+            { "year": 2025, "score": 624, "rank": 665, "province": "北京" },
+            { "year": 2024, "score": 622, "rank": 680, "province": "北京" },
+            { "year": 2023, "score": 619, "rank": 700, "province": "北京" },
+            { "year": 2022, "score": 616, "rank": 720, "province": "北京" }
           ]
         },
         {
           "majorId": "me",
           "majorName": "机械工程",
           "history": [
-            {
-              "year": 2024,
-              "score": 625,
-              "rank": 660,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 622,
-              "rank": 680,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 619,
-              "rank": 700,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 630, "rank": 635, "province": "北京" },
+            { "year": 2025, "score": 627, "rank": 645, "province": "北京" },
+            { "year": 2024, "score": 625, "rank": 660, "province": "北京" },
+            { "year": 2023, "score": 622, "rank": 680, "province": "北京" },
+            { "year": 2022, "score": 619, "rank": 700, "province": "北京" }
           ]
         }
       ]
@@ -1268,72 +645,33 @@
           "majorId": "cs",
           "majorName": "计算机科学与技术",
           "history": [
-            {
-              "year": 2024,
-              "score": 642,
-              "rank": 495,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 639,
-              "rank": 515,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 636,
-              "rank": 535,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 647, "rank": 470, "province": "北京" },
+            { "year": 2025, "score": 644, "rank": 480, "province": "北京" },
+            { "year": 2024, "score": 642, "rank": 495, "province": "北京" },
+            { "year": 2023, "score": 639, "rank": 515, "province": "北京" },
+            { "year": 2022, "score": 636, "rank": 535, "province": "北京" }
           ]
         },
         {
           "majorId": "ee",
           "majorName": "电子信息工程",
           "history": [
-            {
-              "year": 2024,
-              "score": 640,
-              "rank": 515,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 637,
-              "rank": 535,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 634,
-              "rank": 555,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 645, "rank": 490, "province": "北京" },
+            { "year": 2025, "score": 642, "rank": 500, "province": "北京" },
+            { "year": 2024, "score": 640, "rank": 515, "province": "北京" },
+            { "year": 2023, "score": 637, "rank": 535, "province": "北京" },
+            { "year": 2022, "score": 634, "rank": 555, "province": "北京" }
           ]
         },
         {
           "majorId": "me",
           "majorName": "机械工程",
           "history": [
-            {
-              "year": 2024,
-              "score": 635,
-              "rank": 570,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 632,
-              "rank": 590,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 629,
-              "rank": 610,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 640, "rank": 545, "province": "北京" },
+            { "year": 2025, "score": 637, "rank": 555, "province": "北京" },
+            { "year": 2024, "score": 635, "rank": 570, "province": "北京" },
+            { "year": 2023, "score": 632, "rank": 590, "province": "北京" },
+            { "year": 2022, "score": 629, "rank": 610, "province": "北京" }
           ]
         }
       ]
@@ -1347,72 +685,33 @@
           "majorId": "cs",
           "majorName": "计算机科学与技术",
           "history": [
-            {
-              "year": 2024,
-              "score": 635,
-              "rank": 570,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 632,
-              "rank": 590,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 629,
-              "rank": 610,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 640, "rank": 545, "province": "北京" },
+            { "year": 2025, "score": 637, "rank": 555, "province": "北京" },
+            { "year": 2024, "score": 635, "rank": 570, "province": "北京" },
+            { "year": 2023, "score": 632, "rank": 590, "province": "北京" },
+            { "year": 2022, "score": 629, "rank": 610, "province": "北京" }
           ]
         },
         {
           "majorId": "med",
           "majorName": "临床医学",
           "history": [
-            {
-              "year": 2024,
-              "score": 648,
-              "rank": 435,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 645,
-              "rank": 455,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 642,
-              "rank": 475,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 653, "rank": 410, "province": "北京" },
+            { "year": 2025, "score": 650, "rank": 420, "province": "北京" },
+            { "year": 2024, "score": 648, "rank": 435, "province": "北京" },
+            { "year": 2023, "score": 645, "rank": 455, "province": "北京" },
+            { "year": 2022, "score": 642, "rank": 475, "province": "北京" }
           ]
         },
         {
           "majorId": "ds",
           "majorName": "数据科学与大数据技术",
           "history": [
-            {
-              "year": 2024,
-              "score": 638,
-              "rank": 540,
-              "province": "北京"
-            },
-            {
-              "year": 2023,
-              "score": 635,
-              "rank": 560,
-              "province": "北京"
-            },
-            {
-              "year": 2022,
-              "score": 632,
-              "rank": 580,
-              "province": "北京"
-            }
+            { "year": 2026, "score": 643, "rank": 515, "province": "北京" },
+            { "year": 2025, "score": 640, "rank": 525, "province": "北京" },
+            { "year": 2024, "score": 638, "rank": 540, "province": "北京" },
+            { "year": 2023, "score": 635, "rank": 560, "province": "北京" },
+            { "year": 2022, "score": 632, "rank": 580, "province": "北京" }
           ]
         }
       ]

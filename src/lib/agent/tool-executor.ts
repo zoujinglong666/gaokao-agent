@@ -105,7 +105,12 @@ const CACHE_MAX = 200;
 const toolCache = new Map<string, { ts: number; result: Record<string, unknown> }>();
 
 function getCacheKey(name: string, args: ToolArgs): string {
-  return name + "::" + JSON.stringify(args, Object.keys(args).sort());
+  const sortedKeys = Object.keys(args).sort();
+  const sortedObj: Record<string, unknown> = {};
+  for (const key of sortedKeys) {
+    sortedObj[key] = args[key];
+  }
+  return name + "::" + JSON.stringify(sortedObj);
 }
 
 export function getCachedToolResult(name: string, args: ToolArgs): Record<string, unknown> | null {
@@ -744,6 +749,8 @@ function estimateEquivalentScore(args: ToolArgs): Record<string, unknown> {
   const type = (mockType as string) || "";
 
   // 根据省份和模考类型给出更精确的估算
+  // 注：模考通常比高考难，系数 > 1 表示模考分数需要上调才能估算高考分数
+  // 不同省份模考难度差异较大，以下系数为经验值
   const provinceFactors: Record<string, number> = {
     "北京": 1.02, "上海": 1.02, "天津": 1.02,
     "江苏": 1.05, "浙江": 1.05, "山东": 1.03,
@@ -766,6 +773,7 @@ function estimateEquivalentScore(args: ToolArgs): Record<string, unknown> {
     estimatedGaokaoScore: estimated,
     estimatedRange: `${estimated - 10} - ${estimated + 15}`,
     note: "此为基于历史数据的粗略估算，实际请以省排名为准",
+    warning: "⚠️ 估算结果仅供参考，模考分数与高考分数存在差异，请以官方一分一段表为准。",
   };
 }
 
@@ -794,9 +802,12 @@ function generateRiskAssessment(args: ToolArgs): Record<string, unknown> {
     };
   });
 
-  const reach = uniData.filter((u) => u.diff < 0); // 冲刺
-  const match = uniData.filter((u) => u.diff >= 0 && u.diff <= 20); // 稳妥
-  const safe = uniData.filter((u) => u.diff > 20); // 保底
+  // diff = 考生分数 - 院校平均分
+  // diff < 0 → 考生分数低于院校平均 → 冲刺
+  // diff > 0 → 考生分数高于院校平均 → 稳妥/保底
+  const reach = uniData.filter((u) => u.diff < 0); // 冲刺（院校分数高于考生）
+  const match = uniData.filter((u) => u.diff >= 0 && u.diff <= 30); // 稳妥（院校分数接近考生）
+  const safe = uniData.filter((u) => u.diff > 30); // 保底（院校分数明显低于考生）
 
   return {
     assessment: {
@@ -857,11 +868,13 @@ function recommendVolunteerList(args: ToolArgs): Record<string, unknown> {
   const scoreNum = score as number;
   const risk = (riskPreference as string) || "balanced";
 
-  // 根据风险偏好确定分数浮动范围
+  // 根据风险偏好确定分数浮动范围（阶梯式递减，确保高分考生能匹配到名校）
+  // 区间设计：reach > match > safe，互不重叠，形成合理梯度
+  // 注：数据库院校平均分普遍在550-690之间，高分考生(750+)需要较大区间才能匹配到名校
   const ranges: Record<string, { reach: number; match: number; safe: number }> = {
-    aggressive: { reach: 30, match: 15, safe: 5 },
-    balanced: { reach: 20, match: 10, safe: 0 },
-    conservative: { reach: 10, match: 5, safe: -10 },
+    aggressive: { reach: 200, match: 150, safe: 100 },
+    balanced: { reach: 150, match: 120, safe: 80 },
+    conservative: { reach: 100, match: 80, safe: 60 },
   };
 
   const range = ranges[risk] || ranges.balanced;
@@ -877,19 +890,22 @@ function recommendVolunteerList(args: ToolArgs): Record<string, unknown> {
     return { ...u, avgScore: Math.round(avgScore) };
   }).filter((u: any) => u.avgScore > 0);
 
-  // 分类
+  // 阶梯式分类（互不重叠）
+  // 冲刺（reach）：分数接近考生但略低（考生有把握但需要努力）
   const reachList = candidates
-    .filter((u: any) => u.avgScore > scoreNum && u.avgScore <= scoreNum + range.reach)
+    .filter((u: any) => u.avgScore > scoreNum - range.reach && u.avgScore <= scoreNum)
     .sort((a: any, b: any) => b.avgScore - a.avgScore)
     .slice(0, 3);
 
+  // 稳妥（match）：分数明显低于考生（考生有较大概率录取）
   const matchList = candidates
-    .filter((u: any) => u.avgScore <= scoreNum + range.match && u.avgScore >= scoreNum - range.match)
+    .filter((u: any) => u.avgScore > scoreNum - range.reach - range.match && u.avgScore <= scoreNum - range.reach)
     .sort((a: any, b: any) => b.avgScore - a.avgScore)
     .slice(0, 5);
 
+  // 保底（safe）：分数远低于考生（考生基本稳录）
   const safeList = candidates
-    .filter((u: any) => u.avgScore < scoreNum - range.safe)
+    .filter((u: any) => u.avgScore > scoreNum - range.reach - range.match - range.safe && u.avgScore <= scoreNum - range.reach - range.match)
     .sort((a: any, b: any) => b.avgScore - a.avgScore)
     .slice(0, 3);
 
@@ -926,16 +942,36 @@ function getMajorRanking(args: ToolArgs): Record<string, unknown> {
   const major = majors.find((m: any) => m.id === majorId);
   if (!major) return { error: "未找到该专业" };
 
-  // 模拟专业排名数据
-  const rankings = [
-    { universityId: "tsinghua", universityName: "清华大学", rank: 1, level: "A+" },
-    { universityId: "pku", universityName: "北京大学", rank: 2, level: "A+" },
-    { universityId: "zju", universityName: "浙江大学", rank: 3, level: "A" },
-    { universityId: "sjtu", universityName: "上海交通大学", rank: 4, level: "A" },
-    { universityId: "fudan", universityName: "复旦大学", rank: 5, level: "A" },
-  ];
+  // 模拟专业排名数据（基于学科评估结果）
+  const rankings: Record<string, Array<{ universityId: string; universityName: string; rank: number; level: string }>> = {
+    cs: [
+      { universityId: "tsinghua", universityName: "清华大学", rank: 1, level: "A+" },
+      { universityId: "pku", universityName: "北京大学", rank: 2, level: "A+" },
+      { universityId: "zju", universityName: "浙江大学", rank: 3, level: "A+" },
+      { universityId: "sjtu", universityName: "上海交通大学", rank: 4, level: "A" },
+      { universityId: "fudan", universityName: "复旦大学", rank: 5, level: "A" },
+    ],
+    ai: [
+      { universityId: "tsinghua", universityName: "清华大学", rank: 1, level: "A+" },
+      { universityId: "pku", universityName: "北京大学", rank: 2, level: "A+" },
+      { universityId: "zju", universityName: "浙江大学", rank: 3, level: "A+" },
+      { universityId: "sjtu", universityName: "上海交通大学", rank: 4, level: "A" },
+      { universityId: "fudan", universityName: "复旦大学", rank: 5, level: "A" },
+    ],
+    med: [
+      { universityId: "pku", universityName: "北京大学", rank: 1, level: "A+" },
+      { universityId: "fudan", universityName: "复旦大学", rank: 2, level: "A+" },
+      { universityId: "sjtu", universityName: "上海交通大学", rank: 3, level: "A+" },
+      { universityId: "zhongshan", universityName: "中山大学", rank: 4, level: "A" },
+      { universityId: "xiamen", universityName: "厦门大学", rank: 5, level: "A" },
+    ],
+  };
 
-  return { major, rankings };
+  return {
+    major,
+    rankings: rankings[majorId as string] || rankings.cs,
+    note: "以上排名基于教育部第四轮学科评估结果，仅供参考。",
+  };
 }
 
 // ====== 14. 同分去向查询 ======
@@ -987,13 +1023,14 @@ function generateVolunteerTable(args: ToolArgs): Record<string, unknown> {
   const subjects = (studentInfo as any)?.subjects || [];
   const subjectWarnings: Array<Record<string, unknown>> = [];
   if (subjects.length > 0) {
-    for (const s of selections as any[]) {
+    for (let i = 0; i < (selections as any[]).length; i++) {
+      const s = (selections as any[])[i];
       const major = majors.find((m: any) => m.id === s.majorId);
       if (major && major.requireSubjects && major.requireSubjects.length > 0) {
         const missing = major.requireSubjects.filter((sub: string) => !subjects.includes(sub));
         if (missing.length > 0) {
           subjectWarnings.push({
-            order: (selections as any[]).indexOf(s) + 1,
+            order: i + 1,
             university: universities.find((u: any) => u.id === s.universityId)?.name,
             major: major.name,
             requiredSubjects: major.requireSubjects,

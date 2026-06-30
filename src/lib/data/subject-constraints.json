@@ -1,7 +1,7 @@
 {
   "_comment": "新高考3+1+2模式下选科与专业可报范围硬性约束规则",
   "_source": "教育部2021年《普通高校本科招生专业选考科目要求指引（3+1+2模式）》",
-  "_updateDate": "2026-06-11",
+  "_updateDate": "2026-06-30",
   "rules": [
     {
       "ruleId": "must-physics-chemistry",

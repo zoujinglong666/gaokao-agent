@@ -1,7 +1,7 @@
 {
   "_comment": "院校基础数据 - 全部来自公开信息，请人工审核确认",
   "_source": "教育部全国高等学校名单 + 各校官网公开信息",
-  "_crawlDate": "2026-06-11",
+  "_crawlDate": "2026-06-30",
   "_totalCount": 105,
   "universities": [
     {
