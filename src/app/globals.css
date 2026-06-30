@@ -38,6 +38,26 @@
   }
   h1, h2, h3, h4 { font-weight: 700; letter-spacing: -0.01em; line-height: 1.25; }
   .font-mono { font-family: var(--font-mono); }
+
+  /* 自定义滚动条 */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(19, 35, 58, 0.12); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(19, 35, 58, 0.2); }
+
+  /* 减少动画偏好 */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+  }
+
+  /* 更好的文本选择颜色 */
+  ::selection { background: rgba(74, 111, 165, 0.2); color: var(--ink); }
+  ::-moz-selection { background: rgba(74, 111, 165, 0.2); color: var(--ink); }
 }
 
 @layer components {

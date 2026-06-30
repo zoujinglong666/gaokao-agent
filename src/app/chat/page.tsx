@@ -3,7 +3,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import Navbar from "@/components/ui/Navbar";
 import { motion } from "framer-motion";
 import { useAppStore, type ChatMessage as Msg } from "@/lib/store";
-import { Download } from "lucide-react";
+import { Download, ChevronDown } from "lucide-react";
 import ExportDialog from "@/components/ui/ExportDialog";
 import MessageItem from "@/components/chat/MessageItem";
 import ThinkingCard from "@/components/chat/ThinkingCard";
@@ -25,13 +25,42 @@ export default function ChatPage() {
   const [loading, setLoading] = useState(false);
   const [showQuickQuestions, setShowQuickQuestions] = useState(true);
   const [streamingId, setStreamingId] = useState<string | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const lastSendRef = useRef<number>(0);
   const [exportOpen, setExportOpen] = useState(false);
+  const [showNewMsgBtn, setShowNewMsgBtn] = useState(false);
+
+  // 智能滚动：自动跟随新消息，但用户向上滚动时不打扰
+  const isNearBottom = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return true;
+    return el.scrollHeight - el.scrollTop - el.clientHeight < 80;
+  }, []);
 
   useEffect(() => {
+    if (isNearBottom()) {
+      bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    } else if (loading || streamingId) {
+      setShowNewMsgBtn(true);
+    }
+  }, [messages, loading, streamingId, isNearBottom]);
+
+  // 监听用户滚动，隐藏"新消息"按钮
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      if (isNearBottom()) setShowNewMsgBtn(false);
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, [isNearBottom]);
+
+  const scrollToBottom = useCallback(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+    setShowNewMsgBtn(false);
+  }, []);
 
   const simulateToolCalls = (toolResults?: any[]): any[] => {
     if (!toolResults || toolResults.length === 0) return [];
@@ -187,8 +216,8 @@ export default function ChatPage() {
           <span>志愿表 {volunteerList.length}</span>
         </motion.button>
       )}
-      <main className="flex-1 max-w-2xl mx-auto w-full px-3 sm:px-4 pb-4 flex flex-col">
-        <div className="flex-1 overflow-y-auto space-y-3 sm:space-y-4 py-3 sm:py-4">
+      <main className="flex-1 max-w-2xl mx-auto w-full px-3 sm:px-4 pb-4 flex flex-col relative">
+        <div ref={scrollRef} className="flex-1 overflow-y-auto space-y-3 sm:space-y-4 py-3 sm:py-4">
           {messages.map((msg) => {
             if (msg.role === "thinking") {
               return <ThinkingCard key={msg.id} />;
@@ -204,6 +233,24 @@ export default function ChatPage() {
           })}
           <div ref={bottomRef} />
         </div>
+
+        {showNewMsgBtn && (
+          <motion.button
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            onClick={scrollToBottom}
+            className="absolute bottom-32 sm:bottom-36 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium shadow-lg z-20"
+            style={{
+              background: "var(--blue)",
+              color: "#fff",
+              boxShadow: "0 4px 12px rgba(59,85,122,0.3)",
+            }}
+          >
+            <ChevronDown size={12} />
+            <span>新消息</span>
+          </motion.button>
+        )}
 
         <QuickQuestions
           show={showQuickQuestions && messages.length === 1 && !loading}

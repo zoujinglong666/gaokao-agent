@@ -1,7 +1,8 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAppStore } from "@/lib/store";
 
-const quickQuestions = [
+const defaultQuestions = [
   { text: "我是山东考生，600分，推荐一些学校", icon: "🎯" },
   { text: "计算机和电子信息怎么选？", icon: "💻" },
   { text: "分析一下我的志愿方案风险", icon: "📊" },
@@ -15,6 +16,18 @@ interface QuickQuestionsProps {
 }
 
 export default function QuickQuestions({ show, onSend }: QuickQuestionsProps) {
+  const { profile } = useAppStore();
+
+  const questions = profile.province && profile.score
+    ? [
+        { text: `推荐${profile.province}${profile.score}分的院校`, icon: "🎯" },
+        { text: "计算机和电子信息怎么选？", icon: "💻" },
+        { text: "分析一下我的志愿方案风险", icon: "📊" },
+        { text: "我的分数能上哪些211？", icon: "🏫" },
+        { text: "热门专业就业前景如何？", icon: "📈" },
+      ]
+    : defaultQuestions;
+
   return (
     <AnimatePresence>
       {show && (
@@ -28,7 +41,7 @@ export default function QuickQuestions({ show, onSend }: QuickQuestionsProps) {
             💡 快速提问
           </div>
           <div className="flex flex-wrap gap-2">
-            {quickQuestions.map((q, i) => (
+            {questions.map((q, i) => (
               <motion.button
                 key={i}
                 initial={{ opacity: 0, scale: 0.9 }}

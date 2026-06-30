@@ -2,6 +2,8 @@
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 
+const MAX_LENGTH = 2000;
+
 interface ChatInputProps {
   loading: boolean;
   onSend: (text: string) => void;
@@ -28,11 +30,16 @@ export default function ChatInput({ loading, onSend }: ChatInputProps) {
   };
 
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setInput(e.target.value);
+    const value = e.target.value;
+    if (value.length > MAX_LENGTH) return;
+    setInput(value);
     const textarea = e.target;
     textarea.style.height = "auto";
     textarea.style.height = Math.min(textarea.scrollHeight, 120) + "px";
   };
+
+  const charCount = input.length;
+  const isNearLimit = charCount > MAX_LENGTH * 0.85;
 
   return (
     <motion.div
@@ -56,9 +63,16 @@ export default function ChatInput({ loading, onSend }: ChatInputProps) {
           }}
           rows={1}
         />
-        <div className="hidden sm:block absolute right-3 bottom-2.5 text-xs" style={{ color: "var(--ink-muted)" }}>
-          Enter 发送
-        </div>
+        {charCount > 0 && (
+          <div
+            className="absolute right-3 bottom-2.5 text-xs transition-colors"
+            style={{
+              color: isNearLimit ? "var(--danger)" : "var(--ink-muted)",
+            }}
+          >
+            {charCount}
+          </div>
+        )}
       </div>
       <motion.button
         onClick={handleSend}

@@ -1,24 +1,30 @@
 "use client";
 import { motion } from "framer-motion";
-import { Search, CheckCircle2 } from "lucide-react";
+import { Search, CheckCircle2, FileText, BarChart3, GraduationCap, MapPin, Heart, Shield, Zap, Brain, Award, TrendingUp, Users, DollarSign, Clock, Settings, List } from "lucide-react";
 import { type ToolCall } from "@/lib/store";
 
 const toolIcons: Record<string, any> = {
   search_universities: Search,
-  get_university_detail: Search,
-  get_score_lines: Search,
-  analyze_major_fit: Search,
-  get_career_prospects: Search,
-  get_province_portal: Search,
-  compare_universities: Search,
-  get_city_living_cost: Search,
-  estimate_equivalent_score: Search,
-  generate_risk_assessment: Search,
-  get_personality_analysis: Search,
-  recommend_volunteer_list: Search,
-  get_major_ranking: Search,
+  get_university_detail: FileText,
+  get_score_lines: BarChart3,
+  analyze_major_fit: GraduationCap,
+  get_career_prospects: TrendingUp,
+  get_province_portal: MapPin,
+  compare_universities: Users,
+  get_city_living_cost: DollarSign,
+  estimate_equivalent_score: Zap,
+  generate_risk_assessment: Shield,
+  get_personality_analysis: Brain,
+  recommend_volunteer_list: Award,
+  get_major_ranking: Award,
   get_same_score_destinations: Search,
-  generate_volunteer_table: Search,
+  generate_volunteer_table: FileText,
+  get_major_groups: List,
+  analyze_major_group: Brain,
+  get_score_lines_by_province: BarChart3,
+  check_subject_compatibility: Settings,
+  score_rank_convert: BarChart3,
+  get_admission_data: FileText,
 };
 
 const toolNames: Record<string, string> = {
@@ -37,6 +43,12 @@ const toolNames: Record<string, string> = {
   get_major_ranking: "专业排名",
   get_same_score_destinations: "同分去向",
   generate_volunteer_table: "生成志愿表",
+  get_major_groups: "查询专业组",
+  analyze_major_group: "分析专业组",
+  get_score_lines_by_province: "查询省份分数线",
+  check_subject_compatibility: "校验选科",
+  score_rank_convert: "换算位次",
+  get_admission_data: "查询录取数据",
 };
 
 export default function ToolCallIndicator({ toolCalls }: { toolCalls?: ToolCall[] }) {

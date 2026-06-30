@@ -21,13 +21,19 @@ interface ExportDialogProps {
 export default function ExportDialog({ open, onClose, items, studentInfo }: ExportDialogProps) {
   const [format, setFormat] = useState<"pdf" | "csv" | "print">("print");
   const [exported, setExported] = useState(false);
+  const [exporting, setExporting] = useState(false);
 
-  const handleExport = () => {
-    if (format === "csv") exportCSV();
-    else if (format === "pdf") exportPDF();
-    else printTable();
-    setExported(true);
-    setTimeout(() => setExported(false), 2000);
+  const handleExport = async () => {
+    setExporting(true);
+    try {
+      if (format === "csv") exportCSV();
+      else if (format === "pdf") exportPDF();
+      else printTable();
+      setExported(true);
+      setTimeout(() => setExported(false), 2000);
+    } finally {
+      setTimeout(() => setExporting(false), 300);
+    }
   };
 
   const exportCSV = () => {
@@ -170,10 +176,24 @@ export default function ExportDialog({ open, onClose, items, studentInfo }: Expo
 
             <button
               onClick={handleExport}
-              className="w-full py-2.5 rounded-lg text-sm font-medium text-white transition active:scale-95"
+              disabled={exporting}
+              className="w-full py-2.5 rounded-lg text-sm font-medium text-white transition active:scale-95 disabled:opacity-70 flex items-center justify-center gap-2"
               style={{ background: "var(--blue)" }}
             >
-              {exported ? "已导出 ✓" : "开始导出"}
+              {exporting ? (
+                <>
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                    className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
+                  />
+                  导出中...
+                </>
+              ) : exported ? (
+                <>已导出 ✓</>
+              ) : (
+                <>开始导出</>
+              )}
             </button>
           </motion.div>
         </>
