@@ -1,17 +1,20 @@
 "use client";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
+import { validateUserInput } from "@/lib/security/input-validator";
 
 const MAX_LENGTH = 2000;
 
 interface ChatInputProps {
   loading: boolean;
   onSend: (text: string) => void;
+  onError?: (error: string) => void;
 }
 
-export default function ChatInput({ loading, onSend }: ChatInputProps) {
+export default function ChatInput({ loading, onSend, onError }: ChatInputProps) {
   const [input, setInput] = useState("");
   const [focused, setFocused] = useState(false);
+  const [validationError, setValidationError] = useState<string | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Auto-focus on mount
@@ -21,7 +24,17 @@ export default function ChatInput({ loading, onSend }: ChatInputProps) {
 
   const handleSend = () => {
     if (!input.trim() || loading) return;
-    onSend(input.trim());
+
+    // 前端输入校验
+    const validation = validateUserInput(input.trim());
+    if (!validation.valid) {
+      setValidationError(validation.errors[0]);
+      onError?.(validation.errors[0]);
+      return;
+    }
+
+    setValidationError(null);
+    onSend(validation.sanitized);
     setInput("");
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
@@ -42,11 +55,19 @@ export default function ChatInput({ loading, onSend }: ChatInputProps) {
     const textarea = e.target;
     textarea.style.height = "auto";
     textarea.style.height = Math.min(textarea.scrollHeight, 120) + "px";
+
+    // 实时校验（延迟 300ms）
+    if (validationError) {
+      const validation = validateUserInput(value);
+      if (validation.valid) {
+        setValidationError(null);
+      }
+    }
   };
 
   const charCount = input.length;
   const isNearLimit = charCount > MAX_LENGTH * 0.85;
-  const canSend = input.trim().length > 0 && !loading;
+  const canSend = input.trim().length > 0 && !loading && !validationError;
 
   return (
     <motion.div
@@ -63,6 +84,8 @@ export default function ChatInput({ loading, onSend }: ChatInputProps) {
         WebkitBackdropFilter: "blur(20px) saturate(1.5)",
         border: focused
           ? "1.5px solid rgba(74, 111, 165, 0.4)"
+          : validationError
+          ? "1.5px solid rgba(220, 38, 38, 0.4)"
           : "1px solid rgba(19, 35, 58, 0.08)",
       }}
     >
@@ -140,6 +163,18 @@ export default function ChatInput({ loading, onSend }: ChatInputProps) {
           )}
         </motion.button>
       </div>
+
+      {/* 校验错误提示 */}
+      {validationError && (
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: "auto" }}
+          className="px-3 pb-2 text-xs"
+          style={{ color: "var(--danger)" }}
+        >
+          {validationError}
+        </motion.div>
+      )}
     </motion.div>
   );
 }
