@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 
 const MAX_LENGTH = 2000;
@@ -11,7 +11,13 @@ interface ChatInputProps {
 
 export default function ChatInput({ loading, onSend }: ChatInputProps) {
   const [input, setInput] = useState("");
+  const [focused, setFocused] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // Auto-focus on mount
+  useEffect(() => {
+    textareaRef.current?.focus();
+  }, []);
 
   const handleSend = () => {
     if (!input.trim() || loading) return;
@@ -40,59 +46,100 @@ export default function ChatInput({ loading, onSend }: ChatInputProps) {
 
   const charCount = input.length;
   const isNearLimit = charCount > MAX_LENGTH * 0.85;
+  const canSend = input.trim().length > 0 && !loading;
 
   return (
     <motion.div
       initial={{ y: 20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      className="glass-card p-2.5 sm:p-3 flex gap-2"
+      className={`rounded-2xl transition-all duration-200 ${
+        focused ? "shadow-lg" : "shadow-sm"
+      }`}
+      style={{
+        background: focused
+          ? "linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85))"
+          : "rgba(255, 255, 255, 0.7)",
+        backdropFilter: "blur(20px) saturate(1.5)",
+        WebkitBackdropFilter: "blur(20px) saturate(1.5)",
+        border: focused
+          ? "1.5px solid rgba(74, 111, 165, 0.4)"
+          : "1px solid rgba(19, 35, 58, 0.08)",
+      }}
     >
-      <div className="flex-1 relative">
-        <textarea
-          ref={textareaRef}
-          value={input}
-          onChange={handleInput}
-          onKeyDown={handleKeyDown}
-          placeholder="问我任何志愿问题..."
-          className="w-full px-3.5 sm:px-4 py-2.5 rounded-xl text-sm focus:outline-none resize-none"
-          style={{
-            background: "rgba(19,35,58,0.03)",
-            color: "var(--ink)",
-            minHeight: "44px",
-            maxHeight: "120px",
-          }}
-          rows={1}
-        />
-        {charCount > 0 && (
-          <div
-            className="absolute right-3 bottom-2.5 text-xs transition-colors"
+      <div className="flex items-end gap-2 p-2.5">
+        <div className="flex-1 relative">
+          <textarea
+            ref={textareaRef}
+            value={input}
+            onChange={handleInput}
+            onKeyDown={handleKeyDown}
+            onFocus={() => setFocused(true)}
+            onBlur={() => setFocused(false)}
+            placeholder="问我任何志愿问题..."
+            className="w-full px-4 py-3 rounded-xl text-sm focus:outline-none resize-none"
             style={{
-              color: isNearLimit ? "var(--danger)" : "var(--ink-muted)",
+              background: "transparent",
+              color: "var(--ink)",
+              minHeight: "44px",
+              maxHeight: "120px",
+              lineHeight: "1.5",
             }}
-          >
-            {charCount}
-          </div>
-        )}
-      </div>
-      <motion.button
-        onClick={handleSend}
-        disabled={!input.trim() || loading}
-        className="btn-primary px-4 py-2.5 text-sm flex items-center gap-1"
-        whileHover={{ scale: !input.trim() || loading ? 1 : 1.02 }}
-        whileTap={{ scale: !input.trim() || loading ? 1 : 0.98 }}
-      >
-        {loading ? (
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-            className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"
+            rows={1}
           />
-        ) : (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-            <path d="M22 2H12l-2 10 4-4 4 4-2 10h10V2z" />
-          </svg>
-        )}
-      </motion.button>
+          {charCount > 0 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="absolute right-2 bottom-1.5 text-[10px] font-mono"
+              style={{
+                color: isNearLimit ? "var(--danger)" : "var(--ink-muted)",
+              }}
+            >
+              {charCount}
+            </motion.div>
+          )}
+        </div>
+        <motion.button
+          onClick={handleSend}
+          disabled={!canSend}
+          className={`w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-200 flex-shrink-0 ${
+            canSend ? "active:scale-95" : ""
+          }`}
+          style={{
+            background: canSend
+              ? "linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%)"
+              : "rgba(19, 35, 58, 0.06)",
+            color: canSend ? "#fff" : "var(--ink-muted)",
+            boxShadow: canSend
+              ? "0 4px 12px rgba(74, 111, 165, 0.3)"
+              : "none",
+          }}
+          whileHover={canSend ? { scale: 1.05 } : {}}
+          whileTap={canSend ? { scale: 0.95 } : {}}
+        >
+          {loading ? (
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+              className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
+            />
+          ) : (
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M5 12h14" />
+              <path d="M13 6l6 6-6 6" />
+            </svg>
+          )}
+        </motion.button>
+      </div>
     </motion.div>
   );
 }
