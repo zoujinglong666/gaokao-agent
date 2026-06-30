@@ -21,6 +21,81 @@ const { personalities, dimensions } = personalitiesData as any;
 
 type ToolArgs = Record<string, unknown>;
 
+// ====== 联网搜索 ======
+const SEARCH_CACHE_TTL = 10 * 60 * 1000; // 10 minutes
+const searchCache = new Map<string, { ts: number; result: Record<string, unknown> }>();
+
+async function webSearch(args: ToolArgs): Promise<Record<string, unknown>> {
+  const query = (args.query as string)?.trim();
+  if (!query) return { error: "请提供搜索关键词" };
+
+  // 检查搜索缓存
+  const cached = searchCache.get(query);
+  if (cached && Date.now() - cached.ts < SEARCH_CACHE_TTL) {
+    return cached.result;
+  }
+
+  const apiKey = process.env.SERPER_API_KEY;
+  if (!apiKey) {
+    return {
+      error: "搜索服务未配置",
+      tip: "请在 .env.local 中配置 SERPER_API_KEY 以启用联网搜索功能",
+      query,
+    };
+  }
+
+  try {
+    const response = await fetch("https://google.serper.dev/search", {
+      method: "POST",
+      headers: {
+        "X-API-KEY": apiKey,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        q: query,
+        gl: "cn",
+        hl: "zh-cn",
+        num: 8,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`搜索 API 错误: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const organic = data.organic || [];
+    const results = organic.map((item: any, i: number) => ({
+      position: i + 1,
+      title: item.title || "",
+      link: item.link || "",
+      snippet: item.snippet || "",
+    }));
+
+    // 提取文本内容供 agent 使用
+    const textContent = results
+      .map((r: any) => `【${r.title}】\n${r.snippet}\n来源: ${r.link}`)
+      .join("\n\n");
+
+    const result = {
+      query,
+      resultCount: results.length,
+      results,
+      summary: textContent,
+    };
+
+    searchCache.set(query, { ts: Date.now(), result });
+    return result;
+  } catch (err: any) {
+    console.error("[web_search] Error:", err.message);
+    return {
+      error: `搜索失败: ${err.message}`,
+      query,
+      tip: "请稍后重试，或尝试不同的关键词",
+    };
+  }
+}
+
 // ====== 工具结果 LRU 缓存（5 分钟 TTL） ======
 const CACHE_TTL = 5 * 60 * 1000;
 const CACHE_MAX = 200;
@@ -65,6 +140,8 @@ export async function executeTool(
 
   let result: Record<string, unknown>;
   switch (name) {
+    case "web_search":
+      result = await webSearch(args); break;
     case "search_universities":
       result = searchUniversities(args); break;
     case "get_university_detail":

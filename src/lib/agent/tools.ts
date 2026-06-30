@@ -289,6 +289,20 @@ export const AGENT_TOOLS: ChatCompletionTool[] = [
   {
     type: "function",
     function: {
+      name: "web_search",
+      description: "联网搜索最新信息。用于查询实时数据、最新政策、2024年以后的录取分数线、最新招生政策变化、就业前景趋势等本地数据中没有的最新信息。当用户询问'最新''2025年''今年''最近'等时间敏感问题时优先使用。",
+      parameters: {
+        type: "object",
+        properties: {
+          query: { type: "string", description: "搜索关键词，如「2025年山东高考分数线」「2025年计算机专业就业趋势」" },
+        },
+        required: ["query"],
+      },
+    },
+  },
+  {
+    type: "function",
+    function: {
       name: "get_personality_analysis",
       description: "获取人格类型分析或从四维评分反推人格。用户分享「我的测评结果是XX型」或刚做完人格测试时调用。",
       parameters: {

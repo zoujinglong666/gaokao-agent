@@ -1,9 +1,10 @@
 "use client";
 import { motion } from "framer-motion";
-import { Search, CheckCircle2, FileText, BarChart3, GraduationCap, MapPin, Heart, Shield, Zap, Brain, Award, TrendingUp, Users, DollarSign, Clock, Settings, List } from "lucide-react";
+import { Search, CheckCircle2, FileText, BarChart3, GraduationCap, MapPin, Heart, Shield, Zap, Brain, Award, TrendingUp, Users, DollarSign, Clock, Settings, List, Globe } from "lucide-react";
 import { type ToolCall } from "@/lib/store";
 
 const toolIcons: Record<string, any> = {
+  web_search: Globe,
   search_universities: Search,
   get_university_detail: FileText,
   get_score_lines: BarChart3,
@@ -28,6 +29,7 @@ const toolIcons: Record<string, any> = {
 };
 
 const toolNames: Record<string, string> = {
+  web_search: "联网搜索",
   search_universities: "搜索院校",
   get_university_detail: "查询院校详情",
   get_score_lines: "查询分数线",
