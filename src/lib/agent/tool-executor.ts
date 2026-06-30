@@ -25,6 +25,35 @@ type ToolArgs = Record<string, unknown>;
 const SEARCH_CACHE_TTL = 10 * 60 * 1000; // 10 minutes
 const searchCache = new Map<string, { ts: number; result: Record<string, unknown> }>();
 
+// ====== 获取当前时间 ======
+function getCurrentTime(args: ToolArgs): Record<string, unknown> {
+  const now = new Date();
+  const timeZone = "Asia/Shanghai";
+  const options: Intl.DateTimeFormatOptions = {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    weekday: "long",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  };
+  const formatter = new Intl.DateTimeFormat("zh-CN", options);
+  const parts = formatter.formatToParts(now);
+  const formatted = parts.map((p) => p.value).join("");
+
+  return {
+    currentTime: now.toISOString(),
+    localTime: formatted,
+    date: now.toLocaleDateString("zh-CN", { timeZone }),
+    time: now.toLocaleTimeString("zh-CN", { timeZone, hour12: false }),
+    dayOfWeek: now.toLocaleDateString("zh-CN", { timeZone, weekday: "long" }),
+    timestamp: now.getTime(),
+  };
+}
+
 async function webSearch(args: ToolArgs): Promise<Record<string, unknown>> {
   const query = (args.query as string)?.trim();
   if (!query) return { error: "请提供搜索关键词" };
@@ -148,6 +177,8 @@ export async function executeTool(
 
   let result: Record<string, unknown>;
   switch (name) {
+    case "get_current_time":
+      result = getCurrentTime(args); break;
     case "web_search":
       result = await webSearch(args); break;
     case "search_universities":

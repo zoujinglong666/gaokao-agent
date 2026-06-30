@@ -4,6 +4,18 @@ export const AGENT_TOOLS: ChatCompletionTool[] = [
   {
     type: "function",
     function: {
+      name: "get_current_time",
+      description: "获取当前时间（北京时间）。用于确认今天是哪一天、星期几，确保回答中使用正确的日期信息。当用户询问'今天''现在''当前时间'或需要确认日期时使用。",
+      parameters: {
+        type: "object",
+        properties: {},
+        required: [],
+      },
+    },
+  },
+  {
+    type: "function",
+    function: {
       name: "search_universities",
       description: "按省份、分数范围、院校标签、城市、类型或专业搜索大学。用户问「帮我找学校」「推荐几所大学」「XX分能上什么学校」时调用。",
       parameters: {

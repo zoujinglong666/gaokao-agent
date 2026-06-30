@@ -8,6 +8,7 @@ interface ToolSkeletonProps {
 }
 
 const TOOL_LABELS: Record<string, string> = {
+  web_search: "正在联网搜索",
   search_universities: "正在搜索院校",
   get_university_detail: "正在查询院校详情",
   get_score_lines: "正在查询录取分数线",

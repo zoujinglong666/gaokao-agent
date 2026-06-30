@@ -35,6 +35,7 @@ export async function POST(req: NextRequest) {
       reply: result.reply,
       toolResults: result.toolResults,
       sessionId: result.sessionId,
+      reasoning: result.reasoning,
     });
   } catch (error: any) {
     console.error("[Chat API Error]", error);

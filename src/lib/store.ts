@@ -15,6 +15,13 @@ export interface ChatMessage {
   toolResults?: Record<string, unknown>[];
   toolCalls?: ToolCall[];
   timestamp: Date;
+  // 智能卡片：当AI询问信息时，附带一个可交互的卡片
+  card?: {
+    type: "province" | "score" | "subject" | "interest" | "city";
+    dismissed?: boolean;
+  };
+  // 推理过程：展示AI的思考步骤
+  reasoning?: ReasoningStep[];
 }
 
 export interface ToolCall {
@@ -22,6 +29,18 @@ export interface ToolCall {
   status: "running" | "done" | "pending";
   result?: string;
   args?: Record<string, unknown>;
+  duration?: number;
+  step?: number;
+}
+
+export interface ReasoningStep {
+  type: "thinking" | "tool_call" | "tool_result" | "final";
+  content: string;
+  toolName?: string;
+  toolArgs?: Record<string, unknown>;
+  toolResult?: Record<string, unknown>;
+  duration?: number;
+  step?: number;
 }
 
 export interface ReportData {

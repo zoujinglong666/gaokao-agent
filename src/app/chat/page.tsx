@@ -2,12 +2,14 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Navbar from "@/components/ui/Navbar";
 import { motion } from "framer-motion";
-import { useAppStore, type ChatMessage as Msg } from "@/lib/store";
+import { useAppStore, type ChatMessage as Msg, type ReasoningStep } from "@/lib/store";
 import { Download, ChevronDown } from "lucide-react";
 import ExportDialog from "@/components/ui/ExportDialog";
 import MessageItem from "@/components/chat/MessageItem";
 import QuickQuestions from "@/components/chat/QuickQuestions";
 import ChatInput from "@/components/chat/ChatInput";
+import ToolSkeleton from "@/components/ui/ToolSkeleton";
+import { detectCardToDisplay } from "@/lib/card-triggers";
 
 export default function ChatPage() {
   const { profile, addMessage, clearChat, volunteerList, addToVolunteerList } = useAppStore();
@@ -148,12 +150,23 @@ export default function ChatPage() {
       if (!res.ok) throw new Error("API error");
       const data = await res.json();
 
+      // 检测需要显示的智能卡片
+      const replyContent = data.reply || "";
+      const existingCardTypes = messages
+        .filter((m) => m.card)
+        .map((m) => m.card!.type);
+      const card = detectCardToDisplay(replyContent, profile, existingCardTypes);
+
       const assistantMessage: Msg = {
         id: (Date.now() + 2).toString(),
         role: "assistant",
         content: data.reply || "抱歉，我暂时无法回答这个问题。请稍后再试。",
         timestamp: new Date(),
         toolCalls: simulateToolCalls(data.toolResults),
+        // 将卡片附加到消息上，自然融入对话流
+        card: card ? { type: card.type } : undefined,
+        // 推理过程：展示AI的思考步骤
+        reasoning: data.reasoning,
       };
 
       setMessages((m) => [...m, assistantMessage]);
@@ -212,6 +225,8 @@ export default function ChatPage() {
           ))}
           <div ref={bottomRef} />
         </div>
+
+        {loading && <ToolSkeleton count={1} type="text" />}
 
         {showNewMsgBtn && (
           <motion.button

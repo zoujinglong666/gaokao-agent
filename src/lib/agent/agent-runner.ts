@@ -2,6 +2,7 @@ import OpenAI from "openai";
 import { AGENT_TOOLS } from "./tools";
 import { SYSTEM_PROMPT } from "./system-prompt";
 import { executeTool } from "./tool-executor";
+import type { ReasoningStep } from "../store";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -151,10 +152,36 @@ function buildTaskProgress(toolLogs: ToolLog[], currentTool?: string): TaskStep[
   return steps;
 }
 
+// ====== 工具名称映射 ======
+const TOOL_NAMES: Record<string, string> = {
+  get_current_time: "获取当前时间",
+  web_search: "联网搜索",
+  search_universities: "搜索院校",
+  get_university_detail: "查询院校详情",
+  get_score_lines: "查询分数线",
+  analyze_major_fit: "分析专业匹配度",
+  get_career_prospects: "查询就业前景",
+  get_province_portal: "查询官方入口",
+  compare_universities: "对比院校",
+  get_city_living_cost: "查询生活成本",
+  estimate_equivalent_score: "估算等效分数",
+  generate_risk_assessment: "风险评估",
+  get_personality_analysis: "人格分析",
+  recommend_volunteer_list: "智能推荐志愿",
+  get_major_ranking: "专业排名",
+  get_same_score_destinations: "同分去向",
+  generate_volunteer_table: "生成志愿表",
+  search_major_groups: "查询专业组",
+  analyze_major_group: "分析专业组",
+  get_province_score_lines: "查询省份分数线",
+  check_subject_compatibility: "校验选科",
+  score_rank_convert: "换算位次",
+};
+
 export async function runAgent(
   messages: ChatMessage[],
   opts?: AgentOptions
-): Promise<{ reply: string; toolResults: Record<string, unknown>[]; sessionId: string }> {
+): Promise<{ reply: string; toolResults: Record<string, unknown>[]; sessionId: string; reasoning?: ReasoningStep[] }> {
   const sessionId = generateSessionId();
   console.log(`[Agent:${sessionId}] Start`, { universityId: opts?.universityId, msgCount: messages.length });
 
@@ -166,6 +193,7 @@ export async function runAgent(
 
   const toolResults: Record<string, unknown>[] = [];
   const toolLogs: ToolLog[] = [];
+  const reasoningSteps: ReasoningStep[] = [];
   let iterations = 0;
 
   while (iterations < MAX_ITERATIONS) {
@@ -189,15 +217,28 @@ export async function runAgent(
 
     const reasoningContent = (assistantMessage as any).reasoning_content;
     if (reasoningContent) {
+      // 添加思考步骤
+      reasoningSteps.push({
+        type: "thinking",
+        content: reasoningContent.slice(0, 200),
+        step: reasoningSteps.length + 1,
+      });
       console.log(`[Agent:${sessionId}] Reasoning:`, reasoningContent.slice(0, 200));
     }
 
     if (!assistantMessage.tool_calls || assistantMessage.tool_calls.length === 0) {
+      // 添加最终结论
+      reasoningSteps.push({
+        type: "final",
+        content: assistantMessage.content || "抱歉，我暂时无法回答这个问题。",
+        step: reasoningSteps.length + 1,
+      });
       console.log(`[Agent:${sessionId}] Done in ${iterations} iterations, tools: ${toolLogs.length}`);
       return {
         reply: assistantMessage.content || "抱歉，我暂时无法回答这个问题。",
         toolResults,
         sessionId,
+        reasoning: reasoningSteps,
       };
     }
 
@@ -219,6 +260,15 @@ export async function runAgent(
       const t0 = Date.now();
       console.log(`[Agent:${sessionId}] Calling: ${fnName}`, args);
 
+      // 添加工具调用步骤
+      reasoningSteps.push({
+        type: "tool_call",
+        content: `正在调用 ${TOOL_NAMES[fnName] || fnName}...`,
+        toolName: fnName,
+        toolArgs: args,
+        step: reasoningSteps.length + 1,
+      });
+
       // Error Recovery: 工具调用 try/catch + 仅失败时重试
       let result: Record<string, unknown>;
       let success = true;
@@ -239,6 +289,16 @@ export async function runAgent(
       toolLogs.push({ tool: fnName, args, result, duration, success, retried });
       console.log(`[Agent:${sessionId}] ${fnName} ${success ? '✓' : '✗'} ${duration}ms`);
 
+      // 添加工具结果步骤
+      reasoningSteps.push({
+        type: "tool_result",
+        content: `${TOOL_NAMES[fnName] || fnName} 完成 (${duration}ms)`,
+        toolName: fnName,
+        toolResult: result,
+        duration,
+        step: reasoningSteps.length + 1,
+      });
+
       toolResults.push({ tool: fnName, args, result });
       allMessages.push({
         role: "tool",
@@ -253,6 +313,7 @@ export async function runAgent(
     reply: "抱歉，我在处理你的问题时遇到了一些困难。请换个方式问我吧！",
     toolResults,
     sessionId,
+    reasoning: reasoningSteps,
   };
 }
 
@@ -260,7 +321,7 @@ export async function runAgentStream(
   messages: ChatMessage[],
   onChunk: (chunk: string) => void,
   opts?: AgentOptions
-): Promise<{ reply: string; toolResults: Record<string, unknown>[]; sessionId: string }> {
+): Promise<{ reply: string; toolResults: Record<string, unknown>[]; sessionId: string; reasoning?: ReasoningStep[] }> {
   const sessionId = generateSessionId();
   console.log(`[Stream:${sessionId}] Start`, { universityId: opts?.universityId, msgCount: messages.length });
 
@@ -271,6 +332,7 @@ export async function runAgentStream(
   ];
 
   const toolResults: Record<string, unknown>[] = [];
+  const reasoningSteps: ReasoningStep[] = [];
   let iterations = 0;
 
   while (iterations < MAX_ITERATIONS) {
@@ -336,8 +398,14 @@ export async function runAgentStream(
     }
 
     if (!hasToolCall) {
+      // 添加最终结论
+      reasoningSteps.push({
+        type: "final",
+        content: fullReply,
+        step: reasoningSteps.length + 1,
+      });
       console.log(`[Stream:${sessionId}] Done in ${iterations} iterations`);
-      return { reply: fullReply, toolResults, sessionId };
+      return { reply: fullReply, toolResults, sessionId, reasoning: reasoningSteps };
     }
 
     const toolCallsList = Object.values(toolCallsMap).map((tc, i) => ({
@@ -360,6 +428,16 @@ export async function runAgentStream(
       } catch {
         args = {};
       }
+
+      // 添加工具调用步骤
+      reasoningSteps.push({
+        type: "tool_call",
+        content: `正在调用 ${TOOL_NAMES[fnName] || fnName}...`,
+        toolName: fnName,
+        toolArgs: args,
+        step: reasoningSteps.length + 1,
+      });
+
       const t0 = Date.now();
       console.log(`[Stream:${sessionId}] Calling: ${fnName}`);
 
@@ -369,7 +447,18 @@ export async function runAgentStream(
       } catch (err: any) {
         result = { error: `工具执行失败: ${err.message || '未知错误'}`, fallback: true };
       }
-      console.log(`[Stream:${sessionId}] ${fnName} ${Date.now() - t0}ms`);
+      const duration = Date.now() - t0;
+      console.log(`[Stream:${sessionId}] ${fnName} ${duration}ms`);
+
+      // 添加工具结果步骤
+      reasoningSteps.push({
+        type: "tool_result",
+        content: `${TOOL_NAMES[fnName] || fnName} 完成 (${duration}ms)`,
+        toolName: fnName,
+        toolResult: result,
+        duration,
+        step: reasoningSteps.length + 1,
+      });
 
       toolResults.push({ tool: fnName, args, result });
       allMessages.push({
@@ -381,5 +470,5 @@ export async function runAgentStream(
     }
   }
 
-  return { reply: "处理超时，请重试。", toolResults, sessionId };
+  return { reply: "处理超时，请重试。", toolResults, sessionId, reasoning: reasoningSteps };
 }
