@@ -35,27 +35,27 @@ async function webSearch(args: ToolArgs): Promise<Record<string, unknown>> {
     return cached.result;
   }
 
-  const apiKey = process.env.SERPER_API_KEY;
+  const apiKey = process.env.TAVILY_API_KEY;
   if (!apiKey) {
     return {
       error: "搜索服务未配置",
-      tip: "请在 .env.local 中配置 SERPER_API_KEY 以启用联网搜索功能",
+      tip: "请在 .env.local 中配置 TAVILY_API_KEY 以启用联网搜索功能（https://tavily.com）",
       query,
     };
   }
 
   try {
-    const response = await fetch("https://google.serper.dev/search", {
+    const response = await fetch("https://api.tavily.com/search", {
       method: "POST",
       headers: {
-        "X-API-KEY": apiKey,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        q: query,
-        gl: "cn",
-        hl: "zh-cn",
-        num: 8,
+        api_key: apiKey,
+        query,
+        search_depth: "basic",
+        max_results: 8,
+        include_answer: true,
       }),
     });
 
@@ -64,23 +64,26 @@ async function webSearch(args: ToolArgs): Promise<Record<string, unknown>> {
     }
 
     const data = await response.json();
-    const organic = data.organic || [];
-    const results = organic.map((item: any, i: number) => ({
+    const results = (data.results || []).map((item: any, i: number) => ({
       position: i + 1,
       title: item.title || "",
-      link: item.link || "",
-      snippet: item.snippet || "",
+      url: item.url || "",
+      content: item.content || "",
     }));
+
+    // Tavily 会返回 AI 生成的摘要答案
+    const aiAnswer = data.answer || "";
 
     // 提取文本内容供 agent 使用
     const textContent = results
-      .map((r: any) => `【${r.title}】\n${r.snippet}\n来源: ${r.link}`)
+      .map((r: any) => `【${r.title}】\n${r.content}\n来源: ${r.url}`)
       .join("\n\n");
 
     const result = {
       query,
       resultCount: results.length,
       results,
+      aiAnswer,
       summary: textContent,
     };
 
