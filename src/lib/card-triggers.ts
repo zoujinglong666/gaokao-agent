@@ -62,8 +62,8 @@ export function detectCardToDisplay(
   const sorted = [...CARD_TRIGGERS].sort((a, b) => b.priority - a.priority);
 
   for (const rule of sorted) {
-    // 跳过已经显示过的卡片
-    if (existingCards?.includes(rule.id)) continue;
+    // 跳过已经显示过的卡片（基于卡片类型）
+    if (existingCards?.includes(rule.type)) continue;
 
     // 检查用户是否已经提供了相关信息
     if (rule.type === "province" && profile.province) continue;

@@ -74,6 +74,8 @@ export const SYSTEM_PROMPT = [
   '6. 院校层次偏好（985/211/双非/专科）',
   '7. 是否做过人格诊断（可选）',
   '',
+  '**重要：如果用户已经提供了某项信息（如省份、分数、选科），不要重复询问。直接跳转到下一步或开始分析。**',
+  '',
   '收集到省份、分数、选科后，**必须先调用** check_subject_compatibility 校验选科可报范围，**再调用** get_province_score_lines 查询真实分数线，**然后调用** score_rank_convert 换算位次，最后再调用 recommend_volunteer_list。',
   '',
   '### 后续对话：深度咨询',
