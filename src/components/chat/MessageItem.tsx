@@ -22,27 +22,37 @@ interface MessageItemProps {
 
 export default memo(function MessageItem({ msg, streamingId, formatTime, onSendMessage }: MessageItemProps) {
   const [hovered, setHovered] = useState(false);
-  const [confirmedCards, setConfirmedCards] = useState<Set<string>>(new Set());
-  const [selectedValues, setSelectedValues] = useState<Record<string, string>>({});
-  const { setProfile } = useAppStore();
+  const { setProfile, profile } = useAppStore();
 
-  // 标记卡片为已确认并记录选中的值
-  const markCardConfirmed = (cardType: string, value?: string) => {
-    setConfirmedCards((prev) => {
-      const next = new Set(prev);
-      next.add(cardType);
-      return next;
-    });
-    if (value) {
-      setSelectedValues((prev) => ({ ...prev, [cardType]: value }));
+  // 根据 profile 判断卡片是否已经被选过
+  const isCardConfirmed = (cardType: string) => {
+    switch (cardType) {
+      case "province": return !!profile.province;
+      case "score": return profile.score !== null && profile.score !== undefined;
+      case "subject": return Array.isArray(profile.subjects) && profile.subjects.length > 0;
+      default: return false;
+    }
+  };
+
+  // 获取已选值用于摘要展示
+  const getCardValue = (cardType: string): string | undefined => {
+    switch (cardType) {
+      case "province": return profile.province || undefined;
+      case "score": return profile.score ? `${profile.score}分` : undefined;
+      case "subject": return Array.isArray(profile.subjects) && profile.subjects.length > 0
+        ? profile.subjects.join(" + ") : undefined;
+      default: return undefined;
     }
   };
 
   // 渲染智能卡片或已选摘要
   const renderCard = (cardType: string) => {
     // 已选择过的卡片显示摘要，不可重复选择
-    if (confirmedCards.has(cardType) && selectedValues[cardType]) {
-      return <CardSummary type={cardType as "province" | "score" | "subject"} value={selectedValues[cardType]} />;
+    if (isCardConfirmed(cardType)) {
+      const value = getCardValue(cardType);
+      if (value) {
+        return <CardSummary type={cardType as "province" | "score" | "subject"} value={value} />;
+      }
     }
 
     switch (cardType) {
@@ -51,7 +61,6 @@ export default memo(function MessageItem({ msg, streamingId, formatTime, onSendM
           <SubjectCard
             onSelect={(subjects) => {
               setProfile({ subjects });
-              markCardConfirmed(cardType, subjects.join(" + "));
               if (onSendMessage) {
                 onSendMessage(`我的选科是：${subjects.join(" + ")}`);
               }
@@ -64,7 +73,6 @@ export default memo(function MessageItem({ msg, streamingId, formatTime, onSendM
           <ProvinceCard
             onSelect={(province) => {
               setProfile({ province });
-              markCardConfirmed(cardType, province);
               if (onSendMessage) {
                 onSendMessage(`我是${province}的考生`);
               }
@@ -77,7 +85,6 @@ export default memo(function MessageItem({ msg, streamingId, formatTime, onSendM
           <ScoreCard
             onSelect={(score) => {
               setProfile({ score });
-              markCardConfirmed(cardType, `${score}分`);
               if (onSendMessage) {
                 onSendMessage(`我的分数是：${score}分`);
               }
