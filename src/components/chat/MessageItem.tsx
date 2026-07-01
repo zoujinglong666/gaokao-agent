@@ -20,16 +20,31 @@ interface MessageItemProps {
 
 export default memo(function MessageItem({ msg, streamingId, formatTime }: MessageItemProps) {
   const [hovered, setHovered] = useState(false);
+  const [confirmedCards, setConfirmedCards] = useState<Set<string>>(new Set());
   const { setProfile } = useAppStore();
+
+  // 标记卡片为已确认
+  const markCardConfirmed = (cardType: string) => {
+    setConfirmedCards((prev) => {
+      const next = new Set(prev);
+      next.add(cardType);
+      return next;
+    });
+  };
 
   // 渲染智能卡片
   const renderCard = (cardType: string) => {
+    if (confirmedCards.has(cardType)) {
+      return null;
+    }
+
     switch (cardType) {
       case "subject":
         return (
           <SubjectCard
             onSelect={(subjects) => {
               setProfile({ subjects });
+              markCardConfirmed(cardType);
               // 自动发送选科信息
               fetch("/api/chat", {
                 method: "POST",
@@ -48,6 +63,7 @@ export default memo(function MessageItem({ msg, streamingId, formatTime }: Messa
           <ProvinceCard
             onSelect={(province) => {
               setProfile({ province });
+              markCardConfirmed(cardType);
               fetch("/api/chat", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -65,6 +81,7 @@ export default memo(function MessageItem({ msg, streamingId, formatTime }: Messa
           <ScoreCard
             onSelect={(score) => {
               setProfile({ score });
+              markCardConfirmed(cardType);
               fetch("/api/chat", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },

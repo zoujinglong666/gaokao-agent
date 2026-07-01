@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Check, X } from "lucide-react";
+import { Check, X, Send } from "lucide-react";
 
 interface SubjectCardProps {
   onSelect: (subjects: string[]) => void;
@@ -16,6 +16,7 @@ const SUBJECTS = {
 export default function SubjectCard({ onSelect, onDismiss }: SubjectCardProps) {
   const [selected, setSelected] = useState<string[]>([]);
   const [mode, setMode] = useState<"3+1+2" | "3+3">("3+1+2");
+  const [sending, setSending] = useState(false);
 
   const toggleSubject = (subject: string) => {
     setSelected((prev) => {
@@ -38,12 +39,12 @@ export default function SubjectCard({ onSelect, onDismiss }: SubjectCardProps) {
     });
   };
 
-  const handleConfirm = () => {
-    if (mode === "3+1+2" && selected.length === 3) {
-      onSelect(selected);
-    } else if (mode === "3+3" && selected.length >= 3) {
-      onSelect(selected.slice(0, 3));
-    }
+  const handleConfirm = async () => {
+    if (mode === "3+1+2" && selected.length !== 3) return;
+    if (mode === "3+3" && selected.length < 3) return;
+    
+    setSending(true);
+    onSelect(selected);
   };
 
   const canConfirm = mode === "3+1+2" ? selected.length === 3 : selected.length >= 3;
@@ -149,17 +150,33 @@ export default function SubjectCard({ onSelect, onDismiss }: SubjectCardProps) {
         <div className="px-3 pb-3">
           <button
             onClick={handleConfirm}
-            disabled={!canConfirm}
-            className="w-full py-2 rounded-lg text-xs font-bold transition-all"
+            disabled={!canConfirm || sending}
+            className="w-full py-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-2"
             style={{
-              background: canConfirm
+              background: canConfirm && !sending
                 ? "linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%)"
                 : "rgba(19, 35, 58, 0.1)",
-              color: canConfirm ? "#fff" : "var(--ink-muted)",
-              boxShadow: canConfirm ? "0 2px 8px rgba(74, 111, 165, 0.3)" : "none",
+              color: canConfirm && !sending ? "#fff" : "var(--ink-muted)",
+              boxShadow: canConfirm && !sending ? "0 2px 8px rgba(74, 111, 165, 0.3)" : "none",
             }}
           >
-            {canConfirm ? `确认：${selected.join(" + ")}` : `还需选择${mode === "3+1+2" ? 3 - selected.length : 0}门`}
+            {sending ? (
+              <>
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                  className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full"
+                />
+                发送中...
+              </>
+            ) : canConfirm ? (
+              <>
+                <Send size={12} />
+                确认：{selected.join(" + ")}
+              </>
+            ) : (
+              `还需选择${mode === "3+1+2" ? 3 - selected.length : 0}门`
+            )}
           </button>
         </div>
       )}

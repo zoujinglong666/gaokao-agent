@@ -227,15 +227,22 @@ export async function runAgent(
     }
 
     if (!assistantMessage.tool_calls || assistantMessage.tool_calls.length === 0) {
+      // 获取回复内容：优先使用 assistantMessage.content，否则从 reasoning 中提取 final 内容
+      let reply = assistantMessage.content;
+      if (!reply) {
+        const finalStep = reasoningSteps.findLast((s) => s.type === "final");
+        reply = finalStep?.content || "抱歉，我暂时无法回答这个问题。";
+      }
+      
       // 添加最终结论
       reasoningSteps.push({
         type: "final",
-        content: assistantMessage.content || "抱歉，我暂时无法回答这个问题。",
+        content: reply,
         step: reasoningSteps.length + 1,
       });
       console.log(`[Agent:${sessionId}] Done in ${iterations} iterations, tools: ${toolLogs.length}`);
       return {
-        reply: assistantMessage.content || "抱歉，我暂时无法回答这个问题。",
+        reply,
         toolResults,
         sessionId,
         reasoning: reasoningSteps,
