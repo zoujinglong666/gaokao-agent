@@ -1,6 +1,7 @@
 "use client";
 import { ToastContainer, useToast } from "@/components/ui/Toast";
 import LoadingOverlay from "@/components/ui/LoadingOverlay";
+import ErrorBoundary from "@/components/ui/ErrorBoundary";
 import { useAppStore } from "@/lib/store";
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
@@ -8,10 +9,10 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   const { toasts, removeToast } = useToast();
 
   return (
-    <>
+    <ErrorBoundary>
       {children}
       <ToastContainer toasts={toasts} removeToast={removeToast} />
       <LoadingOverlay isLoading={isLoading} />
-    </>
+    </ErrorBoundary>
   );
 }

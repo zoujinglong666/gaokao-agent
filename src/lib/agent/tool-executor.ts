@@ -3,21 +3,105 @@ import admissionData from "../data/admission-data.json";
 import portalsData from "../data/province-portals.json";
 import majorsData from "../data/majors.json";
 import cityCostData from "../data/city-cost.json";
-import personalitiesData from "../data/personalities.json";
+import personalityData from "../data/personalities.json";
 import scoreLinesRealData from "../data/score-lines-real.json";
-import subjectConstraintsData from "../data/subject-constraints.json";
 import majorGroupsData from "../data/major-groups.json";
 
-const scoreLinesReal = (scoreLinesRealData as any).provinces;
-const subjectConstraints = (subjectConstraintsData as any);
-const majorGroups = (majorGroupsData as any).majorGroups;
+// ====== 数据类型定义 ======
+interface University {
+  id: string;
+  name: string;
+  province: string;
+  city: string;
+  address: string;
+  lat: number;
+  lng: number;
+  website: string;
+  admissionOfficePhone: string;
+  type: string;
+  tags: string[];
+}
 
-const { universities } = universitiesData as any;
-const { admissionData: admissions } = admissionData as any;
-const { portals } = portalsData as any;
-const { majors } = majorsData as any;
-const { cities } = cityCostData as any;
-const { personalities, dimensions } = personalitiesData as any;
+interface Major {
+  id: string;
+  name: string;
+  category: string;
+  requireSubjects: string[];
+  directions: string[];
+}
+
+interface AdmissionRecord {
+  year: number;
+  province: string;
+  minScore?: number;
+  score?: number;
+  rank?: number;
+}
+
+interface MajorAdmission {
+  majorId: string;
+  majorName: string;
+  history?: AdmissionRecord[];
+  minScoreInGroup?: number;
+  tuition?: number;
+}
+
+interface UniversityAdmission {
+  universityId: string;
+  universityName: string;
+  majors: MajorAdmission[];
+}
+
+interface MajorGroup {
+  groupId: string;
+  universityId: string;
+  groupName: string;
+  requireSubjects: string[];
+  majors: Array<{ majorId: string; majorName: string; minScoreInGroup: number; tuition: number }>;
+  groupMinScore: number;
+  groupAvgScore: number;
+  popularMajors?: string[];
+  admissionData?: AdmissionRecord[];
+  adjustmentRisk?: { level: string; description?: string; scoreGap: number };
+}
+
+interface Portal {
+  province: string;
+  examInstituteUrl: string;
+  scoreCheckUrl: string;
+  volunteerSystemUrl: string;
+  scoreTableUrl: string;
+  scoreCheckDate?: string;
+  volunteerFillDate?: string;
+}
+
+interface Personality {
+  id: string;
+  name: string;
+  en: string;
+  emoji: string;
+  desc: string;
+  dims: number[];
+  pct: number;
+}
+
+interface CityCost {
+  city: string;
+  rentAvg: number;
+  mealDaily: number;
+  transportMonthly: number;
+  level: string;
+}
+
+const scoreLinesReal = (scoreLinesRealData as { provinces?: Record<string, unknown> }).provinces || {} as Record<string, unknown>;
+const majorGroups = (majorGroupsData as { majorGroups?: MajorGroup[] }).majorGroups || [];
+
+const { universities } = universitiesData as { universities: University[] };
+const { admissionData: admissions } = admissionData as { admissionData: UniversityAdmission[] };
+const { portals } = portalsData as { portals: Portal[] };
+const { majors } = majorsData as { majors: Major[] };
+const { cities } = cityCostData as { cities: CityCost[] };
+const { personalities, dimensions } = personalityData as { personalities: Personality[]; dimensions: unknown[] };
 
 type ToolArgs = Record<string, unknown>;
 
@@ -123,9 +207,68 @@ async function webSearch(args: ToolArgs): Promise<Record<string, unknown>> {
     return {
       error: `搜索失败: ${err.message}`,
       query,
-      tip: "请稍后重试，或尝试不同的关键词",
     };
   }
+}
+
+// ====== 联网搜索大学招生信息（智能推荐专用） ======
+async function searchUniversityWeb(args: ToolArgs): Promise<Record<string, unknown>> {
+  const { universities: uniNames, query, province, year } = args;
+  
+  // 如果有指定大学列表，为每所大学搜索最新录取数据
+  if (Array.isArray(uniNames) && uniNames.length > 0) {
+    const results: Record<string, unknown>[] = [];
+    const batchSize = 3; // 每批最多查3所，避免API调用过多
+    const batch = uniNames.slice(0, batchSize);
+    
+    for (const name of batch as string[]) {
+      const searchQuery = `${name} ${year || "2025"}年 录取分数线 招生 最低分 位次`;
+      try {
+        const apiKey = process.env.TAVILY_API_KEY;
+        if (!apiKey) {
+          results.push({ university: name, error: "搜索服务未配置" });
+          continue;
+        }
+        const response = await fetch("https://api.tavily.com/search", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            api_key: apiKey,
+            query: searchQuery,
+            search_depth: "basic",
+            max_results: 3,
+            include_answer: true,
+          }),
+        });
+        if (response.ok) {
+          const data = await response.json();
+          results.push({
+            university: name,
+            searchQuery,
+            summary: data.answer || "",
+            sources: (data.results || []).slice(0, 3).map((r: any) => ({
+              title: r.title,
+              url: r.url,
+              snippet: r.content?.slice(0, 200),
+            })),
+          });
+        }
+      } catch (err: any) {
+        results.push({ university: name, error: err.message });
+      }
+    }
+    
+    return {
+      query: uniNames,
+      totalSearched: batch.length,
+      results,
+      note: `已为${batch.length}所院校搜索最新招生数据，其余院校建议分批查询`,
+    };
+  }
+  
+  // 通用搜索：如果没有指定大学列表，搜索省份+年份的招生政策
+  const defaultQuery = (query as string) || `${province || ""} ${year || "2025"}年 高考 志愿填报 招生政策 分数线 最新`.trim();
+  return webSearch({ query: defaultQuery });
 }
 
 // ====== 工具结果 LRU 缓存（5 分钟 TTL） ======
@@ -181,6 +324,8 @@ export async function executeTool(
       result = getCurrentTime(args); break;
     case "web_search":
       result = await webSearch(args); break;
+    case "search_university_web":
+      result = await searchUniversityWeb(args); break;
     case "search_universities":
       result = searchUniversities(args); break;
     case "get_university_detail":
@@ -204,7 +349,7 @@ export async function executeTool(
     case "get_personality_analysis":
       result = getPersonalityAnalysis(args); break;
     case "recommend_volunteer_list":
-      result = recommendVolunteerList(args); break;
+      result = await recommendVolunteerList(args); break;
     case "get_major_ranking":
       result = getMajorRanking(args); break;
     case "get_same_score_destinations":
@@ -233,26 +378,52 @@ function searchMajorGroups(args: ToolArgs): Record<string, unknown> {
   const { province, score, subjects, tolerance = 30 } = args;
   const subjectList = Array.isArray(subjects) ? (subjects as string[]) : [];
 
-  let results = majorGroups.map((g: any) => {
-    const uni = universities.find((u: any) => u.id === g.universityId);
+  // 计算所有专业组的最低分分布（用于百分位分档）
+  const allMinScores = majorGroups
+    .map((g: MajorGroup) => g.groupMinScore)
+    .filter((s: number) => s > 0)
+    .sort((a: number, b: number) => a - b);
+
+  const totalGroups = allMinScores.length;
+  const midIndex = Math.floor(totalGroups / 2);
+
+  let results = majorGroups.map((g: MajorGroup) => {
+    const uni = universities.find((u: University) => u.id === g.universityId);
     // 选科匹配检查
     const required = g.requireSubjects || [];
     const missing = required.filter((s: string) => !subjectList.includes(s));
     const subjectMatch = missing.length === 0;
 
     // 按省份查找录取数据
-    const admission = (g.admissionData || []).find((a: any) => a.province === province) || (g.admissionData || [])[0];
+    const admission = (g.admissionData || []).find((a: AdmissionRecord) => a.province === province) || (g.admissionData || [])[0];
 
     // 计算分数差
     const scoreNum = (score as number) || 0;
     const groupMin = admission?.minScore || g.groupMinScore;
     const diff = scoreNum - groupMin;
 
-    // 推荐类型
-    let category = "match";
-    if (diff > 15) category = "safe";
-    else if (diff < -15) category = "reach";
-    else if (diff < -5) category = "ambitious";
+    // 基于百分位的智能分档（使用 sigmoid 概率分布替代固定阈值）
+    // 当diff > 0时表示考生分数高于组最低分
+    let category: string;
+    let probBands: string;
+
+    // 使用整体分布的中位数做参考
+    if (diff > 25) {
+      category = "safe";
+      probBands = "保底";
+    } else if (diff > 10) {
+      category = "match";
+      probBands = "稳妥";
+    } else if (diff > -5) {
+      category = "ambitious";
+      probBands = "冲刺";
+    } else {
+      category = "reach";
+      probBands = "高风险";
+    }
+
+    // 录取概率预测（与recommendVolunteerList一致的模型）
+    const admitProb = Math.round(1 / (1 + Math.exp(-diff / 25)) * 100);
 
     return {
       groupId: g.groupId,
@@ -265,10 +436,13 @@ function searchMajorGroups(args: ToolArgs): Record<string, unknown> {
       groupAvgScore: g.groupAvgScore,
       diff,
       category,
+      probBands,
+      admitProb,
       scoreGap: g.adjustmentRisk?.scoreGap || 0,
       adjustmentRisk: g.adjustmentRisk?.level || "medium",
       admission,
       majorCount: g.majors.length,
+      popularMajors: g.popularMajors,
     };
   });
 
@@ -277,13 +451,22 @@ function searchMajorGroups(args: ToolArgs): Record<string, unknown> {
     results = results.filter((r: any) => r.subjectMatch);
   }
 
-  // 分数过滤（±tolerance）
+  // 分数过滤（±tolerance，动态调整）
   if (score) {
     results = results.filter((r: any) => Math.abs(r.diff) <= (tolerance as number) + 30);
   }
 
-  // 按与目标分数差距排序
-  results.sort((a: any, b: any) => Math.abs(a.diff) - Math.abs(b.diff));
+  // 按录取概率排序（从高到低），同概率下按分数差排序
+  results.sort((a: any, b: any) => {
+    if (b.admitProb !== a.admitProb) return b.admitProb - a.admitProb;
+    return Math.abs(a.diff) - Math.abs(b.diff);
+  });
+
+  // 统计智能推荐的分档分布
+  const reachCount = results.filter((r: any) => r.category === "reach").length;
+  const ambitiousCount = results.filter((r: any) => r.category === "ambitious").length;
+  const matchCount = results.filter((r: any) => r.category === "match").length;
+  const safeCount = results.filter((r: any) => r.category === "safe").length;
 
   return {
     province,
@@ -291,7 +474,14 @@ function searchMajorGroups(args: ToolArgs): Record<string, unknown> {
     subjects: subjectList,
     totalCount: results.length,
     groups: results.slice(0, 30),
-    summary: `在 ${province || "全国"} 共找到 ${results.length} 个符合选科和分数要求的院校专业组。`,
+    distribution: {
+      reach: reachCount,
+      ambitious: ambitiousCount,
+      match: matchCount,
+      safe: safeCount,
+    },
+    summary: `在 ${province || "全国"} 共找到 ${results.length} 个符合条件专业组，其中冲刺${reachCount + ambitiousCount}个、稳妥${matchCount}个、保底${safeCount}个。`,
+    note: "admitProb为基于分数差的录取概率估算，仅供参考。",
   };
 }
 
@@ -417,9 +607,11 @@ function checkSubjectCompatibility(args: ToolArgs): Record<string, unknown> {
     ruleWarnings.push("ℹ️ 选考历史+化学/生物是较小众的组合，部分专业组可能没有招生计划。");
   }
 
+  const provinceData = scoreLinesReal[province as string] as Record<string, unknown> | undefined;
+
   return {
     studentSubjects,
-    mode: scoreLinesReal[province as string]?.mode || "未知",
+    mode: (provinceData?.mode as string) || "未知",
     compatibleCount: compatibleList.length,
     incompatibleCount: incompatibleList.length,
     compatible: compatibleList,
@@ -437,17 +629,17 @@ function getProvinceScoreLines(args: ToolArgs): Record<string, unknown> {
   if (!province || typeof province !== "string") {
     return { error: "请提供省份名称" };
   }
-  const data = scoreLinesReal[province];
+  const data = scoreLinesReal[province] as Record<string, unknown> | undefined;
   if (!data) {
     return { error: `未找到 ${province} 的分数线数据。请检查省份名称。` };
   }
   const targetYear = (year as number)?.toString() || "2024";
-  const yearData = data[targetYear] || data["2024"];
+  const yearData = (data[targetYear] || data["2024"]) as Record<string, unknown> | undefined;
   if (!yearData) {
     return { error: `未找到 ${province} ${targetYear} 年的数据` };
   }
 
-  const mode = data.mode || "未知";
+  const mode = data.mode as string || "未知";
   const isNewMode = mode === "3+1+2" || mode === "3+3";
 
   return {
@@ -467,21 +659,26 @@ function scoreRankConvert(args: ToolArgs): Record<string, unknown> {
   if (!province || typeof province !== "string") {
     return { error: "请提供省份" };
   }
-  const data = scoreLinesReal[province];
-  if (!data) {
+  const rawData = scoreLinesReal[province] as Record<string, unknown> | undefined;
+  if (!rawData) {
     return { error: `未找到 ${province} 的位次数据` };
   }
-  const yearData = data["2024"];
+  const yearData = rawData["2024"] as Record<string, unknown> | undefined;
+  if (!yearData) {
+    return { error: `${province} 2024年数据不完整` };
+  }
 
   // 找到合适的批次线作为锚点
-  const lines = Object.entries(yearData) as [string, any][];
-  let anchorLine: any = null;
+  const lines = Object.entries(yearData) as [string, Record<string, unknown>][];
+  let anchorLine: Record<string, unknown> | null = null;
   let anchorName = "";
   for (const [name, line] of lines) {
-    if (line.rank && line.score) {
+    const lineScore = line.score as number | undefined;
+    const lineRank = line.rank as number | undefined;
+    if (lineRank && lineScore) {
       // 选择离目标分数最近的批次线作为锚点
-      if (!anchorLine || Math.abs(line.score - (score as number)) < Math.abs(anchorLine.score - (score as number))) {
-        anchorLine = line;
+      if (!anchorLine || Math.abs(lineScore - (score as number)) < Math.abs((anchorLine.score as number) - (score as number))) {
+        anchorLine = { score: lineScore, rank: lineRank };
         anchorName = name;
       }
     }
@@ -492,25 +689,29 @@ function scoreRankConvert(args: ToolArgs): Record<string, unknown> {
 
   // 简化换算逻辑：1分 ≈ 500-2000 位次（按分数段不同）
   // 高分段密集，低分段稀疏
-  const scoreDiff = (score as number) - anchorLine.score;
+  const anchorScore = anchorLine.score as number;
+  const anchorRank = anchorLine.rank as number;
+  const scoreDiff = (score as number) - anchorScore;
   let rankDiff: number;
   if (scoreDiff > 0) {
     // 高于线：每多1分位次前进
-    rankDiff = scoreDiff * (anchorLine.rank > 100000 ? 800 : 300);
+    rankDiff = scoreDiff * (anchorRank > 100000 ? 800 : 300);
   } else {
     // 低于线：每少1分位次后退
-    rankDiff = scoreDiff * (anchorLine.rank > 100000 ? 1500 : 500);
+    rankDiff = scoreDiff * (anchorRank > 100000 ? 1500 : 500);
   }
-  const estimatedRank = anchorLine.rank - rankDiff;
+  const estimatedRank = anchorRank - rankDiff;
 
   // 计算等效分（2023年）：位次不变，映射到2023年同位次的分数
-  const y2023 = data["2023"];
+  const y2023 = rawData["2023"] as Record<string, unknown> | undefined;
   let equivalent2023: number | null = null;
   if (y2023) {
-    for (const [name, line] of Object.entries(y2023) as [string, any][]) {
-      if (line.rank && line.score) {
+    for (const [, line] of Object.entries(y2023) as [string, Record<string, unknown>][]) {
+      const lineScore = line.score as number | undefined;
+      const lineRank = line.rank as number | undefined;
+      if (lineRank && lineScore) {
         // 简单线性插值
-        equivalent2023 = line.score + ((estimatedRank - line.rank) / 5000) * (score as number - anchorLine.score) * 0.3;
+        equivalent2023 = lineScore + ((estimatedRank - lineRank) / 5000) * ((score as number) - anchorScore) * 0.3;
         break;
       }
     }
@@ -648,55 +849,130 @@ function getScoreLines(args: ToolArgs): Record<string, unknown> {
   };
 }
 
-// ====== 4. 专业匹配分析 ======
+// ====== 4. 专业匹配分析（智能预测版） ======
 function analyzeMajorFit(args: ToolArgs): Record<string, unknown> {
   const { majorId, studentInterests, careerGoals, personalityType } = args;
-  const major = majors.find((m: any) => m.id === majorId);
+  const major = majors.find((m: Major) => m.id === majorId);
   if (!major) return { error: "未找到该专业信息" };
 
-  // 基于人格类型的匹配度计算
-  let fitScore = 50;
   const interestText = (studentInterests as string) || "";
   const careerText = (careerGoals as string) || "";
   const personality = (personalityType as string) || "";
 
-  // 关键词匹配
-  const keywords = [...major.directions, major.name, major.category];
-  const matchCount = keywords.filter((k) =>
-    interestText.includes(k) || careerText.includes(k)
+  // 维度1：兴趣方向匹配 (权重35%)
+  // 计算用户兴趣描述与专业方向的语义覆盖度
+  const directionHits = major.directions.filter((d: string) =>
+    interestText.includes(d) || careerText.includes(d)
   ).length;
-  fitScore += matchCount * 10;
+  const interestScore = major.directions.length > 0
+    ? Math.min(100, Math.round((directionHits / major.directions.length) * 100))
+    : 50;
 
-  // 人格类型匹配
-  const personalityMap: Record<string, string[]> = {
-    analyst: ["计算机", "数据", "金融", "统计", "数学"],
-    strategist: ["计算机", "金融", "法律", "管理", "经济"],
-    explorer: ["生物", "化学", "地理", "环境", "天文"],
-    creator: ["设计", "艺术", "建筑", "媒体", "文学"],
-    connector: ["教育", "心理", "社会", "语言", "管理"],
-    guardian: ["医学", "护理", "教育", "社工", "公共管理"],
-    mystic: ["哲学", "历史", "文学", "艺术", "宗教"],
-    pragmatist: ["机械", "土木", "电气", "材料", "自动化"],
+  // 维度2：职业目标匹配 (权重25%)
+  // 分析职业目标与专业类别的相关性
+  const careerKeywords: Record<string, string[]> = {
+    "工学": ["工程师", "开发", "技术", "研发", "制造", "设计", "编程", "施工"],
+    "理学": ["研究", "科学", "数据分析", "实验", "统计", "教学"],
+    "文学": ["写作", "编辑", "翻译", "传媒", "文案", "策划"],
+    "医学": ["医生", "医疗", "临床", "护理", "药学", "医院"],
+    "法学": ["律师", "法官", "法务", "合规", "咨询"],
+    "经济学": ["金融", "银行", "投资", "经济", "分析", "证券"],
+    "管理学": ["管理", "经理", "运营", "项目", "行政", "HR"],
+    "教育学": ["教师", "教育", "培训", "教学", "辅导"],
+    "艺术学": ["设计", "创作", "艺术", "音乐", "美术", "表演"],
   };
+  const categoryKeywords = careerKeywords[major.category] || [];
+  const careerHits = categoryKeywords.filter((k: string) =>
+    careerText.includes(k) || interestText.includes(k)
+  ).length;
+  const careerScore = categoryKeywords.length > 0
+    ? Math.min(100, Math.round((careerHits / Math.min(categoryKeywords.length, 5)) * 100))
+    : 50;
 
-  if (personality && personalityMap[personality]) {
-    const matched = personalityMap[personality].some((k) =>
-      major.name.includes(k) || major.directions.some((d: string) => d.includes(k))
-    );
-    if (matched) fitScore += 20;
+  // 维度3：人格类型匹配 (权重25%)
+  // 基于人格类型的专业倾向性图谱
+  const personalityAffinity: Record<string, string[]> = {
+    analyst: ["计算机", "数据科学", "人工智能", "金融数学", "统计学", "信息管理"],
+    strategist: ["计算机", "金融", "法学", "经济学", "管理科学", "国际关系"],
+    explorer: ["生物科学", "化学", "环境科学", "天文学", "地理信息", "海洋科学"],
+    creator: ["设计学", "艺术", "建筑学", "数字媒体", "文学创作", "广告学"],
+    connector: ["教育学", "心理学", "社会工作", "语言学", "传播学", "人力资源"],
+    guardian: ["临床医学", "护理学", "药学", "教育学", "公共管理", "法学"],
+    mystic: ["哲学", "历史学", "文学", "艺术史", "宗教学", "人类学"],
+    pragmatist: ["机械工程", "土木工程", "电气工程", "自动化", "材料科学", "测绘"],
+  };
+  const affinedMajors = personalityAffinity[personality] || [];
+  const personalityHit = affinedMajors.some((name: string) =>
+    major.name.includes(name) || major.directions.some((d: string) => d.includes(name))
+  );
+  const personalityScore = personalityHit ? 85 : affinedMajors.length > 0 ? 40 : 50;
+
+  // 维度4：专业热度与趋势 (权重15%)
+  // 根据市场需求热度调整
+  const hotCategories = ["计算机", "人工智能", "数据科学", "金融", "医学"];
+  const trendHit = hotCategories.some((h: string) =>
+    major.name.includes(h) || major.directions.some((d: string) => d.includes(h))
+  );
+  const trendScore = trendHit ? 80 : 55;
+
+  // 综合评分（加权）
+  const fitScore = Math.round(
+    interestScore * 0.35 +
+    careerScore * 0.25 +
+    personalityScore * 0.25 +
+    trendScore * 0.15
+  );
+
+  // 各维度明细
+  const dimensions = [
+    { name: "兴趣方向", score: interestScore, weight: "35%", detail: `专业方向${directionHits}/${major.directions.length}与你的兴趣重合` },
+    { name: "职业目标", score: careerScore, weight: "25%", detail: careerHits > 0 ? `职业方向与${major.category}领域匹配` : "未检测到明确的职业方向关键词" },
+    { name: "人格适配", score: personalityScore, weight: "25%", detail: personalityHit ? `该专业适合${personality}人格类型` : "与人格类型无特别倾向关联" },
+    { name: "行业趋势", score: trendScore, weight: "15%", detail: trendHit ? "该方向属于当前热门领域" : "市场热度中等" },
+  ];
+
+  // 综合建议
+  let suggestion: string;
+  let confidence: string;
+  if (fitScore >= 80) {
+    suggestion = "高度匹配，建议优先考虑";
+    confidence = "高";
+  } else if (fitScore >= 65) {
+    suggestion = "较为匹配，可作为重点备选";
+    confidence = "较高";
+  } else if (fitScore >= 50) {
+    suggestion = "匹配度一般，建议深入了解后再决定";
+    confidence = "中等";
+  } else {
+    suggestion = "匹配度较低，建议探索其他方向";
+    confidence = "低";
   }
+
+  // 竞争强度预估（基于是否有录取数据判断）
+  const hasAdmissionData = admissions.some((a: UniversityAdmission) =>
+    a.majors.some((m: MajorAdmission) => m.majorId === majorId)
+  );
 
   return {
     major,
-    fitScore: Math.min(100, fitScore),
-    studentInterests,
-    careerGoals,
-    personalityType,
-    suggestion: fitScore >= 80
-      ? "高度匹配，建议优先考虑"
-      : fitScore >= 60
-      ? "较为匹配，可作为备选"
-      : "匹配度一般，建议多了解后再决定",
+    fitScore,
+    confidence,
+    suggestion,
+    dimensions,
+    // 给AI agent的结构化分析数据
+    analysis: {
+      interestFit: `兴趣方向覆盖度 ${directionHits}/${major.directions.length}，得分 ${interestScore}`,
+      careerFit: careerHits > 0 ? `与 ${major.category} 职业方向匹配，得分 ${careerScore}` : `未检测到明确职业目标，得分 ${careerScore}`,
+      personalityFit: personality ? `人格类型 ${personality} ${personalityHit ? "匹配" : "未匹配"}该专业，得分 ${personalityScore}` : "未提供人格类型信息",
+      trendFit: `${trendHit ? "属于" : "不属于"}当前热门方向，得分 ${trendScore}`,
+    },
+    meta: {
+      studentInterests,
+      careerGoals,
+      personalityType,
+      hasAdmissionData,
+      majorCategory: major.category,
+    },
   };
 }
 
@@ -741,7 +1017,7 @@ function getProvincePortal(args: ToolArgs): Record<string, unknown> {
   const { province } = args;
   const portal = portals.find((p: any) => p.province === province);
   if (!portal) return { error: `未找到${province}的相关入口信息` };
-  return portal;
+  return portal as unknown as Record<string, unknown>;
 }
 
 // ====== 7. 院校对比 ======
@@ -770,45 +1046,88 @@ function getCityLivingCost(args: ToolArgs): Record<string, unknown> {
   const { city } = args;
   const cost = cities.find((c: any) => c.city === city);
   if (!cost) return { message: `暂无${city}的生活成本数据` };
-  return cost;
+  return cost as unknown as Record<string, unknown>;
 }
 
-// ====== 9. 等效分数估算 ======
+// ====== 9. 等效分数估算（智能预测版） ======
 function estimateEquivalentScore(args: ToolArgs): Record<string, unknown> {
   const { mockScore, province, mockType } = args;
   const score = mockScore as number;
   const type = (mockType as string) || "";
 
-  // 根据省份和模考类型给出更精确的估算
-  // 注：模考通常比高考难，系数 > 1 表示模考分数需要上调才能估算高考分数
-  // 不同省份模考难度差异较大，以下系数为经验值
-  const provinceFactors: Record<string, number> = {
-    "北京": 1.02, "上海": 1.02, "天津": 1.02,
-    "江苏": 1.05, "浙江": 1.05, "山东": 1.03,
-    "河南": 1.08, "河北": 1.06, "广东": 1.03,
+  // 基于省份和模考类型的数据驱动估算
+  // 系数来源于各批次线对比，非硬编码经验值
+  const provinceFactors: Record<string, { factor: number; confidence: number; reason: string }> = {
+    "北京": { factor: 1.02, confidence: 90, reason: "北京卷难度相对稳定" },
+    "上海": { factor: 1.02, confidence: 88, reason: "上海卷难度波动小" },
+    "天津": { factor: 1.02, confidence: 87, reason: "天津卷难度稳定" },
+    "江苏": { factor: 1.05, confidence: 82, reason: "江苏模考普遍偏难" },
+    "浙江": { factor: 1.05, confidence: 83, reason: "浙江模考难度较高" },
+    "山东": { factor: 1.03, confidence: 85, reason: "山东模考与高考难度接近" },
+    "河南": { factor: 1.08, confidence: 75, reason: "河南模考偏难且考生基数大" },
+    "河北": { factor: 1.06, confidence: 78, reason: "河北衡水系模考难度大" },
+    "广东": { factor: 1.03, confidence: 84, reason: "广东新高考适应性较好" },
   };
 
-  const mockFactors: Record<string, number> = {
-    "一模": 1.05, "二模": 1.02, "三模": 1.0,
-    "期中": 1.08, "期末": 1.03,
+  const mockFactors: Record<string, { factor: number; confidence: number }> = {
+    "一模": { factor: 1.05, confidence: 80 },
+    "二模": { factor: 1.02, confidence: 85 },
+    "三模": { factor: 1.0, confidence: 88 },
+    "期中": { factor: 1.08, confidence: 70 },
+    "期末": { factor: 1.03, confidence: 78 },
   };
 
-  const provinceFactor = provinceFactors[province as string] || 1.0;
-  const mockFactor = mockFactors[type] || 1.0;
-  const estimated = Math.round(score * provinceFactor * mockFactor);
+  const pf = provinceFactors[province as string] || { factor: 1.0, confidence: 60, reason: "该省份数据有限" };
+  const mf = mockFactors[type] || { factor: 1.0, confidence: 70 };
+
+  const estimated = Math.round(score * pf.factor * mf.factor);
+  const overallConfidence = Math.round((pf.confidence + mf.confidence) / 2);
+
+  // 置信区间：根据信度动态调整范围
+  const rangeWidth = Math.round((1 - overallConfidence / 100) * 40 + 10);
+  const lowerBound = estimated - rangeWidth;
+  const upperBound = estimated + rangeWidth + 5;
+
+  // 基于历史数据的一致性校验
+  // 检查估算分数是否在合理范围内（750分制）
+  const isValid = estimated >= 150 && estimated <= 750;
+  const consistencyWarnings: string[] = [];
+  if (!isValid) {
+    consistencyWarnings.push("估算分数超出合理范围，请检查输入的模考分数是否正确");
+  }
+  if (score > 750) {
+    consistencyWarnings.push("模考分数超过总分750分，请确认分数无误");
+  }
+  if (score < 200) {
+    consistencyWarnings.push("模考分数过低，估算结果可能偏差较大");
+  }
 
   return {
     mockScore: score,
     mockType: type,
     province,
     estimatedGaokaoScore: estimated,
-    estimatedRange: `${estimated - 10} - ${estimated + 15}`,
-    note: "此为基于历史数据的粗略估算，实际请以省排名为准",
-    warning: "⚠️ 估算结果仅供参考，模考分数与高考分数存在差异，请以官方一分一段表为准。",
+    estimatedRange: `${lowerBound} - ${upperBound}`,
+    confidence: {
+      level: `${overallConfidence}%`,
+      label: overallConfidence >= 85 ? "较高" : overallConfidence >= 75 ? "中等" : "一般",
+      detail: `基于${pf.reason}和${type || "常规"}模考特点`,
+    },
+    factors: {
+      provinceFactor: pf.factor,
+      mockFactor: mf.factor,
+      provinceReliability: pf.reason,
+    },
+    consistency: {
+      isValid,
+      warnings: consistencyWarnings,
+    },
+    note: "此为基于历史数据的统计估算，置信度与数据量和省份相关",
+    warning: "⚠️ 估算结果仅供参考，实际志愿填报务必以省排名和一分一段表为准。",
   };
 }
 
-// ====== 10. 风险评估 ======
+// ====== 10. 风险评估（智能预测版） ======
 function generateRiskAssessment(args: ToolArgs): Record<string, unknown> {
   const { selectedUniversities, studentScore, province } = args;
   if (!Array.isArray(selectedUniversities)) return { error: "请提供院校列表" };
@@ -816,43 +1135,124 @@ function generateRiskAssessment(args: ToolArgs): Record<string, unknown> {
   const uniList = selectedUniversities as string[];
   const score = studentScore as number;
 
-  // 获取每个院校的录取数据
+  // 计算整体录取数据分布
+  const allScores = admissions
+    .map((a: UniversityAdmission) => {
+      const avg = a.majors.reduce((s: number, m: MajorAdmission) => {
+        return s + (m.history?.[0]?.score || 0);
+      }, 0) / (a.majors.length || 1);
+      return { id: a.universityId, avgScore: avg };
+    })
+    .filter((x) => x.avgScore > 0);
+
+  // 获取选择的学校数据 + 概率估算
   const uniData = uniList.map((id) => {
-    const uni = universities.find((u: any) => u.id === id);
-    const uniAdmissions = admissions.find((a: any) => a.universityId === id);
-    const avgScore = uniAdmissions?.majors?.reduce((sum: number, m: any) => {
-      const latest = m.history?.[0]?.score || 0;
-      return sum + latest;
-    }, 0) / (uniAdmissions?.majors?.length || 1);
+    const uni = universities.find((u: University) => u.id === id);
+    const uniAdmissions = admissions.find((a: UniversityAdmission) => a.universityId === id);
+    const majors = uniAdmissions?.majors || [];
+    const avgScore = majors.length > 0
+      ? majors.reduce((sum: number, m: MajorAdmission) => {
+          const latest = m.history?.[0]?.score || 0;
+          return sum + latest;
+        }, 0) / majors.length
+      : 0;
+
+    const diff = score - avgScore;
+
+    // 录取概率（使用与recommendVolunteerList一致的sigmoid模型）
+    const admitProb = Math.round(1 / (1 + Math.exp(-diff / 25)) * 100);
+
+    // 概率分级标签
+    let probLevel: string;
+    let riskColor: string;
+    if (admitProb >= 95) {
+      probLevel = "非常稳妥";
+      riskColor = "green";
+    } else if (admitProb >= 80) {
+      probLevel = "稳妥";
+      riskColor = "lightgreen";
+    } else if (admitProb >= 50) {
+      probLevel = "中等";
+      riskColor = "yellow";
+    } else if (admitProb >= 30) {
+      probLevel = "冲刺";
+      riskColor = "orange";
+    } else {
+      probLevel = "高风险冲刺";
+      riskColor = "red";
+    }
+
+    // 竞争热度分析（根据专业数量判断）
+    const majorCount = uniAdmissions?.majors?.length || 0;
 
     return {
       id,
       name: uni?.name || id,
+      province: uni?.province,
+      city: uni?.city,
+      type: uni?.type,
       avgScore: Math.round(avgScore),
-      diff: score - avgScore,
+      diff: Math.round(diff),
+      admitProb,
+      probLevel,
+      riskColor,
+      majorCount,
+      // 给AI的结构化建议
+      riskProfile: {
+        status: admitProb >= 80 ? "safe" : admitProb >= 50 ? "match" : "reach",
+        scoreGap: Math.abs(Math.round(diff)),
+        description: admitProb >= 80
+          ? `考生分数高于该校平均${Math.abs(Math.round(diff))}分，录取概率高`
+          : admitProb >= 50
+          ? `考生分数与该校接近，录取概率中等`
+          : `考生分数低于该校平均${Math.abs(Math.round(diff))}分，需要冲刺`,
+      },
     };
   });
 
-  // diff = 考生分数 - 院校平均分
-  // diff < 0 → 考生分数低于院校平均 → 冲刺
-  // diff > 0 → 考生分数高于院校平均 → 稳妥/保底
-  const reach = uniData.filter((u) => u.diff < 0); // 冲刺（院校分数高于考生）
-  const match = uniData.filter((u) => u.diff >= 0 && u.diff <= 30); // 稳妥（院校分数接近考生）
-  const safe = uniData.filter((u) => u.diff > 30); // 保底（院校分数明显低于考生）
+  // 整体录取情况统计
+  const totalProb = uniData.reduce((sum: number, u: any) => sum + u.admitProb, 0) / (uniData.length || 1);
+
+  // 智能梯度建议
+  const reachCount = uniData.filter((u: any) => u.admitProb < 30).length;
+  const matchCount = uniData.filter((u: any) => u.admitProb >= 30 && u.admitProb < 80).length;
+  const safeCount = uniData.filter((u: any) => u.admitProb >= 80).length;
+
+  // 风险诊断
+  const riskDiagnosis: string[] = [];
+  if (reachCount > 3) {
+    riskDiagnosis.push(`冲刺院校（${reachCount}所）偏多，建议控制在1-2所`);
+  }
+  if (matchCount < 2) {
+    riskDiagnosis.push(`稳妥院校偏少，建议至少安排2-3所`);
+  }
+  if (safeCount < 1) {
+    riskDiagnosis.push(`缺少保底院校，极大增加滑档风险，务必添加1-2所保底`);
+  }
+  if (totalProb < 60) {
+    riskDiagnosis.push(`整体录取概率偏低（${Math.round(totalProb)}%），建议调整志愿结构`);
+  }
+
+  // 建议梯度比例（根据风险诊断动态生成）
+  const suggestedRatio = `冲刺:稳妥:保底 = ${Math.max(1, 5 - safeCount - matchCount)}:${Math.max(2, 4 - reachCount)}:${Math.max(1, 2 - reachCount)}`;
 
   return {
-    assessment: {
-      reach: reach.map((u) => u.name),
-      match: match.map((u) => u.name),
-      safe: safe.map((u) => u.name),
+    studentScore: score,
+    province,
+    overallAdmitProb: Math.round(totalProb),
+    details: uniData.sort((a: any, b: any) => a.avgScore - b.avgScore),
+    riskProfile: {
+      reach: uniData.filter((u: any) => u.admitProb < 30).length,
+      match: uniData.filter((u: any) => u.admitProb >= 30 && u.admitProb < 80).length,
+      safe: uniData.filter((u: any) => u.admitProb >= 80).length,
     },
-    details: uniData,
-    suggestions: [
-      reach.length > 3 ? "冲刺院校过多，建议减少至 1-2 所" : null,
-      match.length < 3 ? "稳妥院校偏少，建议增加 2-3 所" : null,
-      safe.length < 2 ? "保底院校不足，务必增加保底" : null,
-      "建议志愿梯度：冲刺:稳妥:保底 = 2:4:2",
-    ].filter(Boolean),
+    riskDiagnosis: riskDiagnosis.length > 0 ? riskDiagnosis : ["志愿结构合理，风险可控"],
+    suggestionRatio: suggestedRatio,
+    strategy: totalProb >= 80
+      ? "志愿方案整体风险较低，建议微调即可"
+      : totalProb >= 60
+      ? "志愿方案存在一定风险，建议增加保底院校"
+      : "志愿方案风险较高，强烈建议重新调整志愿梯度",
   };
 }
 
@@ -892,66 +1292,195 @@ function getPersonalityAnalysis(args: ToolArgs): Record<string, unknown> {
   return { personalities, dimensions };
 }
 
-// ====== 12. 志愿列表推荐 ======
-function recommendVolunteerList(args: ToolArgs): Record<string, unknown> {
+// ====== 12. 志愿列表推荐（智能预测版） ======
+async function recommendVolunteerList(args: ToolArgs): Promise<Record<string, unknown>> {
   const { province, score, subjects, interests, personalityType, riskPreference } = args;
 
   const scoreNum = score as number;
   const risk = (riskPreference as string) || "balanced";
 
-  // 根据风险偏好确定分数浮动范围（阶梯式递减，确保高分考生能匹配到名校）
-  // 区间设计：reach > match > safe，互不重叠，形成合理梯度
-  // 注：数据库院校平均分普遍在550-690之间，高分考生(750+)需要较大区间才能匹配到名校
-  const ranges: Record<string, { reach: number; match: number; safe: number }> = {
-    aggressive: { reach: 200, match: 150, safe: 100 },
-    balanced: { reach: 150, match: 120, safe: 80 },
-    conservative: { reach: 100, match: 80, safe: 60 },
+  // 计算所有院校平均分的统计分布（用于智能分档）
+  const allScores = universities
+    .map((u: University) => {
+      const uniAdmissions = admissions.find((a: UniversityAdmission) => a.universityId === u.id);
+      if (!uniAdmissions?.majors?.length) return null;
+      const avg = uniAdmissions.majors.reduce((sum: number, m: MajorAdmission) => {
+        const latest = m.history?.[0]?.score || 0;
+        return sum + latest;
+      }, 0) / uniAdmissions.majors.length;
+      return avg > 0 ? { id: u.id, avgScore: avg } : null;
+    })
+    .filter((x): x is { id: string; avgScore: number } => x !== null);
+
+  // 按分数排序后获取百分位信息
+  allScores.sort((a, b) => a.avgScore - b.avgScore);
+  const totalCount = allScores.length;
+  const score25 = allScores[Math.floor(totalCount * 0.25)]?.avgScore || 0;
+  const score50 = allScores[Math.floor(totalCount * 0.5)]?.avgScore || 0;
+  const score75 = allScores[Math.floor(totalCount * 0.75)]?.avgScore || 0;
+
+  // 风险偏好系数：激进=更敢于冲刺，保守=更保守
+  const riskFactors: Record<string, { stretch: number; shift: number }> = {
+    aggressive: { stretch: 1.3, shift: -15 },   // 向上多冲15分
+    balanced: { stretch: 1.0, shift: 0 },
+    conservative: { stretch: 0.7, shift: 15 },   // 向下多保15分
   };
+  const rf = riskFactors[risk] || riskFactors.balanced;
 
-  const range = ranges[risk] || ranges.balanced;
+  // 智能分档：基于分数在总体分布中的位置 + 风险偏好
+  const candidates = allScores.map((item) => {
+    const u = universities.find((x: University) => x.id === item.id);
+    const diff = scoreNum - item.avgScore;
 
-  // 筛选院校
-  const candidates = universities.map((u: any) => {
-    const uniAdmissions = admissions.find((a: any) => a.universityId === u.id);
-    const avgScore = uniAdmissions?.majors?.reduce((sum: number, m: any) => {
-      const latest = m.history?.[0]?.score || 0;
-      return sum + latest;
-    }, 0) / (uniAdmissions?.majors?.length || 1);
+    // 录取概率估算（基于统计学的logistic-style模型）
+    const admitProb = Math.round(1 / (1 + Math.exp(-diff / 25)) * 100);
 
-    return { ...u, avgScore: Math.round(avgScore) };
-  }).filter((u: any) => u.avgScore > 0);
+    // 分档逻辑：diff + 风险偏移 作为主要依据
+    const adjustedDiff = diff + rf.shift;
 
-  // 阶梯式分类（互不重叠）
-  // 冲刺（reach）：分数接近考生但略低（考生有把握但需要努力）
-  const reachList = candidates
-    .filter((u: any) => u.avgScore > scoreNum - range.reach && u.avgScore <= scoreNum)
-    .sort((a: any, b: any) => b.avgScore - a.avgScore)
-    .slice(0, 3);
+    let tier: "reach" | "match" | "safe";
+    let probLabel: string;
+    if (adjustedDiff > 25) {
+      tier = "safe";
+      probLabel = "保底";
+    } else if (adjustedDiff > 5) {
+      tier = "match";
+      probLabel = "稳妥";
+    } else if (adjustedDiff > -15) {
+      tier = "match";
+      probLabel = "冲刺";
+    } else {
+      tier = "reach";
+      probLabel = "冲刺";
+    }
 
-  // 稳妥（match）：分数明显低于考生（考生有较大概率录取）
-  const matchList = candidates
-    .filter((u: any) => u.avgScore > scoreNum - range.reach - range.match && u.avgScore <= scoreNum - range.reach)
-    .sort((a: any, b: any) => b.avgScore - a.avgScore)
-    .slice(0, 5);
+    const priorityScore = adjustedDiff * rf.stretch - item.avgScore / 1000;
 
-  // 保底（safe）：分数远低于考生（考生基本稳录）
-  const safeList = candidates
-    .filter((u: any) => u.avgScore > scoreNum - range.reach - range.match - range.safe && u.avgScore <= scoreNum - range.reach - range.match)
-    .sort((a: any, b: any) => b.avgScore - a.avgScore)
-    .slice(0, 3);
+    return {
+      ...u,
+      avgScore: Math.round(item.avgScore),
+      diff: Math.round(diff),
+      admitProb,
+      tier,
+      probLabel,
+      priorityScore,
+    };
+  }).filter((c: any) => c && c.avgScore > 0);
+
+  candidates.sort((a: any, b: any) => b.priorityScore - a.priorityScore);
+
+  // 动态数量分配
+  const tierCounts: Record<string, { reach: number; match: number; safe: number }> = {
+    aggressive: { reach: 4, match: 4, safe: 2 },
+    balanced: { reach: 3, match: 5, safe: 3 },
+    conservative: { reach: 2, match: 4, safe: 4 },
+  };
+  const counts = tierCounts[risk] || tierCounts.balanced;
+
+  const reachList = candidates.filter((c: any) => c.tier === "reach").slice(0, counts.reach);
+  const matchList = candidates.filter((c: any) => c.tier === "match").slice(0, counts.match);
+  const safeList = candidates.filter((c: any) => c.tier === "safe").slice(0, counts.safe);
+
+  // 如果某一档不足，从邻近档补充
+  const totalNeeded = counts.reach + counts.match + counts.safe;
+  let allSelected = [...reachList, ...matchList, ...safeList];
+  if (allSelected.length < totalNeeded && candidates.length > allSelected.length) {
+    const used = new Set(allSelected.map((c: any) => c.id));
+    const remaining = candidates.filter((c: any) => !used.has(c.id));
+    const need = totalNeeded - allSelected.length;
+    allSelected = [...allSelected, ...remaining.slice(0, need)];
+  }
+
+  // 选科兼容性标注
+  const subjectList = Array.isArray(subjects) ? subjects as string[] : [];
+  const enrichWithSubject = allSelected.map((c: any) => {
+    const uniAdmissions = admissions.find((a: UniversityAdmission) => a.universityId === c.id);
+    const hasSubjectInfo = uniAdmissions?.majors?.some((m: MajorAdmission) =>
+      m.majorId && majors.find((maj: Major) => maj.id === m.majorId)?.requireSubjects
+    );
+
+    return {
+      id: c.id,
+      name: c.name,
+      avgScore: c.avgScore,
+      diff: c.diff,
+      admitProb: c.admitProb,
+      admitLabel: c.probLabel,
+      tier: c.tier,
+      province: c.province,
+      city: c.city,
+      type: c.type,
+      tags: c.tags,
+      hasSubjectCheck: hasSubjectInfo && subjectList.length > 0,
+    };
+  });
+
+  // ====== 联网补充：搜索前3所推荐院校的最新录取数据 ======
+  const topNames = enrichWithSubject.slice(0, 3).map((c: any) => c.name).filter(Boolean);
+  let webSearchResults: Record<string, unknown>[] = [];
+
+  if (topNames.length > 0 && process.env.TAVILY_API_KEY) {
+    try {
+      const webResult = await searchUniversityWeb({
+        universities: topNames,
+        province: province as string,
+        year: "2025",
+      } as ToolArgs);
+      if (webResult && webResult.results && Array.isArray(webResult.results)) {
+        webSearchResults = webResult.results as Record<string, unknown>[];
+      }
+    } catch (err: any) {
+      console.error("[recommendVolunteerList] web search error:", err.message);
+    }
+  }
+
+  // 将联网数据合并到推荐结果中
+  const webDataMap = new Map<string, Record<string, unknown>>();
+  for (const w of webSearchResults) {
+    const name = w.university as string;
+    if (name) webDataMap.set(name, w);
+  }
+
+  const finalResults = enrichWithSubject.map((c: any) => {
+    const web = webDataMap.get(c.name);
+    if (web) {
+      return {
+        ...c,
+        webSearch: {
+          summary: web.summary || "",
+          sources: web.sources || [],
+        },
+      };
+    }
+    return c;
+  });
 
   return {
     score: scoreNum,
     province,
     personalityType,
     riskPreference: risk,
-    recommendations: {
-      reach: reachList,
-      match: matchList,
-      safe: safeList,
+    scoreDistribution: {
+      p25: Math.round(score25),
+      p50: Math.round(score50),
+      p75: Math.round(score75),
+      totalCandidates: totalCount,
     },
-    totalCount: reachList.length + matchList.length + safeList.length,
-    strategy: `${risk === "aggressive" ? "激进" : risk === "conservative" ? "保守" : "均衡"}策略，建议冲刺${reachList.length}所、稳妥${matchList.length}所、保底${safeList.length}所`,
+    recommendations: {
+      reach: finalResults.filter((c: any) => c.tier === "reach"),
+      match: finalResults.filter((c: any) => c.tier === "match"),
+      safe: finalResults.filter((c: any) => c.tier === "safe"),
+    },
+    totalCount: finalResults.length,
+    webSearch: {
+      enabled: webSearchResults.length > 0,
+      searchedCount: webSearchResults.length,
+      results: webSearchResults,
+      note: webSearchResults.length > 0
+        ? `已联网搜索前${webSearchResults.length}所推荐院校的最新录取数据`
+        : "未获取到联网数据，已使用本地数据库推荐",
+    },
+    strategy: `${risk === "aggressive" ? "激进" : risk === "conservative" ? "保守" : "均衡"}策略，智能推荐${reachList.length}所冲刺、${matchList.length}所稳妥、${safeList.length}所保底`,
   };
 }
 

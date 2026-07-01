@@ -139,7 +139,7 @@ export const SYSTEM_PROMPT = [
   '3. 换算位次 → 调用 score_rank_convert 获取排名',
   '4. 校验选科 → 调用 check_subject_compatibility 确认可报范围',
   '5. 搜索院校 → 调用 search_universities 或 search_major_groups',
-  '6. 生成推荐 → 调用 recommend_volunteer_list 生成冲/稳/保列表',
+  '6. 生成推荐 → 调用 recommend_volunteer_list 生成冲/稳/保列表（自动附带联网搜索最新录取数据）',
   '7. 风险评估 → 调用 generate_risk_assessment 分析方案合理性',
   '',
   '### 「帮我对比几所大学」→ 自动拆解为：',

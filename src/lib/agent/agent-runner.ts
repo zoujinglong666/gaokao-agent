@@ -230,8 +230,19 @@ export async function runAgent(
       // 获取回复内容：优先使用 assistantMessage.content，否则从 reasoning 中提取 final 内容
       let reply = assistantMessage.content;
       if (!reply) {
-        const finalStep = reasoningSteps.findLast((s) => s.type === "final");
-        reply = finalStep?.content || "抱歉，我暂时无法回答这个问题。";
+        // 尝试从 API 返回的 reasoning 数组中提取 final 内容
+        const apiReasoning = (assistantMessage as any).reasoning;
+        if (Array.isArray(apiReasoning)) {
+          const finalStep = [...apiReasoning].reverse().find((s: any) => s.type === "final");
+          if (finalStep?.content) {
+            reply = finalStep.content;
+          }
+        }
+        // 如果 API reasoning 中没有，尝试从本地 reasoningSteps 中找
+        if (!reply) {
+          const finalStep = [...reasoningSteps].reverse().find((s) => s.type === "final");
+          reply = finalStep?.content || "抱歉，我暂时无法回答这个问题。";
+        }
       }
       
       // 添加最终结论

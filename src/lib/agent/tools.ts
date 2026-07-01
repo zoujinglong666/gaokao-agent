@@ -16,6 +16,23 @@ export const AGENT_TOOLS: ChatCompletionTool[] = [
   {
     type: "function",
     function: {
+      name: "search_university_web",
+      description: "【联网搜索专用】为指定大学列表搜索最新录取数据（录取分数、位次、招生政策）。在调用 recommend_volunteer_list 获得推荐列表后，立即调用本工具为推荐院校搜索实时数据。接受大学名称数组或省份+年份的通用查询。",
+      parameters: {
+        type: "object",
+        properties: {
+          universities: { type: "array", items: { type: "string" }, description: "要搜索的大学名称列表，如 [\"清华大学\", \"北京大学\"]" },
+          query: { type: "string", description: "自定义搜索关键词，当 universities 为空时使用" },
+          province: { type: "string", description: "省份" },
+          year: { type: "string", description: "年份，如 \"2025\"" },
+        },
+        required: [],
+      },
+    },
+  },
+  {
+    type: "function",
+    function: {
       name: "search_universities",
       description: "按省份、分数范围、院校标签、城市、类型或专业搜索大学。用户问「帮我找学校」「推荐几所大学」「XX分能上什么学校」时调用。",
       parameters: {

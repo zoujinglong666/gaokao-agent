@@ -221,6 +221,7 @@ export default function ChatPage() {
               msg={msg}
               streamingId={streamingId}
               formatTime={formatTime}
+              onSendMessage={send}
             />
           ))}
           <div ref={bottomRef} />

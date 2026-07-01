@@ -2,14 +2,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useAppStore } from "@/lib/store";
 
-const defaultQuestions = [
-  { text: "我是山东考生，600分，推荐一些学校", icon: "🎯" },
-  { text: "计算机和电子信息怎么选？", icon: "💻" },
-  { text: "分析一下我的志愿方案风险", icon: "📊" },
-  { text: "我模考580分，大概相当于高考多少？", icon: "📈" },
-  { text: "北京有哪些211院校？", icon: "🏫" },
-];
-
 interface QuickQuestionsProps {
   show: boolean;
   onSend: (text: string) => void;
@@ -18,6 +10,7 @@ interface QuickQuestionsProps {
 export default function QuickQuestions({ show, onSend }: QuickQuestionsProps) {
   const { profile } = useAppStore();
 
+  // 根据 profile 信息量动态生成快速提问
   const questions = profile.province && profile.score
     ? [
         { text: `推荐${profile.province}${profile.score}分的院校`, icon: "🎯" },
@@ -26,7 +19,21 @@ export default function QuickQuestions({ show, onSend }: QuickQuestionsProps) {
         { text: "我的分数能上哪些211？", icon: "🏫" },
         { text: "热门专业就业前景如何？", icon: "📈" },
       ]
-    : defaultQuestions;
+    : profile.province
+    ? [
+        { text: `我是${profile.province}考生，推荐一些学校`, icon: "🎯" },
+        { text: "计算机和电子信息怎么选？", icon: "💻" },
+        { text: "我的模考分数大概能上什么学校？", icon: "📊" },
+        { text: "北京有哪些211院校？", icon: "🏫" },
+        { text: "热门专业就业前景如何？", icon: "📈" },
+      ]
+    : [
+        { text: "帮推荐适合的院校和专业", icon: "🎯" },
+        { text: "计算机和电子信息怎么选？", icon: "💻" },
+        { text: "分析一下我的志愿方案风险", icon: "📊" },
+        { text: "我模考580分，大概相当于高考多少？", icon: "📈" },
+        { text: "北京有哪些211院校？", icon: "🏫" },
+      ];
 
   return (
     <AnimatePresence>

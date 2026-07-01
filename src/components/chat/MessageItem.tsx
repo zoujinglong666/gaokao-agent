@@ -6,6 +6,7 @@ import ToolCallIndicator from "@/components/chat/ToolCallIndicator";
 import DataWatermark from "@/components/ui/DataWatermark";
 import CopyButton from "@/components/chat/CopyButton";
 import ReasoningPanel from "@/components/chat/ReasoningPanel";
+import CardSummary from "@/components/chat/CardSummary";
 import { ChatMessage } from "@/lib/store";
 import SubjectCard from "@/components/chat/SubjectCard";
 import ProvinceCard from "@/components/chat/ProvinceCard";
@@ -16,26 +17,32 @@ interface MessageItemProps {
   msg: ChatMessage;
   streamingId?: string | null;
   formatTime: (date: Date) => string;
+  onSendMessage?: (text: string) => void;
 }
 
-export default memo(function MessageItem({ msg, streamingId, formatTime }: MessageItemProps) {
+export default memo(function MessageItem({ msg, streamingId, formatTime, onSendMessage }: MessageItemProps) {
   const [hovered, setHovered] = useState(false);
   const [confirmedCards, setConfirmedCards] = useState<Set<string>>(new Set());
+  const [selectedValues, setSelectedValues] = useState<Record<string, string>>({});
   const { setProfile } = useAppStore();
 
-  // 标记卡片为已确认
-  const markCardConfirmed = (cardType: string) => {
+  // 标记卡片为已确认并记录选中的值
+  const markCardConfirmed = (cardType: string, value?: string) => {
     setConfirmedCards((prev) => {
       const next = new Set(prev);
       next.add(cardType);
       return next;
     });
+    if (value) {
+      setSelectedValues((prev) => ({ ...prev, [cardType]: value }));
+    }
   };
 
-  // 渲染智能卡片
+  // 渲染智能卡片或已选摘要
   const renderCard = (cardType: string) => {
-    if (confirmedCards.has(cardType)) {
-      return null;
+    // 已选择过的卡片显示摘要，不可重复选择
+    if (confirmedCards.has(cardType) && selectedValues[cardType]) {
+      return <CardSummary type={cardType as "province" | "score" | "subject"} value={selectedValues[cardType]} />;
     }
 
     switch (cardType) {
@@ -44,16 +51,10 @@ export default memo(function MessageItem({ msg, streamingId, formatTime }: Messa
           <SubjectCard
             onSelect={(subjects) => {
               setProfile({ subjects });
-              markCardConfirmed(cardType);
-              // 自动发送选科信息
-              fetch("/api/chat", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  messages: [{ role: "user", content: `我的选科是：${subjects.join(" + ")}` }],
-                  profile: useAppStore.getState().profile,
-                }),
-              });
+              markCardConfirmed(cardType, subjects.join(" + "));
+              if (onSendMessage) {
+                onSendMessage(`我的选科是：${subjects.join(" + ")}`);
+              }
             }}
             onDismiss={() => {}}
           />
@@ -63,15 +64,10 @@ export default memo(function MessageItem({ msg, streamingId, formatTime }: Messa
           <ProvinceCard
             onSelect={(province) => {
               setProfile({ province });
-              markCardConfirmed(cardType);
-              fetch("/api/chat", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  messages: [{ role: "user", content: `我是${province}的考生` }],
-                  profile: useAppStore.getState().profile,
-                }),
-              });
+              markCardConfirmed(cardType, province);
+              if (onSendMessage) {
+                onSendMessage(`我是${province}的考生`);
+              }
             }}
             onDismiss={() => {}}
           />
@@ -81,15 +77,10 @@ export default memo(function MessageItem({ msg, streamingId, formatTime }: Messa
           <ScoreCard
             onSelect={(score) => {
               setProfile({ score });
-              markCardConfirmed(cardType);
-              fetch("/api/chat", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  messages: [{ role: "user", content: `我的分数是：${score}分` }],
-                  profile: useAppStore.getState().profile,
-                }),
-              });
+              markCardConfirmed(cardType, `${score}分`);
+              if (onSendMessage) {
+                onSendMessage(`我的分数是：${score}分`);
+              }
             }}
             onDismiss={() => {}}
           />
